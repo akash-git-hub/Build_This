@@ -1,24 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Login } from './commonPages/login';
+import { SignUp } from './commonPages/signup';
+import { ForgotPassword } from './commonPages/forgotPassword.js';
+import { Verification } from './commonPages/verification/index.js';
+import { CreateProject } from './pages/createProject/index.js';
+import { Dashboard } from './pages/dashboard/index.js';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/forgot_password" element={<ForgotPassword />} />
+          <Route path="/verification" element={<Verification />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/create_project" element={<CreateProject />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
