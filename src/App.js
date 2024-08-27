@@ -1,24 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Login } from './commonPages/login';
+import { SignUp } from './commonPages/signup';
+import { ForgotPassword } from './commonPages/forgotPassword.js';
+import { Verification } from './commonPages/verification/index.js';
+import { Dashboard } from './pages/dashboard/index.js';
+import { MyProject } from './pages/dashboard/myProject/MyProject.js';
+import { PublishProject } from './pages/dashboard/publishProject/PublishProject.js';
+import { MyProjectDetail } from './pages/dashboard/myProject/MyProjectDetail.js';
+import { CreateProject } from './pages/createProject/index.js';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/forgot_password" element={<ForgotPassword />} />
+          <Route path="/verification" element={<Verification />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/my_project" element={<MyProject />} />
+          <Route path="/my_project_detail" element={<MyProjectDetail />} />
+          <Route path="/publish_project" element={<PublishProject />} />
+          <Route path="/create_project" element={<CreateProject />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
