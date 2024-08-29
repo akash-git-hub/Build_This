@@ -28,6 +28,7 @@ const Icon = styled.div`
 
 export const Dashboard = () => {
     const navigate = useNavigate();
+
     const handleClick = () => {
         navigate('/create_project');
     };
@@ -67,17 +68,23 @@ export const Dashboard = () => {
                                 </Stack>
 
                                 <div>
-                                    <Row>
-                                        <Col className='' md={3}>
+                                    <Row >
+                                        <Col className='mb-3' md={3}>
                                             <MyProjectCard BgColor={"#FEEEE7"} />
                                         </Col>
-                                        <Col className='' md={3}>
+                                        <Col className='mb-3' md={3}>
                                             <MyProjectCard BgColor={'#E7F0FE'} />
                                         </Col>
-                                        <Col className='' md={3}>
+                                        <Col className='mb-3' md={3}>
                                             <MyProjectCard BgColor={'#FEE7F5'} />
                                         </Col>
-                                        <Col className='' md={3}>
+                                        <Col className='mb-3' md={3}>
+                                            <MyProjectCard BgColor={'#ECFEE7'} />
+                                        </Col>
+                                         <Col className='mb-3' md={3}>
+                                            <MyProjectCard BgColor={'#ECFEE7'} />
+                                        </Col>
+                                         <Col className='mb-3' md={3}>
                                             <MyProjectCard BgColor={'#ECFEE7'} />
                                         </Col>
                                     </Row>

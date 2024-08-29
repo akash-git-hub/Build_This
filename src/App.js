@@ -9,6 +9,8 @@ import { MyProject } from './pages/dashboard/myProject/MyProject.js';
 import { PublishProject } from './pages/dashboard/publishProject/PublishProject.js';
 import { MyProjectDetail } from './pages/dashboard/myProject/MyProjectDetail.js';
 import { CreateProject } from './pages/createProject/index.js';
+import { Profile } from './pages/myProfile/Profile.js';
+import { EditProfile } from './pages/myProfile/EditProfile.js';
 
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
           <Route path="/my_project_detail" element={<MyProjectDetail />} />
           <Route path="/publish_project" element={<PublishProject />} />
           <Route path="/create_project" element={<CreateProject />} />
+          <Route path='/my_profile' element={<Profile/>} />
+          <Route path='/edit_profile' element={<EditProfile/>} />
         </Routes>
       </BrowserRouter>
     </>

@@ -80,6 +80,10 @@ export const MyProject = () => {
                                     <Col className='' md={3}>
                                         <MyProjectCard BgColor={'#ECFEE7'} />
                                     </Col>
+                                    <Col className='' md={3}>
+                                        <MyProjectCard BgColor={'#ECFEE7'} />
+                                    </Col>
+                                    
                                 </Row>
                             </div>
                         </Box>
