@@ -3,14 +3,15 @@ import { Badge, Image, Stack } from 'react-bootstrap'
 import styled from 'styled-components'
 import { ProjectMemberAvatar } from './ProjectMemberAvatar'
 
+const Box = styled.div`
+padding:1rem;
+background:#fff;
+border-radius:1rem;
+border: 1px solid #666666;
+`;
 export const PublishProjectCard = () => {
 
-    const Box = styled.div`
-    padding:1rem;
-    background:#fff;
-    border-radius:1rem;
-    border: 1px solid #666666;
-`
+   
     return (
         <Box>
             <Stack direction='vertical' gap={2}>

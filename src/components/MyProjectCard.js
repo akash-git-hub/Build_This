@@ -4,24 +4,22 @@ import { ProjectMemberAvatar } from './ProjectMemberAvatar'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-
+const Box = styled.div`
+padding:1.5rem;
+background:${prop=>prop.bgcolor};
+border-radius:1rem;
+`;
 
 export const MyProjectCard = ({ BgColor }) => {
 
 
-    const Box = styled.div`
-    padding:1.5rem;
-    background:${BgColor};
-    border-radius:1rem;
-`
-
-
     return (
-        <Link to={'/my_project_detail'} style={{
-            textDecoration: 'none',
-            color: '#000'
-        }}>
-            <Box>
+      
+        <Box bgcolor={BgColor}>
+            <Link to={'/my_project_detail'} style={{
+                textDecoration: 'none',
+                color: '#000'
+            }}>
                 <Stack direction='vertical' gap={2}>
                     <h6 className='text-ellipsis'>UI/UX Medical Dashboard</h6>
                     <small>6 Task</small>
@@ -35,7 +33,7 @@ export const MyProjectCard = ({ BgColor }) => {
                     </Stack>
                     <ProgressBar now={50} striped variant="dark" />
                 </Stack>
-            </Box>
-        </Link>
+            </Link>
+        </Box>
     )
 }

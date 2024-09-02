@@ -36,13 +36,13 @@ export const Dashboard = () => {
         <>
             <Container fluid>
                 <Row>
-                    <Col md={3} className='p-1'>
+                    <Col md={4} lg={3} className='p-0'>
                         <Sidebar />
                     </Col>
-                    <Col md={9} className='p-1'>
+                    <Col md={8} lg={9} className='p-0'>
                         <Stack direction='vertical' gap={3}>
                             <Box>
-                                <Stack direction='horizontal' gap={2} justifyContent='space-between'>
+                                <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between' }}>
                                     <Heading Heading={'Dashboard'} SubHeading={'Manage your billing and payment details'} />
                                     <SharedButton
                                         label={'Create Project'}
@@ -54,7 +54,7 @@ export const Dashboard = () => {
                                 </Stack>
                                 <Panel>
                                     <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between' }}>
-                                        <SearchPanel />
+                                        <SearchPanel id='search' />
                                         <Icon>
                                             <CiFilter fontSize={'1.5rem'} className='me-0' />
                                         </Icon>
@@ -81,10 +81,10 @@ export const Dashboard = () => {
                                         <Col className='mb-3' md={3}>
                                             <MyProjectCard BgColor={'#ECFEE7'} />
                                         </Col>
-                                         <Col className='mb-3' md={3}>
+                                        <Col className='mb-3' md={3}>
                                             <MyProjectCard BgColor={'#ECFEE7'} />
                                         </Col>
-                                         <Col className='mb-3' md={3}>
+                                        <Col className='mb-3' md={3}>
                                             <MyProjectCard BgColor={'#ECFEE7'} />
                                         </Col>
                                     </Row>

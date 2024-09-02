@@ -8,15 +8,18 @@ import styled from 'styled-components';
 import { SharedButton } from '../../components/Button';
 import { Avatar } from '../../components/Avatar';
 
+const Box = styled.div`
+  background: #ffffff;
+  min-height: 100%;
+  margin-right:10px;
+  `;
+
 export const Sidebar = () => {
   const navigate = useNavigate();
   const pathname = useLocation().pathname;
 
 
-  const Box = styled.div`
-  background: #ffffff;
-  min-height: 100%;
-  `
+  
 
   return (
     <>
@@ -69,7 +72,7 @@ export const Sidebar = () => {
             padding: 0
           }}>
             <Stack direction='vertical' gap={3}>
-              <li className={pathname === "/myprofile" ? 'active' : ""} style={{ padding: '0px 10px' }} onClick={() => navigate('/myprofile')} >
+              <li className={pathname === "/my_profile" ? 'active' : ""} style={{ padding: '0px 10px' }} onClick={() => navigate('/my_profile')} >
                 <Avatar UserName={'Jaylee Fox'} UserEmail={'jaylee@foxgmail.com'} />
               </li>
               <li>

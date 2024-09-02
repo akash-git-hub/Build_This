@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Row, Stack } from 'react-bootstrap'
+import { Col, Row, Stack ,Container} from 'react-bootstrap'
 import { Heading } from '../../../components/Heading'
 import styled from 'styled-components'
 import { SharedButton } from '../../../components/Button'
@@ -32,6 +32,7 @@ export const PublishProject = () => {
 
     return (
         <>
+        <Container fluid>
             <Row>
                 <Col md={3} className='p-1'>
                     <Sidebar />
@@ -56,7 +57,7 @@ export const PublishProject = () => {
                         <Stack direction='horizontal' gap={2} style={{
                             justifyContent:'right'
                         }}>
-                            <SharedButton label={'Back'} size={'sm'} variant={'primary'} startIcon={<HiOutlineArrowLeft />} onClick={() => navigate('/dashboard')} />
+                            <SharedButton label={'Back'} size={'sm'} variant={'primary'} className={'mx-2'} startIcon={<HiOutlineArrowLeft />} onClick={() => navigate('/dashboard')} />
                         </Stack>
                         <Box>
                             <Stack direction='horizontal' gap={2} style={{
@@ -86,6 +87,7 @@ export const PublishProject = () => {
                     </Stack>
                 </Col>
             </Row>
+            </Container>
         </>
     )
 }

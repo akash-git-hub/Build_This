@@ -23,10 +23,10 @@ function App() {
           <Route path="/forgot_password" element={<ForgotPassword />} />
           <Route path="/verification" element={<Verification />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/create_project" element={<CreateProject />} />
           <Route path="/my_project" element={<MyProject />} />
           <Route path="/my_project_detail" element={<MyProjectDetail />} />
           <Route path="/publish_project" element={<PublishProject />} />
-          <Route path="/create_project" element={<CreateProject />} />
           <Route path='/my_profile' element={<Profile/>} />
           <Route path='/edit_profile' element={<EditProfile/>} />
         </Routes>

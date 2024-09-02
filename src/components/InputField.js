@@ -19,11 +19,14 @@ export const InputField = ({
     feedback,
     startIcon,
     endIcon,
+    id,
+    autoComplete,
+    
 }) => {
     return (
         <>
             <Form.Group className={className} controlId={controlId}>
-                {label && <Form.Label>{label}</Form.Label>}
+                {label && <Form.Label htmlFor={label}>{label}</Form.Label>}
                 <InputGroup>
                     {startIcon && (
                         <InputGroup.Text>
@@ -42,6 +45,9 @@ export const InputField = ({
                         plaintext={plaintext}
                         isInvalid={isInvalid}
                         required={required}
+                        className={className}
+                        id={id}
+                        autoComplete={autoComplete}
                     />
                     {endIcon && (
                         <InputGroup.Text>

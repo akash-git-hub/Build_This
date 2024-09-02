@@ -25,20 +25,20 @@ export const CreateProject = () => {
         <>
             <Container fluid>
                 <Row>
-                    <Col md={3}>
-                        <Sidebar />
+                   <Col lg={3} md={4} className='p-0'> 
+                        <Sidebar />     
                     </Col>
-                    <Col md={9}>
+                    <Col lg={9} md={8} className="p-0">
                         <Stack direction='vertical' gap={3}>
                             <Box>
-                                <Stack direction='horizontal' gap={2} justifyContent='space-between'>
+                                <Stack direction='horizontal' gap={2} className='d-flex justify-content-between'>
                                     <Heading Heading={'Create Project'} SubHeading={'Manage your billing and payment details'} />
                                 </Stack>
                             </Box>
                             <Stack direction='horizontal' gap={2} style={{
-                                justifyContent: 'right'
+                                justifyContent: 'right' 
                             }}>
-                                <SharedButton label={'Back'} size={'sm'} variant={'primary'} startIcon={<HiOutlineArrowLeft />} onClick={handleClickBack} />
+                                <SharedButton  label={'Back'} size={'sm'} variant={'primary'} className={'mx-2'} startIcon={<HiOutlineArrowLeft />} onClick={handleClickBack} />
                             </Stack>
                             <Box>
                                 <Row>

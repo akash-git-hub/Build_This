@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { Col, Container, Form, Row, Stack } from 'react-bootstrap'
 import { Sidebar } from '../../commonPages/sidebar'
 import { Heading } from '../../components/Heading'
@@ -15,31 +15,31 @@ const Box = styled.div`
   background: #ffffff;
   padding: 2rem;
 `
- 
+
 
 export const EditProfile = () => {
 
-    const [validated,setValidated]=useState(false);
+    const [validated, setValidated] = useState(false);
 
-    const email = useRef();
-    const fname = useRef();
-    const uname = useRef();
-    const phone = useRef();
-    const address = useRef();
-    const dob = useRef();
-    const city = useRef();
-    const bio = useRef();
-    const degree = useRef();
-    const passyear = useRef();
-    const postalcode = useRef();
-    const college = useRef();
-    const skill = useRef();
-    const available = useRef();
-    const certificate = useRef();
-    const language = useRef();
-    const ptype = useRef();
-    const pexperince = useRef();
-     
+    // const email = useRef();
+    // const fname = useRef();
+    // const uname = useRef();
+    // const phone = useRef();
+    // const address = useRef();
+    // const dob = useRef();
+    // const city = useRef();
+    // const bio = useRef();
+    // const degree = useRef();
+    // const passyear = useRef();
+    // const postalcode = useRef();
+    // const college = useRef();
+    // const skill = useRef();
+    // const available = useRef();
+    // const certificate = useRef();
+    // const language = useRef();
+    // const ptype = useRef();
+    // const pexperince = useRef();
+
 
     const navigate = useNavigate();
     const handleClickBack = () => {
@@ -47,28 +47,26 @@ export const EditProfile = () => {
     };
 
     const handleSubmit = (event) => {
-      
+
         event.preventDefault();
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.stopPropagation();
-            console.log("pls fill all required feilds");
-        } 
-            setValidated(true);
-            console.log("form submitted"); 
-        
+            alert("pls fill all required isInvalid={'isInvalid'} feilds");
+        }
+        setValidated(true);
     };
 
-    
+
     return (
         <>
             <Container fluid>
                 <Row>
-                    <Col md={3} className='p-1'>
+                    <Col lg={3} md={4} className='p-0'>
                         <Sidebar />
                     </Col>
 
-                    <Col md={9} className='p-1'>
+                    <Col lg={9} md={8} className='p-0'>
                         <Stack direction='vertical' gap={3}>
 
                             <Box>
@@ -78,96 +76,98 @@ export const EditProfile = () => {
                             <Stack direction='horizontal' gap={2} style={{
                                 justifyContent: 'right'
                             }}>
-                                <SharedButton label={'Back'} size={'sm'} variant={'primary'} startIcon={<HiOutlineArrowLeft />} onClick={handleClickBack} />
+                                <SharedButton label={'Back'} size={'sm'} variant={'primary'} className={'mx-2'} startIcon={<HiOutlineArrowLeft />} onClick={handleClickBack} />
                             </Stack>
 
                             <Box>
 
                                 <h5 className='text-secondary'>Personal Information</h5>
                                 <Form noValidate validated={validated} onSubmit={handleSubmit} className='mt-3'>
-                                  
+
                                     <Stack direction='vertical' gap={3}>
 
-                                    <UploadImage />
+                                        <UploadImage />
+
                                         <Row>
+
                                             <Col md={6} lg={4} className='mb-3'>
-                                            {/* <Form.Label>full name</Form.Label>
-                                            <Form.Control required  placeholder={'Full Name'} ref={fname}/> <Form.Control.Feedback type="invalid" >Please enter  a valid email.</Form.Control.Feedback>                                                
+                                                {/* <Form.Label>full name</Form.Label>
+                                            <Form.Control required isInvalid={'isInvalid'}  placeholder={'Full Name'} ref={fname}/> <Form.Control.Feedback type="invalid" >Please enter  a valid email.</Form.Control.Feedback>                                                
                                         */}
-                                                 <InputField required label={'Full Name'} placeholder={'Full Name'} ref={fname} feedback={'Please enter your name.'}  /> 
+                                                <InputField required isInvalid={'isInvalid'} label={'Full Name'} placeholder={'Full Name'} feedback={'Please enter your name.'} />
                                             </Col>
 
                                             <Col md={6} lg={4} className='mb-3'>
-                                            <InputField required label={'User Name'} placeholder={'User Name'} ref={uname} feedback={'Please enter user name.'}/>
+                                                <InputField required isInvalid={'isInvalid'} label={'User Name'} placeholder={'User Name'} feedback={'Please enter user name.'} />
                                             </Col>
 
                                             <Col md={6} lg={4} className='mb-3'>
-                                            <InputField required label={'Email'} placeholder={'Email'} ref={email} type='email' feedback={'Please enter valid email.'}/>
-                                            </Col>
-                                        
-                                            <Col md={6} lg={4} className='mb-3'>
-                                               <InputField required label={'Date Of Birth'} placeholder={'Date Of Birth'} ref={dob} type={'date'} feedback={'Please enter Date Of Birth.'}/>
+                                                <InputField required isInvalid={'isInvalid'} label={'Email'} placeholder={'Email'} type='email' feedback={'Please enter valid email.'} autoComplete />
                                             </Col>
 
                                             <Col md={6} lg={4} className='mb-3'>
-                                            <InputField required label={'Phone No'} placeholder={'Phone No'} ref={phone} type={'number'} feedback={'Please enter Phone No.'}/>
+                                                <InputField required isInvalid={'isInvalid'} label={'Date Of Birth'} placeholder={'Date Of Birth'} type={'date'} feedback={'Please enter Date Of Birth.'} />
                                             </Col>
 
                                             <Col md={6} lg={4} className='mb-3'>
-                                            <InputField required label={'Address'} placeholder={'Address'} ref={address} />
-                                            </Col>
-                                        
-                                            <Col md={6} lg={4} className='mb-3'>
-                                            <InputField required label={'City'} placeholder={'City'} ref={city} feedback={'Please enter City.'}/>
+                                                <InputField required isInvalid={'isInvalid'} label={'Phone No'} placeholder={'Phone No'} type={'number'} feedback={'Please enter Phone No.'} />
                                             </Col>
 
                                             <Col md={6} lg={4} className='mb-3'>
-                                            <InputField required label={'Postal Code'} placeholder={'Postal Code'} ref={fname} feedback={'Please enter valid Postal Code.'}/>
+                                                <InputField required isInvalid={'isInvalid'} label={'Address'} placeholder={'Address'} autoComplete />
                                             </Col>
-                                       
+
+                                            <Col md={6} lg={4} className='mb-3'>
+                                                <InputField required isInvalid={'isInvalid'} label={'City'} placeholder={'City'} feedback={'Please enter City.'} />
+                                            </Col>
+
+                                            <Col md={6} lg={4} className='mb-3'>
+                                                <InputField required isInvalid={'isInvalid'} label={'Postal Code'} placeholder={'Postal Code'} feedback={'Please enter valid Postal Code.'} />
+                                            </Col>
+
                                             <Col md={12} className='mb-3'>
-                                            <InputField required label={'Bio Description'} placeholder={'Bio description'} as={'textarea'} ref={bio} feedback={'Please enter bio description'}/>
+                                                <InputField required isInvalid={'isInvalid'} label={'Bio Description'} placeholder={'Bio description'} as={'textarea'} feedback={'Please enter bio description'} />
                                             </Col>
                                         </Row>
 
                                         <h5 className='text-secondary'>Academic Information</h5>
                                         <Row>
                                             <Col md={6} lg={4} className='mb-3'>
-                                              <Select SelectLabel={"College/University Name"} SelectOption={"University"} ref={college} required/>
-                                           </Col>
-                                            <Col md={6} lg={4} className='mb-3'>
-                                            <Select SelectLabel={"Degree"} SelectOption={"Degree"} ref={degree} required/>
+                                                <Select SelectLabel={"College/University Name"} SelectOption={"University"} required isInvalid={'isInvalid'} />
                                             </Col>
                                             <Col md={6} lg={4} className='mb-3'>
-                                             <Select SelectLabel={"Passing Year"} SelectOption={"Passing year"} ref={passyear} required/> 
+                                                <Select SelectLabel={"Degree"} SelectOption={"Degree"} required isInvalid={'isInvalid'} />
+                                            </Col>
+                                            <Col md={6} lg={4} className='mb-3'>
+                                                <Select SelectLabel={"Passing Year"} SelectOption={"Passing year"} required isInvalid={'isInvalid'} />
                                             </Col>
                                         </Row>
 
                                         <h5 className='text-secondary'>Skills & Expertise</h5>
                                         <Row>
-                                        
+
                                             <Col md={6} lg={4} className='mb-3'>
-                                            <Select SelectLabel={"Skills"} SelectOption={"Skills"} ref={skill} feedback={'pls select skills'} required/> 
+                                                <Select SelectLabel={"Skills"} SelectOption={"Skills"} feedback={'pls select skills'} required isInvalid={'isInvalid'} />
                                             </Col>
                                             <Col md={6} lg={4} className='mb-3'>
-                                             <Select SelectLabel={"Certifications"} SelectOption={"Certifications"} ref={certificate} required/> 
+                                                <Select SelectLabel={"Certifications"} SelectOption={"Certifications"} required isInvalid={'isInvalid'} />
                                             </Col>
                                             <Col md={6} lg={4} className='mb-3'>
-                                            <Select SelectLabel={"Languages"} SelectOption={"Languages"} ref={language} required/> 
-                                           </Col>
+                                                <Select SelectLabel={"Languages"} SelectOption={"Languages"} required isInvalid={'isInvalid'} />
+                                            </Col>
                                         </Row>
 
                                         <h5 className='text-secondary'>Project Prefrences</h5>
                                         <Row>
                                             <Col md={6} lg={4} className='mb-3'>
-                                            <Select SelectLabel={"Project Type"} SelectOption={"Project Type"} ref={ptype} required/> 
+                                                <Select SelectLabel={"Project Type"} SelectOption={"Project Type"} required isInvalid={'isInvalid'} />
                                             </Col>
                                             <Col md={6} lg={4} className='mb-3'>
-                                            <Select SelectLabel={"Avalilabilty"} SelectOption={"Availabilty"} ref={available} required/> 
-                                             </Col>
+                                                <Select SelectLabel={"Avalilabilty"} SelectOption={"Availabilty"} required isInvalid={'isInvalid'} />
+                                            </Col>
                                             <Col md={6} lg={4} className='mb-3'>
-                                            <Select SelectLabel={"Project Experience"} SelectOption={"Project Experience"} ref={pexperince} required/> 
-                                          </Col>
+                                                <Select SelectLabel={"Project Experience"} SelectOption={"Project Experience"} required isInvalid={'isInvalid'} />
+                                            </Col>
                                         </Row>
 
                                         <Row>

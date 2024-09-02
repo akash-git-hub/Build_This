@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { InputField } from "./InputField";
+ 
 import React, { useState } from "react";
 import { useRef } from "react";
-import { Stack } from "react-bootstrap";
+ 
  
 
 const Upload = styled.div`
@@ -18,34 +18,46 @@ const Upload = styled.div`
   border: 2px dashed blue;
   border-radius: 15px;
   cursor:pointer;
-`;
-
-const HiddenInput = styled.input`
-display:none;
+  z-index:1;
 `
+
+const img = styled.img`
+background:black;
+border: 2px solid blue;
+border-radius: 50%;
+`
+
+ 
+
 
 export const UploadImage = ( ) => {
     const fileinputRef = useRef(null);
-    const [imgname,setimg]= useState();
+    const [imgName, setimgName] = useState();
+
     const handleClick = () =>{
         if(fileinputRef.current){
             fileinputRef.current.click();// Trigger the file input click
         }
     }
+    
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         console.log(file.name);
         if (file) {
-          setimg(file.name); // Set the selected file
+          setimgName(file);
+           // Set the selected file
+        }
+        else{
+          setimgName(null);
         }
       };
+      console.log(imgName);
+      
   return (
     <>
-    <Stack direction='horizontal' gap={3}>
-    <Upload onClick={handleClick}>Upload Image</Upload>
-    <p>{imgname}</p>
-    </Stack>
-    <HiddenInput type={'file'} ref={fileinputRef} onChange={handleFileChange} accept="image/*"/>
+
+     { (imgName)?<img src={(URL.createObjectURL(imgName))} className="rounded-circle" rounded width={100} height={100}/>:<Upload onClick={handleClick}>Upload Image</Upload>}
+     <input type={'file'} className={'d-none'} ref={fileinputRef} onChange={handleFileChange} accept="image/*"/>
     </>
   );
 };

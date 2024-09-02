@@ -24,10 +24,10 @@ export const MyProjectDetail = () => {
         <>
             <Container fluid>
                 <Row>
-                    <Col className='p-1' md={3}>
+                    <Col className='p-0' lg={3} md={4}>
                         <Sidebar />
                     </Col>
-                    <Col className='p-1' md={9}>
+                    <Col className='p-0' lg={9} md={8}>
                         <Stack direction='vertical' gap={3}>
                             <Box>
                                 <Stack direction='horizontal' gap={2} justifyContent='space-between'>
@@ -37,7 +37,7 @@ export const MyProjectDetail = () => {
                             <Stack direction='horizontal' gap={2} style={{
                                 justifyContent: 'right'
                             }}>
-                                <SharedButton label={'Back'} size={'sm'} variant={'primary'} startIcon={<HiOutlineArrowLeft />} onClick={handleClickBack} />
+                                <SharedButton label={'Back'} size={'sm'} variant={'primary'} startIcon={<HiOutlineArrowLeft />} className={'mx-2'} onClick={handleClickBack} />
                             </Stack>
                             <Box>
                                 <Stack direction='vertical' gap={2}>

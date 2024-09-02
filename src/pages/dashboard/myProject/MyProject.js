@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Row, Stack } from 'react-bootstrap'
+import { Col, Container, Row, Stack } from 'react-bootstrap'
 import { Heading } from '../../../components/Heading'
 import styled from 'styled-components'
 import { SharedButton } from '../../../components/Button'
@@ -32,11 +32,12 @@ export const MyProject = () => {
 
     return (
         <>
+           <Container fluid>
             <Row>
-                <Col md={3} className='p-1'>
+                <Col lg={3} md={4} className='p-0'>
                     <Sidebar />
                 </Col>
-                <Col md={9} className='p-1 pr-0'>
+                <Col lg={9} md={8} className='p-0'>
                     <Stack direction='vertical' gap={3}>
                         <Box>
                             <Stack direction='horizontal' gap={2} justifyContent='space-between'>
@@ -56,19 +57,12 @@ export const MyProject = () => {
                         <Stack direction='horizontal' gap={2} style={{
                             justifyContent:'right'
                         }}>
-                            <SharedButton label={'Back'} size={'sm'} variant={'primary'} startIcon={<HiOutlineArrowLeft />} onClick={() => navigate('/dashboard')} />
+                            <SharedButton label={'Back'} size={'sm'} variant={'primary'}  className={'mx-2'}startIcon={<HiOutlineArrowLeft />} onClick={() => navigate('/dashboard')} />
                         </Stack>
                         <Box>
-                            <Stack direction='horizontal' gap={2} style={{
-                                justifyContent: 'space-between',
-                                alignItems: 'center'
-                            }}>
-                                <h6>My Project</h6>
-                            </Stack>
-
-                            <div style={{ width: '100%', overflowX: 'auto' }}>
+                            <div style={{ width: '100%' }}>
                                 <Row>
-                                    <Col className='' md={3}>
+                                    <Col className='mb-2' md={3}>
                                         <MyProjectCard BgColor={"#FEEEE7"} />
                                     </Col>
                                     <Col className='' md={3}>
@@ -90,6 +84,7 @@ export const MyProject = () => {
                     </Stack>
                 </Col>
             </Row>
+            </Container>
         </>
     )
 }
