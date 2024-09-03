@@ -12,6 +12,11 @@ export const Sidebar = () => {
   const navigate = useNavigate();
   const pathname = useLocation().pathname;
 
+  const logOutHandler = ()=>{
+    localStorage.removeItem('token');
+    navigate('/');
+  }
+
 
   const Box = styled.div`
   background: #ffffff;
@@ -73,7 +78,7 @@ export const Sidebar = () => {
                 <Avatar UserName={'Jaylee Fox'} UserEmail={'jaylee@foxgmail.com'} />
               </li>
               <li>
-                <SharedButton label={'LogOut'} variant={'light'} startIcon={<CgLogOut />} size={'sm'} className={"w-100"} />
+                <SharedButton label={'LogOut'} variant={'light'} onClick={logOutHandler} startIcon={<CgLogOut />} size={'sm'} className={"w-100"} />
               </li>
             </Stack>
           </ul>

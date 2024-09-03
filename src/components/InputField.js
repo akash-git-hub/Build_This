@@ -19,6 +19,8 @@ export const InputField = ({
     feedback,
     startIcon,
     endIcon,
+    name,
+    row
 }) => {
     return (
         <>
@@ -33,10 +35,12 @@ export const InputField = ({
                     <Form.Control
                         type={type}
                         placeholder={placeholder}
+                        name={name}
                         size={size}
                         value={value}
                         onChange={onChange}
-                        as={as}
+                        as={as}      
+                        row={row}                  
                         readOnly={readOnly}
                         disabled={disabled}
                         plaintext={plaintext}

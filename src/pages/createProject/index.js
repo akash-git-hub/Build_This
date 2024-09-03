@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Sidebar } from '../../commonPages/sidebar'
 import { Row, Col, Container, Stack } from 'react-bootstrap'
 import styled from 'styled-components'
@@ -8,6 +8,8 @@ import { HiOutlineArrowLeft } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
 import { InputField } from '../../components/InputField'
 import { Select } from '../../components/Select'
+import { option } from '../../components/Helper'
+import { MultiSelect } from '../../components/MultiSelect'
 
 const Box = styled.div`
   width: 100%;
@@ -17,18 +19,29 @@ const Box = styled.div`
 
 
 export const CreateProject = () => {
-    const navigate = useNavigate();
-    const handleClickBack = () => {
-        navigate('/dashboard');
-    };
+    const [data,setData] = useState({"name":""});
+    const [skillsdata,setSkillsdata] = useState();
+    const [skillsOption, setSkillsOption] = useState([]);
+    
+    const onChangeHandler = (e)=>{
+        const {name,value} = e.target;
+
+    }
+
+
+
+const createHandler = ()=>{
+
+}
+
     return (
         <>
             <Container fluid>
                 <Row>
-                    <Col md={3}>
+                    <Col className='p-1' md={3}>
                         <Sidebar />
                     </Col>
-                    <Col md={9}>
+                    <Col className='p-1' md={9}>
                         <Stack direction='vertical' gap={3}>
                             <Box>
                                 <Stack direction='horizontal' gap={2} justifyContent='space-between'>
@@ -38,18 +51,19 @@ export const CreateProject = () => {
                             <Stack direction='horizontal' gap={2} style={{
                                 justifyContent: 'right'
                             }}>
-                                <SharedButton label={'Back'} size={'sm'} variant={'primary'} startIcon={<HiOutlineArrowLeft />} onClick={handleClickBack} />
+                                <SharedButton label={'Back'} size={'sm'} variant={'primary'} startIcon={<HiOutlineArrowLeft />} onClick={()=>window.history.back()} />
                             </Stack>
                             <Box>
                                 <Row>
                                     <Col md={4}>
-                                        <InputField className={'mb-3'} type={'text'} label={'Project Name'} placeholder={'Project Name'} />
+                                        <InputField name={"name"} value={data.name} onChange={onChangeHandler} className={'mb-3'} type={'text'} label={'Project Name'} placeholder={'Project Name'} />
                                     </Col>
                                     <Col md={4}>
-                                        <Select SelectLabel={'Category'} SelectOption={'Category'} />
+                                        <Select name={"name"} value={data.name} onChange={onChangeHandler} option={option} SelectLabel={'Category'} SelectOption={'Category'} />
                                     </Col>
                                     <Col md={4}>
-                                        <Select SelectLabel={'Skill Required'} SelectOption={'Skills'} />
+                                    <MultiSelect SelectLabel={"Skill Required"} setSkillsdata={setSkillsdata} options={skillsOption} />
+                                    
                                     </Col>
                                     <Col md={4}>
                                         <InputField className={'mb-3'} type={'date'} label={'Start Date'} placeholder={'Date'} />
@@ -61,10 +75,10 @@ export const CreateProject = () => {
                                         <InputField className={'mb-3'} type={'text'} label={'Team Members'} placeholder={'Team Members'} />
                                     </Col>
                                     <Col md={12}>
-                                        <InputField className={'mb-3'} type={'textarea'} label={'Description'} placeholder={'Description'} />
+                                        <InputField className={'mb-3'} type={'textarea'} as={"textarea"} row={2} label={'Description'} placeholder={'Description'} />
                                     </Col>
                                     <Col md={4}>
-                                        <SharedButton className={'w-100'} label={'Create Project'} size={'md'} variant={'primary'} onClick={handleClickBack} />
+                                        <SharedButton className={'w-100'} label={'Create Project'} size={'md'} variant={'primary'} onClick={createHandler} />
                                     </Col>
                                 </Row>
                             </Box>
