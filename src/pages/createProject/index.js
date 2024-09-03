@@ -44,12 +44,12 @@ const createHandler = ()=>{
                     <Col className='p-1' md={9}>
                         <Stack direction='vertical' gap={3}>
                             <Box>
-                                <Stack direction='horizontal' gap={2} justifyContent='space-between'>
+                                <Stack direction='horizontal' gap={2} className='d-flex justify-content-between'>
                                     <Heading Heading={'Create Project'} SubHeading={'Manage your billing and payment details'} />
                                 </Stack>
                             </Box>
                             <Stack direction='horizontal' gap={2} style={{
-                                justifyContent: 'right'
+                                justifyContent: 'right' 
                             }}>
                                 <SharedButton label={'Back'} size={'sm'} variant={'primary'} startIcon={<HiOutlineArrowLeft />} onClick={()=>window.history.back()} />
                             </Stack>
