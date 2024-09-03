@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Image, Stack } from 'react-bootstrap'
+import {  Image, Stack } from 'react-bootstrap'
 import styled from 'styled-components'
 
 const Textp = styled.p`
