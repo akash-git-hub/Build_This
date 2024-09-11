@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Col, Container, Form, Row, Stack } from 'react-bootstrap'
 import { Sidebar } from '../../commonPages/sidebar'
 import { Heading } from '../../components/Heading'
@@ -9,6 +9,10 @@ import { HiOutlineArrowLeft } from 'react-icons/hi'
 import { UploadImage } from '../../components/UploadImage'
 import { Select } from '../../components/Select'
 import { InputField } from '../../components/InputField'
+import EditMyProfileHeading from './EditMyProfileHeading'
+import { updateUserProfileAPI, userProfileAPI } from '../../APIServices/service'
+import { successAlert } from '../../components/Alert'
+import { MyContext } from '../../App'
 
 const Box = styled.div`
   width: 100%;
@@ -18,43 +22,97 @@ const Box = styled.div`
 
 
 export const EditProfile = () => {
-
-    const [validated, setValidated] = useState(false);
-
-    // const email = useRef();
-    // const fname = useRef();
-    // const uname = useRef();
-    // const phone = useRef();
-    // const address = useRef();
-    // const dob = useRef();
-    // const city = useRef();
-    // const bio = useRef();
-    // const degree = useRef();
-    // const passyear = useRef();
-    // const postalcode = useRef();
-    // const college = useRef();
-    // const skill = useRef();
-    // const available = useRef();
-    // const certificate = useRef();
-    // const language = useRef();
-    // const ptype = useRef();
-    // const pexperince = useRef();
-
-
+    const [inData, setInData] = useState({ "id": "", "fullName": "", "userName": "", "email": "", "dob": "", "phone": "", "address": "", "city": "", "postalCode": "","language":"", "bio": "", "image": "" });
+    const [feedback, setFeedback] = useState({ "fullName": "", "userName": "", "email": "", "dob": "", "phone": "", "address": "", "city": "", "postalCode": "","language":"", "bio": "", "image": "" });
     const navigate = useNavigate();
-    const handleClickBack = () => {
-        navigate('/my_profile');
-    };
+    const [waiting, setWaiting] = useState(false);
+    const { info, userData } = useContext(MyContext);
 
-    const handleSubmit = (event) => {
 
-        event.preventDefault();
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.stopPropagation();
-            alert("pls fill all required isInvalid={'isInvalid'} feilds");
+
+
+    const onChangeHandler = (e) => {
+        const { name, value } = e.target;
+        setInData((pre) => ({ ...pre, [name]: value }));
+        setFeedback((pre) => ({ ...pre, [name]: "" }));
+    }
+
+    const imageHandler = (e) => {
+        const { name, value } = e;
+        setInData((pre) => ({ ...pre, [name]: value }));
+
+    }
+
+    const getUserData = async (data) => {
+        if (data) {
+            const { full_name, user_name, email, dob, phone, address, city, postal_code, bio, id ,language} = data;
+            setInData({
+                'id': id,
+                "fullName": full_name,
+                "userName": user_name,
+                "email": email,
+                "dob": dob,
+                "phone": phone,
+                "address": address,
+                "city": city,
+                "postalCode": postal_code,
+                "bio": bio,
+                "language":language,
+                "image": "",
+            });
         }
-        setValidated(true);
+    }
+    useEffect(() => {
+        if (info != "") {
+            getUserData(info);
+        }
+    }, [info])
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const { fullName, userName, email, dob, phone, address, city, postalCode, bio, image, id,language } = inData;
+        let isValid = true;
+        if (!fullName) { setFeedback((pre) => ({ ...pre, 'fullName': "Please enter your name." })); isValid = false; }
+        if (!userName) { setFeedback((pre) => ({ ...pre, 'userName': "Please enter your user name." })); isValid = false; }
+        if (!email) { setFeedback((pre) => ({ ...pre, 'email': "Please enter your valid email." })); isValid = false; }
+        if (!dob) { setFeedback((pre) => ({ ...pre, 'dob': "Please enter Date Of Birth." })); isValid = false; }
+        if (!phone) { setFeedback((pre) => ({ ...pre, 'phone': "Please enter Phone No." })); isValid = false; }
+        if (!address) { setFeedback((pre) => ({ ...pre, 'address': "Please enter your address." })); isValid = false; }
+        if (!city) { setFeedback((pre) => ({ ...pre, 'city': "Please enter your city." })); isValid = false; }
+        if (!postalCode) { setFeedback((pre) => ({ ...pre, 'postalCode': "Please enter your postal code." })); isValid = false; }
+        if (!language) { setFeedback((pre) => ({ ...pre, 'language': "Please enter your languages." })); isValid = false; }
+        if (!bio) { setFeedback((pre) => ({ ...pre, 'bio': "Please enter your bio description." })); isValid = false; }
+        if (phone) {
+            const phoneNoStr = phone.toString();
+            if (phoneNoStr.length !== 10 || isNaN(Number(phoneNoStr))) {
+                setFeedback((pre) => ({ ...pre, "phone": "* Contact Number Must be Numeric and Contain 10 Digits" }));
+                isValid = false;
+            }
+        }
+        if (isValid) {
+            setWaiting(true);
+            const formData = new FormData();
+            formData.append('userId', id);
+            formData.append('fullName', fullName);
+            formData.append('userName', userName);
+            formData.append('dob', dob);
+            formData.append('phone', phone);
+            formData.append('address', address);
+            formData.append('city', city);
+            formData.append('postalCode', postalCode);
+            formData.append('language',language);
+            formData.append('bio', bio);
+            formData.append('image', image);
+            const resp = await updateUserProfileAPI(formData);
+            if (resp && resp.success) {
+                e.target.reset();
+                setWaiting(false);
+                userData();
+                successAlert(resp.message);
+            }
+            setWaiting(false);
+        }
     };
 
 
@@ -65,108 +123,60 @@ export const EditProfile = () => {
                     <Col lg={3} md={4} className='p-0'>
                         <Sidebar />
                     </Col>
-
                     <Col lg={9} md={8} className='p-0'>
                         <Stack direction='vertical' gap={3}>
-
-                            <Box>
-                                <Heading Heading={'My Profile'} SubHeading={'Edit My Profile'} />
-                            </Box>
-
-                            <Stack direction='horizontal' gap={2} style={{
-                                justifyContent: 'right'
-                            }}>
-                                <SharedButton label={'Back'} size={'sm'} variant={'primary'} className={'mx-2'} startIcon={<HiOutlineArrowLeft />} onClick={handleClickBack} />
+                            <EditMyProfileHeading inHeading={'My Profile'} inSubHeading={'Edit My Profile'} />
+                            <Stack direction='horizontal' gap={4} className='ps-4 pe-2' style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                                <h5 className='text-secondary'>Personal Information </h5>
+                                <SharedButton label={'Back'} size={'sm'} variant={'primary'} className={'mx-2'} startIcon={<HiOutlineArrowLeft />} onClick={() => navigate('/my_profile')} />
                             </Stack>
-
                             <Box>
-
-                                <h5 className='text-secondary'>Personal Information</h5>
-                                <Form noValidate validated={validated} onSubmit={handleSubmit} className='mt-3'>
-
+                                <Form noValidate onSubmit={handleSubmit} className='mt-3'>
                                     <Stack direction='vertical' gap={3}>
-
-                                        <UploadImage />
-
+                                        <UploadImage
+                                            FormLabel="Upload Profile"
+                                            name="image"
+                                            controlId="formProfilePic"
+                                            onChange={imageHandler}
+                                        />
                                         <Row>
-
                                             <Col md={6} lg={4} className='mb-3'>
-                                                {/* <Form.Label>full name</Form.Label>
-                                            <Form.Control required isInvalid={'isInvalid'}  placeholder={'Full Name'} ref={fname}/> <Form.Control.Feedback type="invalid" >Please enter  a valid email.</Form.Control.Feedback>                                                
-                                        */}
-                                                <InputField required isInvalid={'isInvalid'} label={'Full Name'} placeholder={'Full Name'} feedback={'Please enter your name.'} />
+                                                <InputField required name='fullName' value={inData.fullName} onChange={onChangeHandler} label={'Full Name'} placeholder={'Full Name'} isInvalid={feedback.fullName} feedback={feedback.fullName} />
                                             </Col>
 
                                             <Col md={6} lg={4} className='mb-3'>
-                                                <InputField required isInvalid={'isInvalid'} label={'User Name'} placeholder={'User Name'} feedback={'Please enter user name.'} />
+                                                <InputField required name='userName' value={inData.userName} onChange={onChangeHandler} label={'User Name'} placeholder={'User Name'} isInvalid={feedback.userName} feedback={feedback.userName} />
                                             </Col>
 
                                             <Col md={6} lg={4} className='mb-3'>
-                                                <InputField required isInvalid={'isInvalid'} label={'Email'} placeholder={'Email'} type='email' feedback={'Please enter valid email.'} autoComplete />
+                                                <InputField readOnly={true} required name='email' value={inData.email} onChange={onChangeHandler} label={'Email'} placeholder={'Email'} type='email' isInvalid={feedback.email} feedback={feedback.email} autoComplete />
                                             </Col>
 
                                             <Col md={6} lg={4} className='mb-3'>
-                                                <InputField required isInvalid={'isInvalid'} label={'Date Of Birth'} placeholder={'Date Of Birth'} type={'date'} feedback={'Please enter Date Of Birth.'} />
+                                                <InputField required name='dob' value={inData.dob} onChange={onChangeHandler} label={'Date Of Birth'} placeholder={'Date Of Birth'} type={'date'} isInvalid={feedback.dob} feedback={feedback.dob} />
                                             </Col>
 
                                             <Col md={6} lg={4} className='mb-3'>
-                                                <InputField required isInvalid={'isInvalid'} label={'Phone No'} placeholder={'Phone No'} type={'number'} feedback={'Please enter Phone No.'} />
+                                                <InputField required name='phone' value={inData.phone} onChange={onChangeHandler} label={'Phone No'} placeholder={'Phone No'} type={'number'} isInvalid={feedback.phone} feedback={feedback.phone} />
                                             </Col>
 
                                             <Col md={6} lg={4} className='mb-3'>
-                                                <InputField required isInvalid={'isInvalid'} label={'Address'} placeholder={'Address'} autoComplete />
+                                                <InputField required name='address' value={inData.address} onChange={onChangeHandler} label={'Address'} placeholder={'Address'} isInvalid={feedback.address} feedback={feedback.address} />
                                             </Col>
 
                                             <Col md={6} lg={4} className='mb-3'>
-                                                <InputField required isInvalid={'isInvalid'} label={'City'} placeholder={'City'} feedback={'Please enter City.'} />
+                                                <InputField required name='city' value={inData.city} onChange={onChangeHandler} label={'City'} placeholder={'City'} isInvalid={feedback.city} feedback={feedback.city} />
                                             </Col>
 
                                             <Col md={6} lg={4} className='mb-3'>
-                                                <InputField required isInvalid={'isInvalid'} label={'Postal Code'} placeholder={'Postal Code'} feedback={'Please enter valid Postal Code.'} />
+                                                <InputField required name='postalCode' value={inData.postalCode} onChange={onChangeHandler} label={'Postal Code'} placeholder={'Postal Code'} isInvalid={feedback.postalCode} feedback={feedback.postalCode} />
+                                            </Col>
+                                            <Col md={6} lg={4} className='mb-3'>
+                                                <InputField required name='language' value={inData.language} onChange={onChangeHandler} label={'Languages'} placeholder={'Hindi,English'} isInvalid={feedback.language} feedback={feedback.language} />
                                             </Col>
 
                                             <Col md={12} className='mb-3'>
-                                                <InputField required isInvalid={'isInvalid'} label={'Bio Description'} placeholder={'Bio description'} as={'textarea'} feedback={'Please enter bio description'} />
-                                            </Col>
-                                        </Row>
-
-                                        <h5 className='text-secondary'>Academic Information</h5>
-                                        <Row>
-                                            <Col md={6} lg={4} className='mb-3'>
-                                                <Select SelectLabel={"College/University Name"} SelectOption={"University"} required isInvalid={'isInvalid'} />
-                                            </Col>
-                                            <Col md={6} lg={4} className='mb-3'>
-                                                <Select SelectLabel={"Degree"} SelectOption={"Degree"} required isInvalid={'isInvalid'} />
-                                            </Col>
-                                            <Col md={6} lg={4} className='mb-3'>
-                                                <Select SelectLabel={"Passing Year"} SelectOption={"Passing year"} required isInvalid={'isInvalid'} />
-                                            </Col>
-                                        </Row>
-
-                                        <h5 className='text-secondary'>Skills & Expertise</h5>
-                                        <Row>
-
-                                            <Col md={6} lg={4} className='mb-3'>
-                                                <Select SelectLabel={"Skills"} SelectOption={"Skills"} feedback={'pls select skills'} required isInvalid={'isInvalid'} />
-                                            </Col>
-                                            <Col md={6} lg={4} className='mb-3'>
-                                                <Select SelectLabel={"Certifications"} SelectOption={"Certifications"} required isInvalid={'isInvalid'} />
-                                            </Col>
-                                            <Col md={6} lg={4} className='mb-3'>
-                                                <Select SelectLabel={"Languages"} SelectOption={"Languages"} required isInvalid={'isInvalid'} />
-                                            </Col>
-                                        </Row>
-
-                                        <h5 className='text-secondary'>Project Prefrences</h5>
-                                        <Row>
-                                            <Col md={6} lg={4} className='mb-3'>
-                                                <Select SelectLabel={"Project Type"} SelectOption={"Project Type"} required isInvalid={'isInvalid'} />
-                                            </Col>
-                                            <Col md={6} lg={4} className='mb-3'>
-                                                <Select SelectLabel={"Avalilabilty"} SelectOption={"Availabilty"} required isInvalid={'isInvalid'} />
-                                            </Col>
-                                            <Col md={6} lg={4} className='mb-3'>
-                                                <Select SelectLabel={"Project Experience"} SelectOption={"Project Experience"} required isInvalid={'isInvalid'} />
+                                                <InputField required name='bio' value={inData.bio} onChange={onChangeHandler} label={'Bio Description'} placeholder={'Bio description'} as={'textarea'} isInvalid={feedback.bio} feedback={feedback.bio} />
                                             </Col>
                                         </Row>
 

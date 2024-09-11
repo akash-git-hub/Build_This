@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Image, Stack } from 'react-bootstrap'
 import { LinkSidebar } from '../../components/LinkSidebar';
 // import { Avatar } from '../../components/Avatar';
@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { SharedButton } from '../../components/Button';
 import { Avatar } from '../../components/Avatar';
+import { MyContext } from '../../App';
 
 const Box = styled.div`
   background: #ffffff;
@@ -17,9 +18,11 @@ const Box = styled.div`
 export const Sidebar = () => {
   const navigate = useNavigate();
   const pathname = useLocation().pathname;
+  const { info } = useContext(MyContext);
+  
 
   const logOutHandler = ()=>{
-    localStorage.removeItem('token');
+    localStorage.removeItem('Authorization');
     navigate('/');
   }
 
@@ -69,16 +72,11 @@ export const Sidebar = () => {
             </Stack>
           </ul>
           <hr />
-          <h6 style={{
-            color: '#64748B'
-          }}>Profile</h6>
-          <ul style={{
-            listStyle: 'none',
-            padding: 0
-          }}>
-            <Stack direction='vertical' gap={3}>
+          <h6 style={{color: '#64748B'}}>Profile</h6>
+          <ul style={{listStyle: 'none', padding: 0 }}>
+            <Stack direction='vertical' gap={3} style={{cursor:"pointer"}}>
               <li className={pathname === "/my_profile" ? 'active' : ""} style={{ padding: '0px 10px' }} onClick={() => navigate('/my_profile')} >
-                <Avatar UserName={'Jaylee Fox'} UserEmail={'jaylee@foxgmail.com'} />
+                <Avatar UserName={info && info.user_name} UserEmail={info && info.email} Pr_Image={info && info.pr_image} />
               </li>
               <li>
                 <SharedButton label={'LogOut'} variant={'light'} onClick={logOutHandler} startIcon={<CgLogOut />} size={'sm'} className={"w-100"} />
