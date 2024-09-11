@@ -3,10 +3,10 @@ import { InputField } from './InputField'
 import { CiSearch } from 'react-icons/ci'
 
 
-export const SearchPanel = () => {
+export const SearchPanel = ({className}) => {
     return (
         <>
-            <InputField startIcon={<CiSearch />} placeholder={'Search project, users...'}   className={'w-50 border-0'}/>
+            <InputField startIcon={<CiSearch />} placeholder={'Search project, users...'} id={'search'}  className={className}/>
         </>
     )
 }

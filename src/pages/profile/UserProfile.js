@@ -3,26 +3,23 @@ import { Col, Container, Image, Row, Stack } from 'react-bootstrap'
 import { Sidebar } from '../../commonPages/sidebar'
 import { Heading } from '../../components/Heading'
 import styled from 'styled-components'
-import { SharedButton } from '../../components/Button'
-import { CiEdit } from 'react-icons/ci'
-import { MyProjectCard } from '../../components/MyProjectCard'
+import { SharedButton } from '../../components/Button' 
 import { useNavigate } from 'react-router-dom'
 import { InputField } from '../../components/InputField'
+import { HiOutlineArrowLeft } from 'react-icons/hi'
 
 const Box = styled.div`
   width: 100%;
   background: #ffffff;
   padding: 2rem;
 `
-const Icon = styled.div`
-background:#e6f5ff;
-padding: 0.5rem;
-color:blue;
-border-radius: 30px;
-`
+ 
 
-export const Profile = () => {
+export const UserProfile = () => {
     const navigate = useNavigate();
+    const handleClickBack = () => {
+        navigate('/dashboard');
+    };
     return (
         <>
             <Container fluid>
@@ -34,24 +31,23 @@ export const Profile = () => {
                         <Stack direction='vertical' gap={3}>
 
                             <Box>
-                                <Heading Heading={'My Profile'} SubHeading={'Create your project & team member'} />
+                                <Heading Heading={'User Profile'}/>
                             </Box>
+
+                            <Stack direction='horizontal' gap={2} style={{
+                                justifyContent: 'right'
+                            }}>
+                                <SharedButton label={'Back'} size={'sm'} variant={'primary'} className={'mx-2'} startIcon={<HiOutlineArrowLeft />} onClick={handleClickBack} />
+                            </Stack>
 
                             <Box>
                                 <Stack direction='horizontal' gap={0} style={{ justifyContent: 'space-between', alignItems: 'center' }}>
-
                                     <Stack direction='horizontal' gap={4} style={{ justifyContent: 'center', alignItem: 'center' }} >
                                         <Image src='/assets/images/Avatar.svg' className='img-fluid ' width={100} height={100} rounded />
                                         <Stack direction='vertical' gap={0} className='mt-3'>
-                                            <Heading Heading={'Jaylee Fox'} SubHeading={'jaylee@foxgmail.com'} />
+                                            <Heading Heading={'Andrew Son'} SubHeading={'jaylee@foxgmail.com'} />
                                         </Stack>
-
                                     </Stack>
-
-                                    <Icon>
-                                        <CiEdit fontSize={'1.5rem'} className='me-0' onClick={() => navigate('/edit_profile')} />
-                                    </Icon>
-
                                 </Stack>
                             </Box>
                             <p className='mb-0 mx-2'>Personal Information</p>
@@ -73,7 +69,7 @@ export const Profile = () => {
                             <Box>
                                 <Stack direction='vertical' gap={2}>
                                     <Row>
-                                        <Col md={6} lg={3}><h5>Skills</h5><InputField plaintext={'plaintext'} id={'skills'} value={'UI/UX Designer, FrontEnd ,Gra'} readOnly={'readOnly'} /> </Col>
+                                        <Col md={6} lg={4}><h5>Skills</h5><InputField plaintext={'plaintext'} id={'skills'} value={'UI/UX Designer, FrontEnd ,Gra'} readOnly={'readOnly'} /> </Col>
                                         <Col md={6} lg={3}><h5>Certifications</h5><InputField plaintext={'plaintext'} id={'certifications'} value={'Product Designer'} readOnly={'readOnly'} /></Col>
                                         <Col md={6} lg={3}><h5>Languages</h5><InputField plaintext={'plaintext'} id={'languages'} value={'Hindi,English'} readOnly={'readOnly'} /></Col>
                                     </Row>
@@ -100,30 +96,6 @@ export const Profile = () => {
                                     </Row>
                                 </Stack>
                             </Box>
-                            <Box>
-                                <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between', alignItems: 'center' }}>
-                                    <h6>My Project</h6>
-                                    <SharedButton label={'See all'} size={'sm'} variant={'outlined'} onClick={() => navigate('/my_project')} />
-                                </Stack>
-
-                                <div>
-                                    <Row >
-                                        <Col className='mb-3' md={6} lg={4} xl={3}>
-                                            <MyProjectCard BgColor={"#FEEEE7"} />
-                                        </Col>
-                                        <Col className='mb-3' md={6} lg={4} xl={3}>
-                                            <MyProjectCard BgColor={'#E7F0FE'} />
-                                        </Col>
-                                        <Col className='mb-3' md={6} lg={4} xl={3}>
-                                            <MyProjectCard BgColor={'#FEE7F5'} />
-                                        </Col>
-                                        <Col className='mb-3' md={6} lg={4} xl={3}>
-                                            <MyProjectCard BgColor={'#ECFEE7'} />
-                                        </Col>
-                                    </Row>
-                                </div>
-                            </Box>
-
                         </Stack>
                     </Col>
                 </Row>

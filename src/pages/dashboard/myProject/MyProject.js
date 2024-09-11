@@ -47,7 +47,7 @@ export const MyProject = () => {
                                 <Stack direction='horizontal' gap={2} style={{
                                     justifyContent: 'space-between'
                                 }}>
-                                    <SearchPanel />
+                                    <SearchPanel className={'w-50 bg-light'} />
                                     <Icon>
                                         <CiFilter fontSize={'1.5rem'} className='me-0' />
                                     </Icon>

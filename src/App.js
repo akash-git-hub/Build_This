@@ -9,8 +9,11 @@ import { MyProject } from './pages/dashboard/myProject/MyProject.js';
 import { PublishProject } from './pages/dashboard/publishProject/PublishProject.js';
 import { MyProjectDetail } from './pages/dashboard/myProject/MyProjectDetail.js';
 import { CreateProject } from './pages/createProject/index.js';
-import { Profile } from './pages/myProfile/Profile.js';
-import { EditProfile } from './pages/myProfile/EditProfile.js';
+import { UserProfile } from './pages/profile/UserProfile.js';
+import { Chat } from './pages/chatPages/index.js';
+import { MyProfile } from './pages/profile/myProfile/index.js';
+import { EditProfile } from './pages/profile/editProfile/index.js';
+import { InviteUser } from './pages/inviteUserPage/index.js';
 
 
 function App() {
@@ -27,8 +30,11 @@ function App() {
           <Route path="/my_project" element={<MyProject />} />
           <Route path="/my_project_detail" element={<MyProjectDetail />} />
           <Route path="/publish_project" element={<PublishProject />} />
-          <Route path='/my_profile' element={<Profile/>} />
+          <Route path='/my_profile' element={ <MyProfile/> } />
           <Route path='/edit_profile' element={<EditProfile/>} />
+          <Route path="/user_profile" element={<UserProfile/>}/>
+          <Route path="/invite_user" element={<InviteUser/>}/> 
+          <Route path="/chats" element={<Chat/>}/> 
         </Routes>
       </BrowserRouter>
     </>

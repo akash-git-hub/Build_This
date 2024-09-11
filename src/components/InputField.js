@@ -44,18 +44,17 @@ export const InputField = ({
                         row={row}                  
                         readOnly={readOnly}
                         disabled={disabled}
-                        plaintext={plaintext}
-                        isInvalid={isInvalid}
+                        plaintext={plaintext}               
                         required={required}
                         className={className}
-                        id={id}
+                        id={label}
                     />
                     {endIcon && (
                         <InputGroup.Text>
                             {endIcon}
                         </InputGroup.Text>
                     )}
-                    {isInvalid && <Form.Control.Feedback type="invalid">{feedback}</Form.Control.Feedback>}
+                    <Form.Control.Feedback type="invalid">{feedback}</Form.Control.Feedback>
                 </InputGroup>
             </Form.Group>
         </>

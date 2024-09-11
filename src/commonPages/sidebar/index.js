@@ -44,26 +44,26 @@ export const Sidebar = () => {
               }}>
                 <LinkSidebar LinkIcon={<Image src='./assets/images/Icons/Dashboard.svg' />} LinkLabel={'Dashboard'} LinkPath={'/dashboard'} />
               </li>
-              <li className={pathname === "/create_project" || pathname === "/editprofileadminstrator" || pathname === "/profileadminstrator" ? 'active' : ""} style={{
+              <li className={pathname === "/create_project" ? 'active' : ""} style={{
                 padding: '10px',
                 position: 'relative'
               }}>
                 <LinkSidebar LinkIcon={<Image src='./assets/images/Icons/CreateProject.svg' />} LinkLabel={'Create Project'} LinkPath={'/create_project'} />
               </li>
-              <li className={pathname === "/traininglist" || pathname === "/TraningListDetail" || pathname === "/training" ? 'active' : ""} style={{
+              <li className={pathname === "/chats" ? 'active' : ""} style={{
                 padding: '10px'
               }}>
-                <LinkSidebar LinkIcon={<Image src='./assets/images/Icons/Chats.svg' />} LinkLabel={'Chats'} LinkPath={'/traininglist'} />
+                <LinkSidebar LinkIcon={<Image src='./assets/images/Icons/Chats.svg' />} LinkLabel={'Chats'} LinkPath={'/chats'} />
               </li>
               <li className={pathname === "/messages" ? 'active' : ""} style={{
                 padding: '10px'
               }}>
                 <LinkSidebar LinkIcon={<Image src='./assets/images/Icons/Notification.svg' />} LinkLabel={'Notification'} LinkPath={'/messages'} />
               </li>
-              <li className={pathname === "/inventorymodulelist" || pathname === "/apparatusInfoDetails" || pathname === "/createGeareType" || pathname === "/gearinfo" || pathname === "/CreateGear" || pathname === "/CreateApparatus" || pathname === "/GearListDetail" ? 'active' : ""} style={{
+              <li className={pathname === "/invite_user" ? 'active' : ""} style={{
                 padding: '10px'
               }}>
-                <LinkSidebar LinkIcon={<Image src='./assets/images/Icons/InviteUser.svg' />} LinkLabel={'Invite Users'} LinkPath={'/inventorymodulelist'} />
+                <LinkSidebar LinkIcon={<Image src='./assets/images/Icons/InviteUser.svg' />} LinkLabel={'Invite Users'} LinkPath={'/invite_user'} />
               </li>
 
             </Stack>

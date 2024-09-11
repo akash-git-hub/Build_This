@@ -10,6 +10,7 @@ import { InputField } from '../../components/InputField'
 import { Select } from '../../components/Select'
 import { option } from '../../components/Helper'
 import { MultiSelect } from '../../components/MultiSelect'
+import { UploadImage } from '../../components/UploadImage'
 
 const Box = styled.div`
   width: 100%;
@@ -19,20 +20,20 @@ const Box = styled.div`
 
 
 export const CreateProject = () => {
-    const [data,setData] = useState({"name":""});
-    const [skillsdata,setSkillsdata] = useState();
+    const [data, setData] = useState({ "name": "" });
+    const [skillsdata, setSkillsdata] = useState();
     const [skillsOption, setSkillsOption] = useState([]);
-    
-    const onChangeHandler = (e)=>{
-        const {name,value} = e.target;
+
+    const onChangeHandler = (e) => {
+        const { name, value } = e.target;
 
     }
 
 
 
-const createHandler = ()=>{
+    const createHandler = () => {
 
-}
+    }
 
     return (
         <>
@@ -49,12 +50,15 @@ const createHandler = ()=>{
                                 </Stack>
                             </Box>
                             <Stack direction='horizontal' gap={2} style={{
-                                justifyContent: 'right' 
+                                justifyContent: 'right'
                             }}>
-                                <SharedButton label={'Back'} size={'sm'} variant={'primary'} startIcon={<HiOutlineArrowLeft />} onClick={()=>window.history.back()} />
+                                <SharedButton label={'Back'} size={'sm'} variant={'primary'} startIcon={<HiOutlineArrowLeft />} onClick={() => window.history.back()} />
                             </Stack>
                             <Box>
                                 <Row>
+                                    <Col md={12} className='mb-4'>
+                                        <UploadImage />
+                                    </Col>
                                     <Col md={4}>
                                         <InputField name={"name"} value={data.name} onChange={onChangeHandler} className={'mb-3'} type={'text'} label={'Project Name'} placeholder={'Project Name'} />
                                     </Col>
@@ -62,8 +66,8 @@ const createHandler = ()=>{
                                         <Select name={"name"} value={data.name} onChange={onChangeHandler} option={option} SelectLabel={'Category'} SelectOption={'Category'} />
                                     </Col>
                                     <Col md={4}>
-                                    <MultiSelect SelectLabel={"Skill Required"} setSkillsdata={setSkillsdata} options={skillsOption} />
-                                    
+                                        <MultiSelect SelectLabel={"Skill Required"} setSkillsdata={setSkillsdata} options={skillsOption} />
+
                                     </Col>
                                     <Col md={4}>
                                         <InputField className={'mb-3'} type={'date'} label={'Start Date'} placeholder={'Date'} />
