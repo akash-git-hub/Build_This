@@ -62,21 +62,27 @@ function App() {
   }, [localStorage.getItem('Authorization')])
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/forgot_password" element={<ForgotPassword />} />
-          <Route path="/verification" element={<Verification />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/create_project" element={<CreateProject />} />
-          <Route path="/my_project" element={<MyProject />} />
-          <Route path="/my_project_detail" element={<MyProjectDetail />} />
-          <Route path="/publish_project" element={<PublishProject />} />
-          <Route path='/my_profile' element={<Profile/>} />
-          <Route path='/edit_profile' element={<EditProfile/>} />
-        </Routes>
-      </BrowserRouter>
+      <MyContext.Provider value={{ info, mySkills, getMySkills, userData, getMyCertificate, myCertificate,myAcademic,getAcademic }}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/forgot_password" element={<ForgotPassword />} />
+            <Route path="/verification" element={<Verification />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/create_project" element={<CreateProject />} />
+            <Route path="/my_project" element={<MyProject />} />
+            <Route path="/my_project_detail" element={<MyProjectDetail />} />
+            <Route path="/publish_project" element={<PublishProject />} />
+            <Route path='/my_profile' element={<Profile />} />
+            <Route path='/edit_profile' element={<EditProfile />} />
+            <Route path='/AcademicInfo' element={<AcademicInformation />} />
+            <Route path='/skillsExpertise' element={<SkillsAndExpertise />} />
+            <Route path='/projectPreferences' element={<ProjectPreferences />} />
+            <Route path='/editCertificate' element={<EditCertificate />} />
+          </Routes>
+        </BrowserRouter>
+      </MyContext.Provider>
     </>
   );
 }
