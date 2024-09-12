@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Image, Stack } from 'react-bootstrap'
 import { InputField } from '../../components/InputField'
 import { SharedButton } from '../../components/Button'
@@ -22,6 +22,15 @@ export const Login = () => {
     const [error, setError] = useState({ "email": false, "password": false });
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (localStorage.getItem('email') && localStorage.getItem('password')) {
+            const email = localStorage.getItem('email');
+            const password = localStorage.getItem('password');
+            const keep = localStorage.getItem('keepMe');
+            setData({ "email": email, "password": password, "keepMe": keep })
+        };
+    }, [])
+
     const onChangeHandler = (e) => {
         const { name, value } = e.target;
         setData({ ...data, [name]: value });
@@ -37,6 +46,7 @@ export const Login = () => {
 
     const loginHandler = async () => {
         const { email, password, keepMe } = data;
+
         let isValid = true;
         if (!email) {
             setError({ ...error, email: true });
@@ -48,7 +58,17 @@ export const Login = () => {
             const resp = await login_API(data);
             if (resp && resp.success) {
                 successAlert(resp.message);
+                if (keepMe) {
+                    localStorage.setItem('email', email);
+                    localStorage.setItem('password', password);
+                    localStorage.setItem('keepMe', keepMe);
+                } else {
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('password');
+                }
                 navigate("/dashboard");
+
+
             }
         }
     }
@@ -69,6 +89,7 @@ export const Login = () => {
                             type={'email'}
                             label={"Email Address"}
                             name={'email'}
+
                             placeholder={'Enter Email'}
                             size={'sm'}
                             feedback={'Please enter correct email'}
@@ -86,7 +107,7 @@ export const Login = () => {
                             as={'input'}
                             isInvalid={error.password}
                             feedback={'Please enter correct password'} />
-                        <CheckBox type={"CheckBox"} name={"keepMe"} onClick={onClickHandler} label={"Keep me signed in"} />
+                        <CheckBox type={"CheckBox"} name={"keepMe"} value={data.keepMe} onClick={onClickHandler} label={"Keep me signed in"} />
                         <SharedButton type={'button'} onClick={loginHandler} label={'Login'} variant={'primary'} size={'sm'} />
                         <p className='text-center'>Don’t have an account yet? <Link to={'/signup'} style={{
                             textDecoration: 'none',

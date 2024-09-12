@@ -46,7 +46,7 @@ export const CreateProject = () => {
                         <Stack direction='vertical' gap={3}>
                             <Box>
                                 <Stack direction='horizontal' gap={2} className='d-flex justify-content-between'>
-                                    <Heading Heading={'Create Project'} SubHeading={'Manage your billing and payment details'} />
+                                    <Heading Heading={'Create Project'}  />
                                 </Stack>
                             </Box>
                             <Stack direction='horizontal' gap={2} style={{
@@ -66,8 +66,8 @@ export const CreateProject = () => {
                                         <Select name={"name"} value={data.name} onChange={onChangeHandler} option={option} SelectLabel={'Category'} SelectOption={'Category'} />
                                     </Col>
                                     <Col md={4}>
-                                        <MultiSelect SelectLabel={"Skill Required"} setSkillsdata={setSkillsdata} options={skillsOption} />
-
+                                    <MultiSelect SelectLabel={"Skills"} setSkillsdata={setSkillsdata} options={skillsOption} />
+                                    
                                     </Col>
                                     <Col md={4}>
                                         <InputField className={'mb-3'} type={'date'} label={'Start Date'} placeholder={'Date'} />
@@ -76,7 +76,7 @@ export const CreateProject = () => {
                                         <InputField className={'mb-3'} type={'date'} label={'End Date'} placeholder={'Date'} />
                                     </Col>
                                     <Col md={4}>
-                                        <InputField className={'mb-3'} type={'text'} label={'Team Members'} placeholder={'Team Members'} />
+                                        <InputField name={"name"} value={data.name} onChange={onChangeHandler} className={'mb-3'} type={'text'} label={'Tags'} placeholder={'Project Name'} />
                                     </Col>
                                     <Col md={12}>
                                         <InputField className={'mb-3'} type={'textarea'} as={"textarea"} row={2} label={'Description'} placeholder={'Description'} />

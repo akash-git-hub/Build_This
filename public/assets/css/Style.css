@@ -20,4 +20,15 @@ body{
   .MultiSelected span {
     margin: 0px 10px;
   }
+  .skillEdit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    border-radius: 10px;
+  }
+
+  
+
   
