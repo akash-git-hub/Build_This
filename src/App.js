@@ -17,6 +17,7 @@ import { ProjectPreferences } from './pages/myProfile/ProjectPreferences.js';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { getAcademic_API, getMyCertificates_API, getMySkills_API, userProfileAPI } from './APIServices/service.js';
 import { EditCertificate } from './pages/myProfile/EditCertificate.js';
+import { InviteUser } from './pages/inviteUserPage/index.js';
 
 const MyContext = createContext();
 
@@ -80,6 +81,7 @@ function App() {
             <Route path='/skillsExpertise' element={<SkillsAndExpertise />} />
             <Route path='/projectPreferences' element={<ProjectPreferences />} />
             <Route path='/editCertificate' element={<EditCertificate />} />
+            <Route path='/inviteUser' element={<InviteUser/>}/>
           </Routes>
         </BrowserRouter>
       </MyContext.Provider>

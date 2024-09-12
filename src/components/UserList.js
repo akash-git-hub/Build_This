@@ -2,7 +2,6 @@ import React from 'react'
 import { SharedButton } from './Button'
 import { FiUserPlus } from 'react-icons/fi'
 import { Table } from 'react-bootstrap'; 
-import Swal from 'sweetalert2'; 
 import { CheckBox } from './CheckBox';
 import { FaUserPlus } from 'react-icons/fa6';
 import { PopupModal } from './PopupModal';
@@ -33,29 +32,6 @@ export const UserList = () => {
     { name: 'Tatiana Curtis', email: 'Futurristics@gmail.com', phone: '+966583317251' },
     ]
 
-    const handleClick=()=>{      
-       alert(); 
-    }
-    
-    const alert=()=>{
-        Swal.fire({
-            imageUrl:'./assets/images/Icons/UserAdd.svg',
-            title:"Invite Successfully",
-            text:"Your invite has been processed successfully",
-            showCloseButton:true,
-            showCancelButton:true,
-            confirmButtonText: "Continue",
-            cancelButtonText: "Close",
-            customClass: {
-                confirmButton: 'btn btn-outline-primary w-100',
-                cancelButton: 'btn btn-primary w-100 ',   
-                title:'p-0',
-                actions:'flex-nowrap w-75'   
-            },  
-          }) 
-    }
-
-    
 
     return (
 
@@ -97,14 +73,6 @@ export const UserList = () => {
                             onHide={() => setModalShow(false)}
                           />
                           </td>
-
-                         {/* <td><SharedButton
-                                label={'Invite'}
-                                size={'sm'}
-                                variant={'primary'}
-                                startIcon={<FiUserPlus/>}
-                                onClick={handleClick}
-                            /></td>  */}
                         </tr>
                     )
                 })}

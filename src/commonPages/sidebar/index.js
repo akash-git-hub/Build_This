@@ -63,10 +63,10 @@ export const Sidebar = () => {
               }}>
                 <LinkSidebar LinkIcon={<Image src='./assets/images/Icons/Notification.svg' />} LinkLabel={'Notification'} LinkPath={'/messages'} />
               </li>
-              <li className={pathname === "/invite_user" ? 'active' : ""} style={{
+              <li className={pathname === "/inviteUser" ? 'active' : ""} style={{
                 padding: '10px'
               }}>
-                <LinkSidebar LinkIcon={<Image src='./assets/images/Icons/InviteUser.svg' />} LinkLabel={'Invite Users'} LinkPath={'/invite_user'} />
+                <LinkSidebar LinkIcon={<Image src='./assets/images/Icons/InviteUser.svg' />} LinkLabel={'Invite Users'} LinkPath={'/inviteUser'} />
               </li>
 
             </Stack>
