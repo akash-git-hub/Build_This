@@ -30,7 +30,7 @@ border-radius: 50%;
 
 
 
-export const UploadImage = ({name,onChange}) => {
+export const UploadImage = ({name,onChange,label}) => {
   const fileinputRef = useRef(null);
   const [imgName, setimgName] = useState();
 
@@ -59,7 +59,7 @@ export const UploadImage = ({name,onChange}) => {
   return (
     <>
 
-      {(imgName) ? <img src={(URL.createObjectURL(imgName))} className="rounded-circle" rounded width={100} height={100} /> : <Upload onClick={handleClick}>Upload Image</Upload>}
+      {(imgName) ? <img src={(URL.createObjectURL(imgName))} className="rounded-circle" rounded width={100} height={100} /> : <Upload onClick={handleClick}>{label ? label :"Upload Image"}</Upload>}
       <input type={'file'} className={'d-none'} ref={fileinputRef} onChange={handleFileChange} accept="image/*" />
     </>
   );

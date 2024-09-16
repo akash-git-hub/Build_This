@@ -40,7 +40,6 @@ export const registration_API = async (data) => {
     }
 }
 
-
 export const updateUserProfileAPI = async (data) => {
     try {
         const resp = await http.post("/updateUserProfile", data);
@@ -64,7 +63,7 @@ export const userProfileAPI = async () => {
         if (resp && resp.data && resp.data.success) {
             return resp.data;
         } else {           
-             errorAlert(resp.data.message);
+            //  errorAlert(resp.data.message);
         }
     } catch (error) {
         if (error && error.response && error.response.data && error.response.data.message) {        
@@ -102,6 +101,8 @@ export const getMySkills_API = async () => {
         } 
     } catch (error) {
         if (error && error.response && error.response.data && error.response.data.message) {
+            localStorage.setItem('Authorization',"");
+            localStorage.removeItem('Authorization');
             errorAlert(error.response.data.message);
         } else {
             errorAlert(error.response);
@@ -168,6 +169,8 @@ export const getMyCertificates_API = async () => {
         } 
     } catch (error) {
         if (error && error.response && error.response.data && error.response.data.message) {
+            localStorage.setItem('Authorization',"");
+            localStorage.removeItem('Authorization');
             errorAlert(error.response.data.message);
         } else {
             errorAlert(error.response);
@@ -234,6 +237,8 @@ export const getAcademic_API = async () => {
         } 
     } catch (error) {
         if (error && error.response && error.response.data && error.response.data.message) {
+            localStorage.setItem('Authorization',"");
+            localStorage.removeItem('Authorization');
             errorAlert(error.response.data.message);
         } else {
             errorAlert(error.response);
@@ -261,6 +266,54 @@ export const updateAcademic_API = async (data) => {
 export const deleteAcademic_API = async (data) => {
     try {
         const resp = await http.post("/deleteAcademic", data);
+        if (resp && resp.data && resp.data.success) {
+            return resp.data;
+        } else {
+            errorAlert(resp.data.message);
+        }
+    } catch (error) {
+        if (error && error.response && error.response.data && error.response.data.message) {
+            errorAlert(error.response.data.message);
+        } else {
+            errorAlert(error.response);
+        }
+    }
+}
+
+export const createProject_API = async (data) => {
+    try {
+        const resp = await http.post("/createProject", data);
+        if (resp && resp.data && resp.data.success) {
+            return resp.data;
+        } else {
+            errorAlert(resp.data.message);
+        }
+    } catch (error) {
+        if (error && error.response && error.response.data && error.response.data.message) {
+            errorAlert(error.response.data.message);
+        } else {
+            errorAlert(error.response);
+        }
+    }
+}
+export const getMyProjects_API = async () => {
+    try {
+        const resp = await http.get("/getMyProjects");
+        if (resp && resp.data && resp.data.success) {
+            return resp.data;
+        } 
+    } catch (error) {
+        if (error && error.response && error.response.data && error.response.data.message) {            
+            errorAlert(error.response.data.message);
+        } else {
+            errorAlert(error.response);
+        }
+    }
+}
+
+export const updateProject_API = async (data) => {
+    try {
+        const resp = await http.post("/updateProject", data);
         if (resp && resp.data && resp.data.success) {
             return resp.data;
         } else {

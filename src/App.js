@@ -6,7 +6,7 @@ import { ForgotPassword } from './commonPages/forgotPassword.js';
 import { Verification } from './commonPages/verification/index.js';
 import { Dashboard } from './pages/dashboard/index.js';
 import { MyProject } from './pages/dashboard/myProject/MyProject.js';
-import { PublishProject } from './pages/dashboard/publishProject/PublishProject.js';
+import { MyAllProject } from './pages/dashboard/publishProject/MyAllProject.js';
 import { MyProjectDetail } from './pages/dashboard/myProject/MyProjectDetail.js';
 import { CreateProject } from './pages/createProject/index.js';
 import { Profile } from './pages/myProfile/Profile.js';
@@ -17,6 +17,8 @@ import { ProjectPreferences } from './pages/myProfile/ProjectPreferences.js';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { getAcademic_API, getMyCertificates_API, getMySkills_API, userProfileAPI } from './APIServices/service.js';
 import { EditCertificate } from './pages/myProfile/EditCertificate.js';
+import { DetailsProject } from './pages/dashboard/myProject/DetailsProject.js';
+import Auth from './Auth.js';
 
 const MyContext = createContext();
 
@@ -53,7 +55,6 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem('Authorization') && localStorage.getItem('Authorization') != "") {
-      console.log(localStorage.getItem('Authorization'))
       userData();
       getMySkills();
       getMyCertificate();
@@ -62,27 +63,30 @@ function App() {
   }, [localStorage.getItem('Authorization')])
   return (
     <>
-      <MyContext.Provider value={{ info, mySkills, getMySkills, userData, getMyCertificate, myCertificate,myAcademic,getAcademic }}>
+      <MyContext.Provider value={{ info, mySkills, getMySkills, userData, getMyCertificate, myCertificate, myAcademic, getAcademic }}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/forgot_password" element={<ForgotPassword />} />
-            <Route path="/verification" element={<Verification />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/create_project" element={<CreateProject />} />
-            <Route path="/my_project" element={<MyProject />} />
-            <Route path="/my_project_detail" element={<MyProjectDetail />} />
-            <Route path="/publish_project" element={<PublishProject />} />
-            <Route path='/my_profile' element={<Profile />} />
-            <Route path='/edit_profile' element={<EditProfile />} />
-            <Route path='/AcademicInfo' element={<AcademicInformation />} />
-            <Route path='/skillsExpertise' element={<SkillsAndExpertise />} />
-            <Route path='/projectPreferences' element={<ProjectPreferences />} />
-            <Route path='/editCertificate' element={<EditCertificate />} />
+            <Route element={<Auth />} >
+              <Route path="/forgot_password" element={<ForgotPassword />} />
+              <Route path="/verification" element={<Verification />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/create_project" element={<CreateProject />} />
+              <Route path="/my_project" element={<MyProject />} />
+              <Route path="/my_project_detail" element={<MyProjectDetail />} />
+              <Route path="/detailsProject" element={<DetailsProject />} />
+              <Route path="/my_all_project" element={<MyAllProject />} />
+              <Route path='/my_profile' element={<Profile />} />
+              <Route path='/edit_profile' element={<EditProfile />} />
+              <Route path='/AcademicInfo' element={<AcademicInformation />} />
+              <Route path='/skillsExpertise' element={<SkillsAndExpertise />} />
+              <Route path='/projectPreferences' element={<ProjectPreferences />} />
+              <Route path='/editCertificate' element={<EditCertificate />} />
+            </Route>
           </Routes>
-        </BrowserRouter>
-      </MyContext.Provider>
+        </BrowserRouter >
+      </MyContext.Provider >
     </>
   );
 }
