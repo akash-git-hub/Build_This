@@ -8,12 +8,13 @@ import { CiEdit } from 'react-icons/ci'
 import { MyProjectCard } from '../../components/MyProjectCard'
 import { useNavigate } from 'react-router-dom'
 import { InputField } from '../../components/InputField'
-import { createCertificate_API, createSkills_API, getMySkills_API, userProfileAPI } from '../../APIServices/service'
+import { createCertificate_API, createSkills_API, getMyProjects_API, getMySkills_API, userProfileAPI } from '../../APIServices/service'
 import moment from 'moment-timezone'
 import { IoAddCircleOutline } from 'react-icons/io5'
 import { CommonModal } from '../../components/CommonModal'
 import { errorAlert, successAlert } from '../../components/Alert'
 import { MyContext } from '../../App'
+import { PublishProjectCard } from '../../components/PublishProjectCard'
 
 const Box = styled.div`
   width: 100%;
@@ -38,6 +39,13 @@ export const Profile = () => {
     const [certificateShow, setCertificateShow] = useState(false);
     const [certificateData, setCertificateData] = useState();
 
+    const [my_projects, setMy_projects] = useState([]);
+
+    const preData = async () => {
+        const resp = await getMyProjects_API();
+        const pr = resp && resp.data || [];
+        setMy_projects(pr);
+    }
 
 
 
@@ -53,7 +61,7 @@ export const Profile = () => {
     }
 
     useEffect(() => {
-        if (info) { getPreData(info); }
+        if (info) { getPreData(info); preData(); }
     }, [info])
 
 
@@ -247,27 +255,16 @@ export const Profile = () => {
                             <Box>
                                 <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between', alignItems: 'center' }}>
                                     <h6>My Project</h6>
-                                    <SharedButton label={'See all'} size={'sm'} variant={'outlined'} onClick={() => navigate('/my_project')} />
+                                    <SharedButton label={'See all'} size={'sm'} variant={'outlined'} onClick={() => navigate('/my_all_project', { state: { data: my_projects } })} />
                                 </Stack>
-
-                                <div>
-                                    <Row >
-                                        <Col className='mb-3' md={6} lg={4} xl={3}>
-                                            <MyProjectCard BgColor={"#FEEEE7"} />
+                                <Row className='mt-3' >
+                                    {my_projects && my_projects.map((e, i) => (
+                                        <Col className='mb-3' md={6} lg={4} xl={3} key={i}>
+                                            <PublishProjectCard data={e} BgColor={"#FEEEE7"} />
                                         </Col>
-                                        <Col className='mb-3' md={6} lg={4} xl={3}>
-                                            <MyProjectCard BgColor={'#E7F0FE'} />
-                                        </Col>
-                                        <Col className='mb-3' md={6} lg={4} xl={3}>
-                                            <MyProjectCard BgColor={'#FEE7F5'} />
-                                        </Col>
-                                        <Col className='mb-3' md={6} lg={4} xl={3}>
-                                            <MyProjectCard BgColor={'#ECFEE7'} />
-                                        </Col>
-                                    </Row>
-                                </div>
+                                    ))}
+                                </Row>
                             </Box>
-
                         </Stack>
                     </Col>
                 </Row>

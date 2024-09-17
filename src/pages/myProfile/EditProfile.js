@@ -13,6 +13,7 @@ import EditMyProfileHeading from './EditMyProfileHeading'
 import { updateUserProfileAPI, userProfileAPI } from '../../APIServices/service'
 import { successAlert } from '../../components/Alert'
 import { MyContext } from '../../App'
+import { WaitingLoader } from '../../commonPages/WaitingLoader'
 
 const Box = styled.div`
   width: 100%;
@@ -40,7 +41,6 @@ export const EditProfile = () => {
     const imageHandler = (e) => {
         const { name, value } = e;
         setInData((pre) => ({ ...pre, [name]: value }));
-
     }
 
     const getUserData = async (data) => {
@@ -118,6 +118,7 @@ export const EditProfile = () => {
 
     return (
         <>
+        <WaitingLoader show={waiting} />
             <Container fluid>
                 <Row>
                     <Col lg={3} md={4} className='p-0'>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Container, Row, Stack } from 'react-bootstrap'
 import { Sidebar } from '../../commonPages/sidebar'
 import { Heading } from '../../components/Heading'
@@ -9,6 +9,7 @@ import { SearchPanel } from '../../components/Search'
 import { MyProjectCard } from '../../components/MyProjectCard'
 import { PublishProjectCard } from '../../components/PublishProjectCard'
 import { useNavigate } from 'react-router-dom'
+import { getMyProjects_API } from '../../APIServices/service'
 
 const Box = styled.div`
   width: 100%;
@@ -28,10 +29,16 @@ const Icon = styled.div`
 
 export const Dashboard = () => {
     const navigate = useNavigate();
+    const handleClick = () => { navigate('/create_project'); };
+    const [my_projects, setMy_projects] = useState([]);
 
-    const handleClick = () => {
-        navigate('/create_project');
-    };
+    const preData = async () => {
+        const resp = await getMyProjects_API();
+        const pr = resp && resp.data || [];
+        setMy_projects(pr);
+    }
+    useEffect(() => { preData(); }, [])
+
     return (
         <>
             <Container fluid>
@@ -43,7 +50,9 @@ export const Dashboard = () => {
                         <Stack direction='vertical' gap={3}>
                             <Box>
                                 <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between' }}>
-                                    <Heading Heading={'Dashboard'} SubHeading={'Manage your billing and payment details'} />
+                                    <Heading Heading={'Dashboard'}
+                                    //  SubHeading={'Manage your billing and payment details'}
+                                      />
                                     <SharedButton
                                         label={'Create Project'}
                                         size={'sm'}
@@ -63,58 +72,32 @@ export const Dashboard = () => {
                             </Box>
                             <Box>
                                 <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between', alignItems: 'center' }}>
-                                    <h6>My Project</h6>
+                                    <h6>Active Project</h6>
                                     <SharedButton label={'See all'} size={'sm'} variant={'outlined'} onClick={() => navigate('/my_project')} />
                                 </Stack>
 
                                 <div>
                                     <Row >
-                                        <Col className='mb-3' md={3}>
+                                        <Col className='mb-3' md={3} >
                                             <MyProjectCard BgColor={"#FEEEE7"} />
-                                        </Col>
-                                        <Col className='mb-3' md={3}>
-                                            <MyProjectCard BgColor={'#E7F0FE'} />
-                                        </Col>
-                                        <Col className='mb-3' md={3}>
-                                            <MyProjectCard BgColor={'#FEE7F5'} />
-                                        </Col>
-                                        <Col className='mb-3' md={3}>
-                                            <MyProjectCard BgColor={'#ECFEE7'} />
-                                        </Col>
-                                        <Col className='mb-3' md={3}>
-                                            <MyProjectCard BgColor={'#ECFEE7'} />
-                                        </Col>
-                                        <Col className='mb-3' md={3}>
-                                            <MyProjectCard BgColor={'#ECFEE7'} />
                                         </Col>
                                     </Row>
                                 </div>
                             </Box>
                             <Box>
-                                <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between', alignItems: 'center' }}>
-                                    <h6>Publish Project</h6>
-                                    <SharedButton label={'See all'} size={'sm'} variant={'outlined'} onClick={() => navigate('/publish_project')} />
+                                <Stack direction='horizontal' className='mb-3' gap={2} style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <h6>My Project</h6>
+                                    <SharedButton label={'See all'} size={'sm'} variant={'outlined'} onClick={() => navigate('/my_all_project', { state: { data: my_projects } })} />
                                 </Stack>
-
-                                <div>
-                                    <Row>
-                                        <Col className='mb-3' md={4}>
-                                            <PublishProjectCard />
-                                        </Col>
-                                        <Col className='mb-3' md={4}>
-                                            <PublishProjectCard />
-                                        </Col>
-                                        <Col className='mb-3' md={4}>
-                                            <PublishProjectCard />
-                                        </Col>
-                                        <Col className='mb-3' md={4}>
-                                            <PublishProjectCard />
-                                        </Col>
-                                        <Col className='mb-3' md={4}>
-                                            <PublishProjectCard />
-                                        </Col>
-                                    </Row>
-                                </div>
+                                <Row>
+                                    {my_projects.length > 0 && my_projects.map((e, i) => (
+                                        i <= 3 ?
+                                            <Col className='mb-3' md={3} key={i}>
+                                                <PublishProjectCard data={e} />
+                                            </Col>
+                                            : ''
+                                    ))}
+                                </Row>
                             </Box>
                         </Stack>
                     </Col>

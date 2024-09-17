@@ -7,6 +7,6 @@ export const validateEmail = (email) => {
 
 
 export const option =[
-    {name:"Hindi",value:"123"},
-    {name:"English",value:"english"}
+    {name:"ABCD",value:"abcd"},
+    {name:"XYZ",value:"xyz"}
 ]
