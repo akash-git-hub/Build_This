@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 import { InputField } from '../../components/InputField'
 import { Select } from '../../components/Select'
 import { option } from '../../components/Helper'
-import { MultiSelect } from '../../components/MultiSelect'
 import { createProject_API } from '../../APIServices/service'
 import { WaitingLoader } from '../../commonPages/WaitingLoader'
 import { errorAlert, successAlert } from '../../components/Alert'
@@ -20,7 +19,7 @@ const Box = styled.div`
   width: 100%;
   background: #ffffff;
   padding: 2rem;
-`
+`;
 
 export const CreateProject = () => {
     const { info } = useContext(MyContext);
@@ -105,9 +104,6 @@ export const CreateProject = () => {
                                     />
                                 </Stack>
                                 <Row>
-                                    <Col md={12} className='mb-4'>
-                                        <UploadImage />
-                                    </Col>
                                     <Col md={4}>
                                         <InputField name={"project_name"} value={data.project_name} onChange={onChangeHandler}
                                             isInvalid={feedback.project_name} feedback={feedback.project_name}
