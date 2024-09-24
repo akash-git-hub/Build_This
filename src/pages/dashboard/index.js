@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Col, Container, Row, Stack } from 'react-bootstrap'
 import { Sidebar } from '../../commonPages/sidebar'
 import { Heading } from '../../components/Heading'
@@ -10,6 +10,7 @@ import { MyProjectCard } from '../../components/MyProjectCard'
 import { PublishProjectCard } from '../../components/PublishProjectCard'
 import { useNavigate } from 'react-router-dom'
 import { getMyProjects_API } from '../../APIServices/service'
+import { MyContext } from '../../App'
 
 const Box = styled.div`
   width: 100%;
@@ -31,6 +32,7 @@ export const Dashboard = () => {
     const navigate = useNavigate();
     const handleClick = () => { navigate('/create_project'); };
     const [my_projects, setMy_projects] = useState([]);
+    const {getMySkills,userData,getMyCertificate,getAcademic} = useContext(MyContext);
 
     const preData = async () => {
         const resp = await getMyProjects_API();
@@ -38,6 +40,15 @@ export const Dashboard = () => {
         setMy_projects(pr);
     }
     useEffect(() => { preData(); }, [])
+
+    useEffect(() => {
+        if (localStorage.getItem('Authorization') && localStorage.getItem('Authorization') != "") {
+          userData();
+          getMySkills();
+          getMyCertificate();
+          getAcademic();
+        }
+      }, [localStorage.getItem('Authorization')])
 
     return (
         <>
