@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { InputField } from "../../../components/InputField";
 import { BiSolidNavigation } from "react-icons/bi";
 import { useState } from "react";
-import EmojiPicker from "emoji-picker-react";
 import { GrEmoji } from "react-icons/gr";
 
 const MessageBox = styled.div`
@@ -115,11 +114,6 @@ export const ChatBox = (user) => {
                 endIcon={<BiSolidNavigation fontSize={'2rem'} className="text-primary" onClick={handleSend} />} 
                 />
 
-                <EmojiPicker open={showEmoji} skinTonesDisabled searchDisabled onEmojiClick={(emojiData)=>{
-                    setCurrentEmoji(emojiData.emoji);
-                    setMessage(currentEmoji);
-                    setShowEmoji(!showEmoji);
-                }}/>
                  
         </Stack>
     )
