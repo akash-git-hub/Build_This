@@ -14,12 +14,13 @@ import { EditProfile } from './pages/myProfile/EditProfile.js';
 import { AcademicInformation } from './pages/myProfile/AcademicInformation.js';
 import { SkillsAndExpertise } from './pages/myProfile/SkillsAndExpertise.js';
 import { ProjectPreferences } from './pages/myProfile/ProjectPreferences.js';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { getAcademic_API, getMyCertificates_API, getMySkills_API, userProfileAPI } from './APIServices/service.js';
 import { EditCertificate } from './pages/myProfile/EditCertificate.js';
 import { DetailsProject } from './pages/dashboard/myProject/DetailsProject.js';
 import Auth from './Auth.js';
 import { InviteUser } from './pages/inviteUserPage/index.js';
+import {Chat} from './pages/chatPages/index.js'
 
 const MyContext = createContext();
 
@@ -39,18 +40,18 @@ function App() {
   }
   const getMySkills = async () => {
     const resp = await getMySkills_API();
-    const pr = resp && resp.data || [];
+    const pr =( resp && resp.data )|| [];
     setMySkills(pr);
 
   }
   const getMyCertificate = async () => {
     const resp = await getMyCertificates_API();
-    const pr = resp && resp.data || [];
+    const pr = (resp && resp.data) || [];
     setMyCertificate(pr);
   }
   const getAcademic = async () => {
     const resp = await getAcademic_API();
-    const pr = resp && resp.data || [];
+    const pr = (resp && resp.data) || [];
     setMyAcademic(pr);
   }
 
@@ -86,6 +87,7 @@ function App() {
               <Route path='/editCertificate' element={<EditCertificate />} />
             </Route>
             <Route path='/inviteUser' element={<InviteUser/>}/>
+            <Route path='/chats' element={<Chat/>}/> 
           </Routes>
         </HashRouter >
       </MyContext.Provider >

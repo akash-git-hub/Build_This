@@ -21,7 +21,8 @@ export const InputField = ({
     endIcon,
     name,
     row,
-    id
+    id,
+    style
 }) => {
     return (
         <>
@@ -48,6 +49,7 @@ export const InputField = ({
                         required={required}
                         className={className}
                         id={label}
+                        style={style}
                     />
                     {endIcon && (
                         <InputGroup.Text>

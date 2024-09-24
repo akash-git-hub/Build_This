@@ -1,7 +1,6 @@
 import { errorAlert } from "../components/Alert";
 import http from "../http"
 
-
 export const login_API = async (data) => {
     try {
         const resp = await http.post("/login", data);

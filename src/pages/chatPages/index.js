@@ -1,7 +1,7 @@
  
 import { Col, Container, Row } from 'react-bootstrap'
 import { Sidebar } from '../../commonPages/sidebar'
-import { ChatBoard } from './ChatBoard'
+import { ChatBoard } from './chatBoard/ChatBoard'
 
 
 export const Chat = () => {

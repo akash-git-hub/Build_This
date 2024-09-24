@@ -43,9 +43,9 @@ export const MultiSelect = ({ SelectLabel, options, name, setSkillsdata, id, val
   }, [value]);
 
 
-  const handleClearAll = () => {
-    setSelectedOptions([]);
-  };
+  // const handleClearAll = () => {
+  //   setSelectedOptions([]);
+  // };
 
   const handleOptionToggle = (option) => {
     if (selectedOptions.includes(option)) {
@@ -57,7 +57,7 @@ export const MultiSelect = ({ SelectLabel, options, name, setSkillsdata, id, val
 
   const renderMenu = (results, menuProps) => (
     <div className="MultiSelected" {...menuProps}>
-      <div>
+      <div >
         <input
           type="checkbox"
           checked={selectedOptions.length === options.length}
@@ -93,9 +93,9 @@ export const MultiSelect = ({ SelectLabel, options, name, setSkillsdata, id, val
         selected={selectedOptions}
         onChange={handleChange}
         placeholder="Select options"
-        labelKey="label"
-        dropdownProps={{
-          style: { maxHeight: "200px", overflow: "auto" },
+        labelKey="label"  
+        selectedOptions={{
+          style: { maxHeight: "100px", overflow: "auto" },
         }}
         renderMenu={renderMenu}
       />

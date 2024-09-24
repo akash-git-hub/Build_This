@@ -163,13 +163,13 @@ export const UserProfile = () => {
                                     </Row>
                                 </Stack>
                             </Box>
-                            {/* <Stack direction='horizontal' gap={4} className='ps-2 pe-2' style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                             <Stack direction='horizontal' gap={4} className='ps-2 pe-2' style={{ justifyContent: 'space-between', alignItems: 'center' }}>
                                 <h6 className='mb-0 mx-2'>Project Preferences</h6>
                                 <Icon style={{ background: "#fff", cursor: "pointer", color: '#000' }} >
                                     <CiEdit fontSize={'1.5rem'} style={{ background: 'none' }} className='me-0' onClick={() => navigate('/projectPreferences')} />
                                 </Icon>
-                            </Stack> */}
-                            {/* <Box>
+                            </Stack>  
+                            <Box>
                                 <Stack direction='vertical' gap={2}>
                                     <Row>
                                         <Col md={6} lg={4}><h5>Project Type</h5><InputField plaintext={'plaintext'} id={'project_type'} value={' Web design, Development, Server'} readOnly={'readOnly'} /></Col>
