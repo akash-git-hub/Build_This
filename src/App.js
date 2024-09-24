@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 import { Login } from './commonPages/login';
 import { SignUp } from './commonPages/signup';
 import { ForgotPassword } from './commonPages/forgotPassword.js';
@@ -53,18 +53,18 @@ function App() {
     setMyAcademic(pr);
   }
 
-  useEffect(() => {
-    if (localStorage.getItem('Authorization') && localStorage.getItem('Authorization') != "") {
-      userData();
-      getMySkills();
-      getMyCertificate();
-      getAcademic();
-    }
-  }, [localStorage.getItem('Authorization')])
+  // useEffect(() => {
+  //   if (localStorage.getItem('Authorization') && localStorage.getItem('Authorization') != "") {
+  //     userData();
+  //     getMySkills();
+  //     getMyCertificate();
+  //     getAcademic();
+  //   }
+  // }, [localStorage.getItem('Authorization')])
   return (
     <>
       <MyContext.Provider value={{ info, mySkills, getMySkills, userData, getMyCertificate, myCertificate, myAcademic, getAcademic }}>
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
@@ -85,7 +85,7 @@ function App() {
               <Route path='/editCertificate' element={<EditCertificate />} />
             </Route>
           </Routes>
-        </BrowserRouter >
+        </HashRouter >
       </MyContext.Provider >
     </>
   );
