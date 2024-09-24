@@ -4,8 +4,6 @@ import styled from "styled-components";
 import { InputField } from "../../../components/InputField";
 import { BiSolidNavigation } from "react-icons/bi";
 import { useState } from "react";
-import EmojiPicker from "emoji-picker-react";
-import { GrEmoji } from "react-icons/gr";
 
 const MessageBox = styled.div`
  
@@ -26,8 +24,6 @@ border-radius:10px;
 `;
 
 export const ChatBox = (user) => {
-    const [showEmoji, setShowEmoji]= useState(false);
-    const [currentEmoji, setCurrentEmoji]=useState(null);
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([{ text:'Nostrud cillum non veniam nisi elit nostrud ex pariatur amet dolore pariatur. Eiusmod elit labore veniam nisi et amet elit exercitation consectetur Lorem cupidatat cillum ad. Incididunt elit incididunt incididunt laboris magna commodo'
 , received:user.user.name, time:"12:05" }]);
@@ -41,15 +37,9 @@ export const ChatBox = (user) => {
             setMessage('');
         }
     } 
-    
 
-    
+    console.log(messages);
 
-    const handleEmoji = () => {
-        setShowEmoji(!showEmoji);
-    }
-
-    console.log(currentEmoji);
     return (
         <Stack direction='vertical' gap={1} >
             <Stack direction='horizontal' gap={3} className='mx-3'>
@@ -107,19 +97,11 @@ export const ChatBox = (user) => {
                 className={'rounded-start h-25'}
                 placeholder={'Type a message'}
                 value={message}
-
                 as={"textarea"}
-                startIcon={<GrEmoji fontSize={'1.5rem'} onClick={handleEmoji}/>}
                 style={{display:'inline-block'}}
                 onChange={(e) => setMessage(e.target.value)}
                 endIcon={<BiSolidNavigation fontSize={'2rem'} className="text-primary" onClick={handleSend} />} 
                 />
-
-                <EmojiPicker open={showEmoji} skinTonesDisabled searchDisabled onEmojiClick={(emojiData)=>{
-                    setCurrentEmoji(emojiData.emoji);
-                    setMessage(currentEmoji);
-                    setShowEmoji(!showEmoji);
-                }}/>
                  
         </Stack>
     )
