@@ -89,7 +89,6 @@ export const Login = () => {
                             type={'email'}
                             label={"Email Address"}
                             name={'email'}
-
                             placeholder={'Enter Email'}
                             size={'sm'}
                             feedback={'Please enter correct email'}

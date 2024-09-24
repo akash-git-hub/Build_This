@@ -10,6 +10,7 @@ import { MyProjectCard } from '../../components/MyProjectCard'
 import { PublishProjectCard } from '../../components/PublishProjectCard'
 import { useNavigate } from 'react-router-dom'
 import { getMyProjects_API } from '../../APIServices/service'
+import { SelectDropdown } from '../../components/Dropdown'
 
 const Box = styled.div`
   width: 100%;
@@ -31,10 +32,12 @@ export const Dashboard = () => {
     const navigate = useNavigate();
     const handleClick = () => { navigate('/create_project'); };
     const [my_projects, setMy_projects] = useState([]);
+    const action = [{ name: 'action 1', href: '#/1' }, { name: 'action 2', href: '#/2' }, { name: 'action 3', href: '#/3' }]
+
 
     const preData = async () => {
         const resp = await getMyProjects_API();
-        const pr = resp && resp.data || [];
+        const pr =( resp && resp.data) || [];
         setMy_projects(pr);
     }
     useEffect(() => { preData(); }, [])
@@ -64,9 +67,10 @@ export const Dashboard = () => {
                                 <Panel>
                                     <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between' }}>
                                         <SearchPanel id='search' className={'w-50 bg-light'}/>
-                                        <Icon>
+                                        <SelectDropdown icon={<Icon><CiFilter fontSize={'1.5rem'} className='me-0' /></Icon>} items={action} drop={'start'}/>
+                                        {/* <Icon>
                                             <CiFilter fontSize={'1.5rem'} className='me-0' />
-                                        </Icon>
+                                        </Icon> */}
                                     </Stack>
                                 </Panel>
                             </Box>

@@ -4,6 +4,7 @@ import { Form } from 'react-bootstrap'
 export const Select = ({SelectLabel, SelectOption,option=[],isInvalid=false,feedback=""}) => {
     return (
         <>
+        <Form.Group controlId={SelectLabel}>
         <Form.Label>{SelectLabel}</Form.Label>
             <Form.Select aria-label="Default select example">
                 <option>{SelectOption}</option>
@@ -13,6 +14,7 @@ export const Select = ({SelectLabel, SelectOption,option=[],isInvalid=false,feed
                     ))}
             </Form.Select>
             {isInvalid && <Form.Control.Feedback type="invalid">{feedback}</Form.Control.Feedback>}
+            </Form.Group>
         </>
     )
 }
