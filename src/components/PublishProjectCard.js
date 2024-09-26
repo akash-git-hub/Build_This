@@ -1,7 +1,6 @@
 import React from 'react'
 import { Badge, Image, Stack } from 'react-bootstrap'
 import styled from 'styled-components'
-import { ProjectMemberAvatar } from './ProjectMemberAvatar'
 import moment from 'moment-timezone';
 import { useNavigate } from 'react-router-dom';
 

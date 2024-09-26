@@ -11,7 +11,10 @@ import { MyContext } from '../../App';
 
 const Box = styled.div`
   background: #ffffff;
-  min-height: 100%;
+  height:100vh;
+  min-height:100%;
+  overflow-y: scroll;
+  &::-webkit-scrollbar{display:none;}
   margin-right:10px;
   `;
 

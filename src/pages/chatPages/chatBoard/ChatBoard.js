@@ -27,7 +27,7 @@ margin:auto;
 
 
 const ListBox = styled.div`
-max-height:470px;  
+max-height:45vh; 
 overflow-y:auto;
 &::-webkit-scrollbar {
   display: none;
@@ -39,13 +39,12 @@ overflow-y:auto;
 const user = [
     { image: '/assets/images/user.svg', name: 'Jhon doe', message: ' hahaha oh man', msgtime: '12m' },
     { image: '/assets/images/user.svg', name: 'Elmer laverty', message: ' hahaha oh man', msgtime: '12m' },
-    { image: '/assets/images/user.svg', name: 'Jhon doe', message: ' hahaha oh man', msgtime: '12m' },
+    { image: '/assets/images/user.svg', name: ' Jhon doe', message: ' hahaha oh man', msgtime: '12m' },
     { image: '/assets/images/user.svg', name: 'Elmer laverty', message: ' hahaha oh mansadfghjkldsfghjkldfghjk sadfghj', msgtime: '12m' },
     { image: '/assets/images/user.svg', name: 'Jhon doe', message: ' hahaha oh mansadfghjkldsfghjkldfghjk sadfghj', msgtime: '12m' },
     { image: '/assets/images/user.svg', name: 'Elmer laverty', message: 'Adipisicing officia reprehenderit voluptate dolor occaecat sint cillum occaecat amet Lorem consequat aute laboris enim. Non deserunt officia nulla mollit consectetur deserunt enim. Adipisicing magna dolore consectetur do sint duis ad id pariatur sunt duis.', msgtime: '12m' },
     { image: '/assets/images/user.svg', name: 'Jhon doe', message: ' hahaha oh man', msgtime: '12m' },
-    { image: '/assets/images/user.svg', name: 'Elmer laverty', message: ' hahaha oh man', msgtime: '12m' },
-    { image: '/assets/images/user.svg', name: 'Jhon doe', message: ' hahaha oh man', msgtime: '12m' }
+    { image: '/assets/images/user.svg', name: 'Elmer laverty', message: ' hahaha oh man', msgtime: '12m' }
 ];
 
 export const ChatBoard = () => {
@@ -56,21 +55,19 @@ export const ChatBoard = () => {
 
     const handleclick = (index) => {
         setUserKey(user[index]);
-        console.log(userKey);
+        
     }
     return <>
-        <Stack direction='vertical' gap={3}>
+        <Stack direction='vertical' gap={3}  >
             <Box>
                 <Heading Heading={'Chats'} SubHeading={'invite user as your team members'} />
             </Box>
 
-            <Box>
+            <Box className='pb-3'>
                 <Row>
                     <Col md={7} lg={5} xl={4} >
                         <Stack direction='vertical' gap={3}>
-
                             <Stack direction='horizontal' gap={0} style={{ justifyContent: "space-between" }}>
-
                                 <Stack direction='horizontal' gap={3}>
                                     <SelectDropdown title={'Message'} icon={<IoIosArrowDown />} items={action} />
                                     <Badge bg="dark" pill>12</Badge>

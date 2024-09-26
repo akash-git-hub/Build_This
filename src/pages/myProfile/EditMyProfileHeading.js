@@ -1,5 +1,4 @@
 import React from 'react'
-import { Col, Container, Form, Image, Row, Stack } from 'react-bootstrap'
 import { Heading } from '../../components/Heading'
 import styled from 'styled-components'
 

@@ -21,7 +21,7 @@ const Upload = styled.div`
   z-index:1;
 `
 
-const img = styled.img`
+const Img = styled.img`
 background:black;
 border: 2px solid blue;
 border-radius: 50%;
@@ -59,7 +59,7 @@ export const UploadImage = ({name,onChange,label}) => {
   return (
     <>
 
-      {(imgName) ? <img src={(URL.createObjectURL(imgName))} className="rounded-circle" rounded width={100} height={100} /> : <Upload onClick={handleClick}>{label ? label :"Upload Image"}</Upload>}
+      {(imgName) ? <Img src={(URL.createObjectURL(imgName))} className="rounded-circle" rounded width={100} height={100} alt=""/> : <Upload onClick={handleClick}>{label ? label :"Upload Image"}</Upload>}
       <input type={'file'} className={'d-none'} ref={fileinputRef} onChange={handleFileChange} accept="image/*" />
     </>
   );

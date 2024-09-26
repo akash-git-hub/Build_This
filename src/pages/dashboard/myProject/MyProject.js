@@ -40,7 +40,7 @@ export const MyProject = () => {
                 <Col lg={9} md={8} className='p-0'>
                     <Stack direction='vertical' gap={3}>
                         <Box>
-                            <Stack direction='horizontal' gap={2} justifyContent='space-between'>
+                            <Stack direction='horizontal' gap={2} style={{justifyContent:'space-between'}}>
                                 <Heading Heading={'My Project'} SubHeading={'Manage your billing and payment details'} />
                             </Stack>
                             <Panel>

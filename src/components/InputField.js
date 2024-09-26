@@ -50,12 +50,14 @@ export const InputField = ({
                         className={className}
                         id={label}
                         style={style}
+
                     />
                     {endIcon && (
                         <InputGroup.Text>
                             {endIcon}
                         </InputGroup.Text>
                     )}
+                    
                     <Form.Control.Feedback type="invalid">{feedback}</Form.Control.Feedback>
                 </InputGroup>
             </Form.Group>
