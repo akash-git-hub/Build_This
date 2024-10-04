@@ -36,13 +36,13 @@ export const Dashboard = () => {
 
     const preData = async () => {
         const resp = await getMyProjects_API();
-        const pr = resp && resp.data || [];
+        const pr =  resp?.data || [];
         setMy_projects(pr);
     }
     useEffect(() => { preData(); }, [])
 
     useEffect(() => {
-        if (localStorage.getItem('Authorization') && localStorage.getItem('Authorization') != "") {
+        if (localStorage.getItem('Authorization') && localStorage.getItem('Authorization') !== "") {
           userData();
           getMySkills();
           getMyCertificate();

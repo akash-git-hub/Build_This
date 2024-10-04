@@ -1,16 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Col, Container, Form, Row, Stack } from 'react-bootstrap'
 import { Sidebar } from '../../commonPages/sidebar'
-import { Heading } from '../../components/Heading'
 import styled from 'styled-components'
 import { SharedButton } from '../../components/Button'
 import { useNavigate } from 'react-router-dom'
 import { HiOutlineArrowLeft } from 'react-icons/hi'
 import { UploadImage } from '../../components/UploadImage'
-import { Select } from '../../components/Select'
 import { InputField } from '../../components/InputField'
 import EditMyProfileHeading from './EditMyProfileHeading'
-import { updateUserProfileAPI, userProfileAPI } from '../../APIServices/service'
+import { updateUserProfileAPI } from '../../APIServices/service'
 import { successAlert } from '../../components/Alert'
 import { MyContext } from '../../App'
 import { WaitingLoader } from '../../commonPages/WaitingLoader'
@@ -63,7 +61,7 @@ export const EditProfile = () => {
         }
     }
     useEffect(() => {
-        if (info != "") {
+        if (info !== "") {
             getUserData(info);
         }
     }, [info])

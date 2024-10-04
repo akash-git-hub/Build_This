@@ -5,10 +5,8 @@ import { Heading } from '../../components/Heading'
 import styled from 'styled-components'
 import { SharedButton } from '../../components/Button'
 import { CiEdit } from 'react-icons/ci'
-import { MyProjectCard } from '../../components/MyProjectCard'
 import { useNavigate } from 'react-router-dom'
-import { InputField } from '../../components/InputField'
-import { createCertificate_API, createSkills_API, getMyProjects_API, getMySkills_API, userProfileAPI } from '../../APIServices/service'
+import { createCertificate_API, createSkills_API, getMyProjects_API } from '../../APIServices/service'
 import moment from 'moment-timezone'
 import { IoAddCircleOutline } from 'react-icons/io5'
 import { CommonModal } from '../../components/CommonModal'
@@ -43,7 +41,7 @@ export const Profile = () => {
 
     const preData = async () => {
         const resp = await getMyProjects_API();
-        const pr = resp && resp.data || [];
+        const pr = resp && resp.data;
         setMy_projects(pr);
     }
 

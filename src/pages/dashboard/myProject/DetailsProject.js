@@ -16,6 +16,7 @@ import { option } from '../../../components/Helper'
 import { IoMdClose } from 'react-icons/io'
 import { errorAlert, successAlert } from '../../../components/Alert'
 import { updateProject_API } from '../../../APIServices/service'
+import { WaitingLoader } from '../../../commonPages/WaitingLoader'
 
 const Box = styled.div`
   width: 100%;
@@ -116,6 +117,7 @@ export const DetailsProject = () => {
     }
     return (
         <>
+        <WaitingLoader show={waiting} />
             <Container fluid>
                 <Row>
                     <Col className='p-0' lg={3} md={4}>

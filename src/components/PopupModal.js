@@ -1,8 +1,6 @@
 import { Modal, Stack } from "react-bootstrap";
 import { Heading } from "./Heading";
 import { SharedButton } from "./Button";
-import styled from "styled-components";
-import { FaUserPlus } from "react-icons/fa6";
 
 
 

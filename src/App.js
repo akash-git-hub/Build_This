@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
+import {  HashRouter, Route, Routes } from 'react-router-dom';
 import { Login } from './commonPages/login';
 import { SignUp } from './commonPages/signup';
 import { ForgotPassword } from './commonPages/forgotPassword.js';
@@ -14,7 +14,7 @@ import { EditProfile } from './pages/myProfile/EditProfile.js';
 import { AcademicInformation } from './pages/myProfile/AcademicInformation.js';
 import { SkillsAndExpertise } from './pages/myProfile/SkillsAndExpertise.js';
 import { ProjectPreferences } from './pages/myProfile/ProjectPreferences.js';
-import { createContext, useEffect, useState } from 'react';
+import { createContext,  useState } from 'react';
 import { getAcademic_API, getMyCertificates_API, getMySkills_API, userProfileAPI } from './APIServices/service.js';
 import { EditCertificate } from './pages/myProfile/EditCertificate.js';
 import { DetailsProject } from './pages/dashboard/myProject/DetailsProject.js';
@@ -55,14 +55,6 @@ function App() {
     setMyAcademic(pr);
   }
 
-  // useEffect(() => {
-  //   if (localStorage.getItem('Authorization') && localStorage.getItem('Authorization') != "") {
-  //     userData();
-  //     getMySkills();
-  //     getMyCertificate();
-  //     getAcademic();
-  //   }
-  // }, [localStorage.getItem('Authorization')])
   return (
     <>
       <MyContext.Provider value={{ info, mySkills, getMySkills, userData, getMyCertificate, myCertificate, myAcademic, getAcademic }}>
