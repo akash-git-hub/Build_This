@@ -10,10 +10,10 @@ background:#fff;
 border-radius:1rem;
 border: 1px solid #666666;
 `;
-export const PublishProjectCard = ({ data }) => {
+export const PublishProjectCard = ({ data, type = 'my_project' }) => {
     const navigate = useNavigate();
     return (
-        <Box style={{cursor:"pointer"}} onClick={() => navigate('/detailsProject', { state: { data: data } })}>
+        <Box style={{ cursor: "pointer" }} onClick={() => navigate('/detailsProject', { state: { data: data, type: type } })}>
             <Stack direction='vertical' gap={2}>
                 <Stack direction='horizontal' gap={0}>
                     <Stack direction='vertical' gap={0}>

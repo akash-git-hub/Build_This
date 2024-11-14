@@ -9,7 +9,10 @@ import { FaRegEyeSlash } from "react-icons/fa6";
 import { Link, useNavigate } from 'react-router-dom'
 import { registration_API } from '../../APIServices/service'
 import { validateEmail } from '../../components/Helper'
-import { successAlert } from '../../components/Alert'
+import { errorAlert, successAlert } from '../../components/Alert'
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../../firebase'
+
 
 const Box = styled.div`
   height: 100vh;
@@ -44,13 +47,28 @@ export const SignUp = () => {
 
         }
         if (!password) { setError((pre) => ({ ...pre, "password": true })); isValid = false; }
+        if (!password || typeof password !== 'string' || password.length < 6) {
+            setError((pre) => ({ ...pre, "password": true }));
+            isValid = false;
+        }
         if (!cn_password) { setError((pre) => ({ ...pre, "cn_password": true })); isValid = false; }
         if (cn_password !== password) { setError((pre) => ({ ...pre, "cn_password": true })); isValid = false; }
         if (isValid) {
-            const resp = await registration_API(inData);
-            if (resp && resp.success) {
-                successAlert(resp.message);
-                navigate("/");
+            try {
+                // const chatRes = await createUserWithEmailAndPassword(auth, email, password);
+                // if (chatRes) {
+                // const firebaseUserID = chatRes?.user?.uid;
+                // let preData = { ...inData };
+                // preData.firebaseUserID = firebaseUserID;
+                const resp = await registration_API(inData);
+                if (resp && resp.success) {
+                    successAlert(resp.message);
+                    navigate("/");
+                }
+                // }
+            } catch (error) {
+                errorAlert('EMAIL_EXISTS')
+                console.log("firebase --error", error);
             }
         }
     }

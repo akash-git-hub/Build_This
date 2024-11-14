@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Table, Pagination } from 'react-bootstrap';
+import { filterProjectStatus, optionAccept } from '../../../components/Helper';
 
 const userData = [
     { name: 'user-1', skills: 'React,  , NodeJS', email: 'Futurristics@gmail.com', phone: '+966583317251' },
@@ -12,7 +13,7 @@ const userData = [
 ];
 
 
-export const InviteUserList = () => {
+export const InviteUserList = ({ invitedList }) => {
 
     const [user, setUser] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -41,6 +42,8 @@ export const InviteUserList = () => {
     const indexOfFirstUser = indexOfLastUser - 5;
     const currentUser = user.slice(indexOfFirstUser, indexOfLastUser);
 
+
+
     return (
         <>
             <Table bordered hover responsive className='text-center'  >
@@ -50,22 +53,25 @@ export const InviteUserList = () => {
                         <td className='text-secondary p-2'>SKILLS</td>
                         <td className='text-secondary p-2'>EMAIL</td>
                         <td className='text-secondary p-2'>PHONE NO</td>
+                        <td className='text-secondary p-2'>PROJECT NAME</td>
+                        <td className='text-secondary p-2'>STATUS</td>
                     </tr>
                 </thead>
                 <tbody>
-                    {currentUser.map((userlist, index) => {
-                        return (
-                            <tr key={index}>
-                                <td className='p-2'>{userlist.name}</td>
-                                <td className='p-2'>{userlist.skills}</td>
-                                <td className='p-2'>{userlist.email}</td>
-                                <td className='p-2'>{userlist.phone}</td>
-                            </tr>
-                        );
-                    })}
+                    {invitedList?.map((u, i) => (
+                        <tr key={i}>
+                            <td className='p-2'>{u?.full_name}</td>
+                            <td className='p-2'>{u?.skills}</td>
+                            <td className='p-2'>{u?.email}</td>
+                            <td className='p-2'>{u?.phone}</td>
+                            <td className='p-2'>{u?.project_name}</td>
+                            <td className='p-2'>{ filterProjectStatus(optionAccept,u?.status)}</td>
+                        </tr>
+                    ))}
+
                 </tbody>
             </Table>
-            <Pagination size='sm' className='float-end p-3'>{items}</Pagination>
+            {/* <Pagination size='sm' className='float-end p-3'>{items}</Pagination> */}
         </>
     );
 };

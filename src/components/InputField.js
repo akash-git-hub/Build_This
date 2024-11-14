@@ -14,7 +14,7 @@ export const InputField = ({
     readOnly,
     disabled,
     plaintext,
-    isInvalid=false,
+    isInvalid = false,
     required,
     feedback,
     startIcon,
@@ -27,7 +27,7 @@ export const InputField = ({
     return (
         <>
             <Form.Group className={className} controlId={controlId}>
-                {label && <Form.Label htmlFor={label}>{label}</Form.Label>}
+                {label && <Form.Label>{label}</Form.Label>}
                 <InputGroup>
                     {startIcon && (
                         <InputGroup.Text>
@@ -41,14 +41,13 @@ export const InputField = ({
                         size={size}
                         value={value}
                         onChange={onChange}
-                        as={as}      
-                        row={row}                  
+                        as={as}
+                        row={row}
                         readOnly={readOnly}
                         disabled={disabled}
-                        plaintext={plaintext}               
+                        plaintext={plaintext}
                         required={required}
                         className={className}
-                        id={label}
                         style={style}
                     />
                     {endIcon && (
@@ -56,8 +55,11 @@ export const InputField = ({
                             {endIcon}
                         </InputGroup.Text>
                     )}
-                    <Form.Control.Feedback type="invalid">{feedback}</Form.Control.Feedback>
+                    {/* <Form.Control.Feedback type="invalid">{feedback}</Form.Control.Feedback> */}
                 </InputGroup>
+                {isInvalid &&
+                    <span style={{ color: "red" }}>{feedback}</span>
+                }
             </Form.Group>
         </>
     );

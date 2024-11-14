@@ -40,14 +40,16 @@ export const DetailsProject = () => {
         "start_date": "", "end_date": "",
         "category": "", "skills_name": "",
         "tag_by": "", "description": "",
-        "logo": "", "status": "",
+        "logo": "", "status": "", "team": ""
     });
 
     const [isEdit, setIsEdit] = useState(false);
 
-    const [data, setData] = useState({ "project_name": "", "start_date": "", "end_date": '', "category": "", "skills": "", "tag_by": "", "description": '', 'logo': '' });
+    const [data, setData] = useState({ "project_name": "", "start_date": "", "end_date": '', "category": "", "skills": "", "tag_by": "", "description": '', 'logo': '', 'team': '' });
     const [feedback, setFeedback] = useState({ "project_name": "", "start_date": "", "end_date": '', "category": "", "skills": "", "tag_by": "", "description": '' });
     const [waiting, setWaiting] = useState(false);
+    const [type, setType] = useState();
+    const [creator_name, setCreator_name] = useState();
 
     const onChangeHandler = (e) => {
         const { name, value } = e.target;
@@ -64,20 +66,26 @@ export const DetailsProject = () => {
     useEffect(() => {
         if (location && location.state && location.state.data) {
             console.log(location.state.data);
-            const { id, project_name, start_date, end_date, category, skills_name, tag_by, description, logo, status } = location.state.data;
+            if (location?.state?.type) {
+                setType(location.state?.type);
+            }
+            const { id, project_name, start_date, end_date, category, skills_name, tag_by, description, logo, status, team } = location.state.data;
             setPre({
                 "id": id, "project_name": project_name,
                 "start_date": start_date, "end_date": end_date,
                 "category": category, "skills_name": skills_name,
                 "tag_by": tag_by, "description": description,
-                "logo": logo, "status": status,
+                "logo": logo, "status": status, "team": team
             });
+            if (location?.state?.data?.creator_name) {
+                setCreator_name(location.state.data.creator_name);
+            }
             setData({
                 "id": id, "project_name": project_name,
                 "start_date": start_date, "end_date": end_date,
                 "category": category, "skills_name": skills_name,
                 "tag_by": tag_by, "description": description,
-                "logo": logo, "status": status,
+                "logo": logo, "status": status, "team": team
             });
         } else { setPre([]); setData(); }
     }, [location])
@@ -101,8 +109,8 @@ export const DetailsProject = () => {
             formData.append('skills_name', skills);
             formData.append('tag_by', tag_by);
             formData.append('description', description);
-            if(logo){ formData.append('image', logo);  }
-            
+            if (logo) { formData.append('image', logo); }
+
             setWaiting(true);
             const resp = await updateProject_API(formData);
             if (resp && resp.success) {
@@ -117,7 +125,7 @@ export const DetailsProject = () => {
     }
     return (
         <>
-        <WaitingLoader show={waiting} />
+            <WaitingLoader show={waiting} />
             <Container fluid>
                 <Row>
                     <Col className='p-0' lg={3} md={4}>
@@ -127,9 +135,14 @@ export const DetailsProject = () => {
                         <Stack direction='vertical' gap={3}>
                             <Box>
                                 <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between' }}>
-                                    <Heading Heading={'My Projects Details'}
+                                    {type === 'active' ?
+                                        <Heading Heading={'Active Projects Details'} />
+                                        :
+                                        <Heading Heading={'My Projects Details'} />
+                                    }
+                                    {/* 
                                     //  SubHeading={'Manage your billing and payment details'}
-                                    />
+                                    /> */}
                                 </Stack>
                             </Box>
                             <Stack direction='horizontal' gap={2} style={{
@@ -152,57 +165,69 @@ export const DetailsProject = () => {
                                                 </Stack>
                                             </div>
                                             <div>
-                                                <Icon style={{ background: "#fff", cursor: "pointer", color: '#000' }} >
-                                                    <CiEdit fontSize={'1.5rem'} className='me-0' onClick={() => setIsEdit(true)} />
-                                                </Icon>
+                                                {type !== 'active' &&
+                                                    <Icon style={{ background: "#fff", cursor: "pointer", color: '#000' }} >
+                                                        <CiEdit fontSize={'1.5rem'} className='me-0' onClick={() => setIsEdit(true)} />
+                                                    </Icon>
+                                                }
                                             </div>
                                         </Stack>
                                         <Stack direction='vertical' gap={3}>
                                             <Row>
-                                                <Col md={2}>
+                                                <Col md={3}>
                                                     <ProjectDetailIcon Icon={'/assets/images/Icons/Status.svg'} IconLabel={'Status'} />
                                                 </Col>
-                                                <Col md={10}>
+                                                <Col md={9}>
                                                     <p className='mb-0' style={{ textTransform: "capitalize" }}>{pre && pre.status}</p>
                                                 </Col>
                                             </Row>
                                             <Row>
-                                                <Col md={2}>
+                                                <Col md={3}>
                                                     <ProjectDetailIcon Icon={'/assets/images/Icons/Timeline.svg'} IconLabel={'Timeline'} />
                                                 </Col>
-                                                <Col md={10}>
+                                                <Col md={9}>
                                                     <p className='mb-0'>{pre && pre.end_date && moment(pre.end_date).fromNow("DD-MM-YYYY")}</p>
                                                 </Col>
                                             </Row>
                                             <Row>
-                                                <Col md={2}>
+                                                <Col md={3}>
                                                     <ProjectDetailIcon Icon={'/assets/images/Icons/Task.svg'} IconLabel={'Skills'} />
                                                 </Col>
-                                                <Col md={10}>
+                                                <Col md={9}>
                                                     <p className='mb-0'>{pre && pre.skills_name}</p>
                                                 </Col>
                                             </Row>
                                             <Row>
-                                                <Col md={2}>
+                                                <Col md={3}>
                                                     <ProjectDetailIcon Icon={'/assets/images/Icons/Tag.svg'} IconLabel={'Tags'} />
                                                 </Col>
-                                                <Col md={10}>
+                                                <Col md={9}>
                                                     <p className='mb-0'>{pre && pre.tag_by}</p>
                                                 </Col>
                                             </Row>
                                             <Row>
-                                                <Col md={2}>
+                                                <Col md={3}>
                                                     <ProjectDetailIcon Icon={'/assets/images/Icons/Team.svg'} IconLabel={'Team'} />
                                                 </Col>
-                                                <Col md={10}>
-                                                    <p className='mb-0'>No Progress</p>
+                                                <Col md={9}>
+                                                    <p className='mb-0'>{pre?.team}</p>
                                                 </Col>
                                             </Row>
+                                            {creator_name && type === 'active' &&
+                                                <Row>
+                                                    <Col md={3}>
+                                                        <ProjectDetailIcon Icon={'/assets/images/Icons/Team.svg'} IconLabel={'Owner Name'} />
+                                                    </Col>
+                                                    <Col md={9}>
+                                                        <p className='mb-0'>{creator_name}</p>
+                                                    </Col>
+                                                </Row>
+                                            }
                                             <Row>
-                                                <Col md={2}>
+                                                <Col md={3}>
                                                     <ProjectDetailIcon Icon={'/assets/images/Icons/Description.svg'} IconLabel={'Description'} />
                                                 </Col>
-                                                <Col md={10}>
+                                                <Col md={9}>
                                                     <p className='mb-0'>{pre && pre.description}</p>
                                                 </Col>
                                             </Row>

@@ -9,7 +9,7 @@ import { SearchPanel } from '../../components/Search'
 import { MyProjectCard } from '../../components/MyProjectCard'
 import { PublishProjectCard } from '../../components/PublishProjectCard'
 import { useNavigate } from 'react-router-dom'
-import { getMyProjects_API } from '../../APIServices/service'
+import { get_team_projectsAPI, getMyProjects_API } from '../../APIServices/service'
 import { MyContext } from '../../App'
 
 const Box = styled.div`
@@ -32,23 +32,33 @@ export const Dashboard = () => {
     const navigate = useNavigate();
     const handleClick = () => { navigate('/create_project'); };
     const [my_projects, setMy_projects] = useState([]);
-    const {getMySkills,userData,getMyCertificate,getAcademic} = useContext(MyContext);
+    const { getMySkills, userData, getMyCertificate, getAcademic } = useContext(MyContext);
+    const [tmProjects, setTmProjects] = useState([]);
 
     const preData = async () => {
         const resp = await getMyProjects_API();
-        const pr =  resp?.data || [];
+        const pr = resp?.data || [];
         setMy_projects(pr);
     }
-    useEffect(() => { preData(); }, [])
+
+    const getTeamProjects = async () => {
+        const res = await get_team_projectsAPI();
+        if (res && res.success) {
+            const data = res.data;
+            setTmProjects(data);
+        }
+    }
+
+    useEffect(() => { preData(); getTeamProjects(); }, [])
 
     useEffect(() => {
         if (localStorage.getItem('Authorization') && localStorage.getItem('Authorization') !== "") {
-          userData();
-          getMySkills();
-          getMyCertificate();
-          getAcademic();
+            userData();
+            getMySkills();
+            getMyCertificate();
+            getAcademic();
         }
-      }, [localStorage.getItem('Authorization')])
+    }, [localStorage.getItem('Authorization')])
 
     return (
         <>
@@ -63,7 +73,7 @@ export const Dashboard = () => {
                                 <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between' }}>
                                     <Heading Heading={'Dashboard'}
                                     //  SubHeading={'Manage your billing and payment details'}
-                                      />
+                                    />
                                     <SharedButton
                                         label={'Create Project'}
                                         size={'sm'}
@@ -74,7 +84,7 @@ export const Dashboard = () => {
                                 </Stack>
                                 <Panel>
                                     <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between' }}>
-                                        <SearchPanel id='search' className={'w-50 bg-light'}/>
+                                        <SearchPanel id='search' className={'w-50 bg-light'} />
                                         <Icon>
                                             <CiFilter fontSize={'1.5rem'} className='me-0' />
                                         </Icon>
@@ -84,30 +94,49 @@ export const Dashboard = () => {
                             <Box>
                                 <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between', alignItems: 'center' }}>
                                     <h6>Active Project</h6>
-                                    <SharedButton label={'See all'} size={'sm'} variant={'outlined'} onClick={() => navigate('/my_project')} />
+                                    {/* {tmProjects.length > 0 &&
+                                        <SharedButton label={'See all'} size={'sm'} variant={'outlined'} onClick={() => navigate('/my_all_project', { state: { data: tmProjects } })} />
+                                        // <SharedButton label={'See all'} size={'sm'} variant={'outlined'} onClick={() => navigate('/my_project')} />
+                                    } */}
                                 </Stack>
 
                                 <div>
                                     <Row >
-                                        <Col className='mb-3' md={3} >
-                                            <MyProjectCard BgColor={"#FEEEE7"} />
-                                        </Col>
+                                        {tmProjects.length > 0 ?
+                                            tmProjects.map((project, index) => (
+                                                <Col className='mb-3' md={3} >
+                                                    <PublishProjectCard data={project} type={'active'} />
+                                                    {/* <MyProjectCard BgColor={"#FEEEE7"} /> */}
+                                                </Col>
+                                            ))
+                                            :
+                                            <Col className='mt-3 mb-3 text-center'>
+                                                <h5>No project data available.</h5>
+                                            </Col>
+                                        }
+
                                     </Row>
                                 </div>
                             </Box>
                             <Box>
                                 <Stack direction='horizontal' className='mb-3' gap={2} style={{ justifyContent: 'space-between', alignItems: 'center' }}>
                                     <h6>My Project</h6>
-                                    <SharedButton label={'See all'} size={'sm'} variant={'outlined'} onClick={() => navigate('/my_all_project', { state: { data: my_projects } })} />
+                                    {/* {my_projects.length > 0 &&
+                                        <SharedButton label={'See all'} size={'sm'} variant={'outlined'} onClick={() => navigate('/my_all_project', { state: { data: my_projects } })} />
+                                    } */}
                                 </Stack>
                                 <Row>
-                                    {my_projects.length > 0 && my_projects.map((e, i) => (
-                                        i <= 3 ?
+                                    {my_projects.length > 0 ?
+                                        my_projects.map((e, i) => (
                                             <Col className='mb-3' md={3} key={i}>
-                                                <PublishProjectCard data={e} />
+                                                <PublishProjectCard data={e} type={'my_project'} />
                                             </Col>
-                                            : ''
-                                    ))}
+                                        ))
+                                        :
+                                        <Col className='mt-3 mb-3 text-center'>
+                                            <h5>No project data available.</h5>
+                                        </Col>
+                                    }
                                 </Row>
                             </Box>
                         </Stack>

@@ -1,5 +1,5 @@
 import './App.css';
-import {  HashRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 import { Login } from './commonPages/login';
 import { SignUp } from './commonPages/signup';
 import { ForgotPassword } from './commonPages/forgotPassword.js';
@@ -14,13 +14,14 @@ import { EditProfile } from './pages/myProfile/EditProfile.js';
 import { AcademicInformation } from './pages/myProfile/AcademicInformation.js';
 import { SkillsAndExpertise } from './pages/myProfile/SkillsAndExpertise.js';
 import { ProjectPreferences } from './pages/myProfile/ProjectPreferences.js';
-import { createContext,  useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { getAcademic_API, getMyCertificates_API, getMySkills_API, userProfileAPI } from './APIServices/service.js';
 import { EditCertificate } from './pages/myProfile/EditCertificate.js';
 import { DetailsProject } from './pages/dashboard/myProject/DetailsProject.js';
 import Auth from './Auth.js';
 import { InviteUser } from './pages/inviteUserPage/index.js';
-import {Chat} from './pages/chatPages/index.js'
+import { Chat } from './pages/chatPages/index.js'
+import MyInvitation from './pages/inviteUserPage/MyInvitation.js';
 
 const MyContext = createContext();
 
@@ -40,7 +41,7 @@ function App() {
   }
   const getMySkills = async () => {
     const resp = await getMySkills_API();
-    const pr =( resp && resp.data )|| [];
+    const pr = (resp && resp.data) || [];
     setMySkills(pr);
 
   }
@@ -55,10 +56,24 @@ function App() {
     setMyAcademic(pr);
   }
 
+  useEffect(() => {
+    if (info) {
+      getMySkills(); getMyCertificate(); getAcademic();
+      return;
+    }
+  }, [info])
+
+  useEffect(() => {
+    if (localStorage.getItem('Authorization')) {
+      userData();
+      return;
+    }
+  }, [localStorage.getItem('Authorization')])
+
   return (
     <>
       <MyContext.Provider value={{ info, mySkills, getMySkills, userData, getMyCertificate, myCertificate, myAcademic, getAcademic }}>
-        <HashRouter>
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
@@ -77,11 +92,13 @@ function App() {
               <Route path='/skillsExpertise' element={<SkillsAndExpertise />} />
               <Route path='/projectPreferences' element={<ProjectPreferences />} />
               <Route path='/editCertificate' element={<EditCertificate />} />
+              <Route path='/inviteUser' element={<InviteUser />} />
+              <Route path='/my-invitation' element={<MyInvitation />} />
+              <Route path='/chats' element={<Chat />} />
             </Route>
-            <Route path='/inviteUser' element={<InviteUser/>}/>
-            <Route path='/chats' element={<Chat/>}/> 
+
           </Routes>
-        </HashRouter >
+        </BrowserRouter >
       </MyContext.Provider >
     </>
   );

@@ -29,6 +29,9 @@ export const CreateProject = () => {
 
     const onChangeHandler = (e) => {
         const { name, value } = e.target;
+        console.log("name--", name, '-------value', value);
+
+
         setData((pre) => ({ ...pre, [name]: value }));
         setFeedback((pre) => ({ ...pre, [name]: "" }));
     }
@@ -46,6 +49,7 @@ export const CreateProject = () => {
         const { id } = info;
         if (!id) { errorAlert("something  id wrong"); return; }
         const { project_name, start_date, end_date, category, skills, tag_by, description, logo } = data;
+
         if (!project_name) { setFeedback((pre) => ({ ...pre, "project_name": "Required" })); isValid = false; }
         if (!start_date) { setFeedback((pre) => ({ ...pre, "start_date": "Required" })); isValid = false; }
 

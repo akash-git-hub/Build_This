@@ -58,11 +58,11 @@ export const Sidebar = () => {
               }}>
                 <LinkSidebar LinkIcon={<Image src='./assets/images/Icons/Chats.svg' />} LinkLabel={'Chats'} LinkPath={'/chats'} />
               </li>
-              <li className={pathname === "/messages" ? 'active' : ""} style={{
+              {/* <li className={pathname === "/messages" ? 'active' : ""} style={{
                 padding: '10px'
               }}>
                 <LinkSidebar LinkIcon={<Image src='./assets/images/Icons/Notification.svg' />} LinkLabel={'Notification'} LinkPath={'/messages'} />
-              </li>
+              </li> */}
               <li className={pathname === "/inviteUser" ? 'active' : ""} style={{
                 padding: '10px'
               }}>
@@ -76,7 +76,7 @@ export const Sidebar = () => {
           <ul style={{listStyle: 'none', padding: 0 }}>
             <Stack direction='vertical' gap={3} style={{cursor:"pointer"}}>
               <li className={pathname === "/my_profile" ? 'active' : ""} style={{ padding: '0px 10px' }} onClick={() => navigate('/my_profile')} >
-                <Avatar UserName={info && info.user_name} UserEmail={info && info.email} Pr_Image={info && info.pr_image} />
+                <Avatar UserName={info && info.full_name} UserEmail={info && info.email} Pr_Image={info && info.pr_image} />
               </li>
               <li>
                 <SharedButton label={'LogOut'} variant={'light'} onClick={logOutHandler} startIcon={<CgLogOut />} size={'sm'} className={"w-100"} />

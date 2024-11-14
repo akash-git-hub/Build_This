@@ -6,9 +6,22 @@ export const validateEmail = (email) => {
 };
 
 
-export const option =[
-    {name:"ABCD",value:"abcd"},
-    {name:"XYZ",value:"xyz"}
+export const option = [
+    { name: "AR", value: "AR" },
+    { name: "VR", value: "VR" },
+    { name: "App-Development", value: "App-Development" },
+    { name: "Web-Development", value: "Web-Development" }
+]
+
+export const filterProjectStatus = (option, status) => {
+    const data = option.filter((e) => e.value === status);
+    return data[0]?.name;
+}
+
+export const optionAccept = [
+    { name: "Pending", value: "pending" },
+    { name: "Accept", value: "accept" },
+    { name: "Rejected", value: "rejected" }
 ]
 
 
