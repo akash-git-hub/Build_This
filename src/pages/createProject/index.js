@@ -29,9 +29,6 @@ export const CreateProject = () => {
 
     const onChangeHandler = (e) => {
         const { name, value } = e.target;
-        console.log("name--", name, '-------value', value);
-
-
         setData((pre) => ({ ...pre, [name]: value }));
         setFeedback((pre) => ({ ...pre, [name]: "" }));
     }

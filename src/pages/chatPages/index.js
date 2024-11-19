@@ -17,7 +17,7 @@ export const Chat = () => {
                         <Sidebar />
                     </Col>
                     <Col md={8} lg={9} className='p-0'>
-                        <ChatBoard setWaiting={setWaiting} />
+                        <ChatBoard setWaiting={setWaiting}  />
                     </Col>
                 </Row>
             </Container>

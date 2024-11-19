@@ -182,7 +182,7 @@ export const Profile = () => {
                                             }
                                         </Col>
                                         <Col md={12} className='mb-2' >
-                                            {mySkills && mySkills.map((e) => (<Badge bg="info" className='me-2 pt-1 pb-1'> {e.skill_name} </Badge>))}
+                                            {mySkills && mySkills.map((e, index) => (<Badge bg="info" className='me-2 pt-1 pb-1' key={index}> {e.skill_name} </Badge>))}
                                         </Col>
                                     </Row>
                                     <Row>
@@ -199,7 +199,7 @@ export const Profile = () => {
                                             }
                                         </Col>
                                         <Col md={12} className='mb-2' >
-                                            {myCertificate && myCertificate.map((e) => (<Badge bg="info" className='me-2 pt-1 pb-1'> {e.certificate_name} </Badge>))}
+                                            {myCertificate && myCertificate.map((e, index) => (<Badge bg="info" className='me-2 pt-1 pb-1' key={index}> {e.certificate_name} </Badge>))}
                                         </Col>
 
                                     </Row>
@@ -219,8 +219,8 @@ export const Profile = () => {
                                         <Col md={4}><h6>Passing Year</h6></Col>
                                     </Row>
                                     <Row className='mt-2'>
-                                        {myAcademic.length > 0 && myAcademic.map((e) => (
-                                            <>
+                                        {myAcademic.length > 0 && myAcademic.map((e, index) => (
+                                            <React.Fragment key={index}>
                                                 <Col md={4} className='mb-2' >
                                                     <p>{e.college_name}</p>
                                                 </Col>
@@ -230,7 +230,7 @@ export const Profile = () => {
                                                 <Col md={4} className='mb-2' >
                                                     <p>{e.passing_year && moment(e.passing_year).format("DD-MM-YYYY")}</p>
                                                 </Col>
-                                            </>
+                                            </React.Fragment>
                                         ))}
                                     </Row>
                                 </Stack>

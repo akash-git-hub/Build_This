@@ -104,7 +104,7 @@ export const Dashboard = () => {
                                     <Row >
                                         {tmProjects.length > 0 ?
                                             tmProjects.map((project, index) => (
-                                                <Col className='mb-3' md={3} >
+                                                <Col className='mb-3' md={3} key={index} >
                                                     <PublishProjectCard data={project} type={'active'} />
                                                     {/* <MyProjectCard BgColor={"#FEEEE7"} /> */}
                                                 </Col>

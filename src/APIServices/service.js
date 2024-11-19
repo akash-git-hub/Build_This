@@ -389,6 +389,24 @@ export const createInvitationAPI = async (data) => {
 }
 
 
+export const uploadGroupImage = async (data) => {
+    try {
+        const resp = await http.post("/uploadGroupImage", data);
+        if (resp && resp.data && resp.data.success) {
+            return resp.data;
+        } else {
+            errorAlert(resp.data.message);
+        }
+    } catch (error) {
+        if (error && error.response && error.response.data && error.response.data.message) {
+            console.log(error.response.data.message);
+        } else {
+            console.log(error.response);
+        }
+    }
+}
+
+
 export const getUserListProjectWiseAPI = async () => {
     try {
         const resp = await http.get("/getUserListProjectWise");

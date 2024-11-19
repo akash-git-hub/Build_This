@@ -17,7 +17,8 @@ export const PopupModal = ({
     btn1label,
     btn2label,
     btn1variant,
-    btn2variant
+    btn2variant,
+    createGrHandler
 }) => {
 
     return (
@@ -40,7 +41,7 @@ export const PopupModal = ({
             <Modal.Footer className="border-0 d-inline">
                 <Stack direction='horizontal' gap={2}>
                { btn1label &&  <SharedButton onClick={onHide} label={btn1label} variant={btn1variant} className={'w-50'} />}
-                {btn2label &&  <SharedButton label={btn2label} variant={btn2variant} className={'w-50'} />}
+                {btn2label &&  <SharedButton onClick={createGrHandler} label={btn2label} variant={btn2variant} className={'w-50'} />}
                 </Stack>
             </Modal.Footer>
         </Modal>

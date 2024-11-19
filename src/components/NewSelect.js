@@ -21,7 +21,7 @@ export default function NewSelect({
                         <option key={i} value={e.value}>{e.name} </option>
                     ))}
             </Form.Select>
-            <small style={{ color: 'red' }} className='error'>{error}</small>
+            <small style={{ color: 'red',fontSize:'12pt' }} className='error'>{error}</small>
         </>
     );
 }
