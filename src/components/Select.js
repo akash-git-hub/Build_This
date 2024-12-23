@@ -2,7 +2,7 @@ import React from 'react'
 import { Form } from 'react-bootstrap'
 
 export const Select = ({ SelectLabel, SelectOption, option = [], name, onChange, readOnly, isInvalid = false, feedback = "" }) => {
-    console.log(feedback);
+
     return (
         <>
             <Form.Group controlId={SelectLabel}>

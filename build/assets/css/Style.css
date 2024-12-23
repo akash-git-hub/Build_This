@@ -10,7 +10,7 @@ body {
     display: none;
   }
   background: white;
-  z-index: 999;
+  z-index: 9;
   top: 40px !important;
   border-radius: 5px;
   box-shadow: 0px 4px 10px #0000001f;
@@ -36,7 +36,6 @@ body {
 
 .love-serch ul li {
   padding: 10px 5px;
-  
 }
 
 .love-serch ul li:hover {
@@ -56,11 +55,69 @@ body {
   border-radius: 10px;
 }
 
-
 .MainLoader {
   height: 100vh;
   background: #0000002e;
   position: fixed;
   width: 100%;
   z-index: 999 !important;
+}
+
+.fade.modal.show {
+  z-index: 9 !important;
+}
+.fade.modal-backdrop.show {
+  z-index: 0 !important;
+}
+
+.fixed-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%; /* Make sure it’s wide enough for the sidebar */
+  padding-top: 20px; /* Optional, if you want to add some top padding */
+  overflow: hidden;
+}
+
+.content-area {
+  margin-left: 25%; /* Adjust this value based on your sidebar's width */
+  padding-top: 20px; /* Optional, to add some space at the top */
+  overflow: auto;
+  height: 100vh;
+}
+
+.chat-style {
+  background: #0d6efd;
+  cursor: pointer;
+  padding: 8px 9px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
+  border: 2px solid #0d6efd;
+  color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /*Adds a subtle shadow */
+}
+.chat-style-active {
+  border: 2px solid #198754;
+  background-color: #198754;
+}
+
+ .card-check-box{
+  margin-top: 5px;
+  width: 100%;
+  display: flex;
+  position: absolute;
+  justify-content: right;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+input#vehicle2 {
+  font-size: 27px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }

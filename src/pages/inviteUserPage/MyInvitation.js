@@ -20,14 +20,18 @@ const Box = styled.div`
 `
 
 export default function MyInvitation() {
+
     const [waiting, setWaiting] = useState(false);
     const [projectList, setProjectList] = useState([]);
 
+    let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+
     const getProjectList = async () => {
         const resp = await getUserProjectAssociateListAPI();
-
         if (resp && resp.success) {
-            const data = resp.data;
+            let data = resp.data;
+            data = data.filter((e) => e.senderId != userInfo.id);
             setProjectList(data);
         }
     }
@@ -90,14 +94,14 @@ export default function MyInvitation() {
                                         {projectList?.map((u, i) => (
                                             <tr key={i}>
                                                 <td className='p-2'>{u?.project_name}</td>
-                                                <td className='p-2'>{u?.project_name}</td>                                               
+                                                <td className='p-2'>{u?.project_name}</td>
                                                 <td className='p-2'>{u?.invitedDate ? moment(u.invitedDate).format("DD-MM-YYYY") : ""}</td>
                                                 <td className='p-2'>
                                                     {
                                                         u?.status === 'pending' ?
                                                             <TableSelectOption name="project" FormLabel={null} value={u?.status} onChange={(e) => statusHandler(u?.id, e.target.value)} Array={optionAccept} myDefault={'select'} />
                                                             :
-                                                            filterProjectStatus(optionAccept,u?.status)                                                       
+                                                            filterProjectStatus(optionAccept, u?.status)
                                                     }
 
                                                 </td>

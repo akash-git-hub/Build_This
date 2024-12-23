@@ -156,7 +156,7 @@ export const ChatBoard = ({ setWaiting }) => {
 
     const my_projects = async () => {
         const resp = await getMyProjects_API();
-        const data = resp.data;
+        const data = resp?.data;
         setProjectList(data);
         let pre = [];
         data.forEach((e) => {
@@ -252,7 +252,6 @@ export const ChatBoard = ({ setWaiting }) => {
                     });
                 } else {
                     // If the document exists, update the userInfo
-                    console.log("Document exists, updating...");
                     const existingData = res2.data();
                     let updatedUserInfo = existingData.userInfo || [];
                     // Check if the user already exists in userInfo array
@@ -304,21 +303,6 @@ export const ChatBoard = ({ setWaiting }) => {
                 date: time,
             }),
         });
-
-        // await updateDoc(doc(db, "userChats", currentUser.id), {
-        //     [data.chatId + ".lastMessage"]: {
-        //         text,
-        //     },
-        //     [data.chatId + ".date"]: time,
-        // });
-
-        // await updateDoc(doc(db, "userChats", data.user.uid), {
-        //     [data.chatId + ".lastMessage"]: {
-        //         text,
-        //     },
-        //     [data.chatId + ".date"]: time,
-        // });
-
     };
 
 
@@ -401,6 +385,7 @@ export const ChatBoard = ({ setWaiting }) => {
 
             if (isValid) {
                 setWaiting(true);
+                console.log("prId---",prId);
                 const time = moment().unix(); // Get the current Unix timestamp
                 const groupData = {
                     groupName: grName,
@@ -478,10 +463,14 @@ export const ChatBoard = ({ setWaiting }) => {
 
                             <Stack direction='horizontal' gap={0} style={{ justifyContent: "space-between" }}>
 
-                                <Stack direction='horizontal' gap={3} >
-                                    <SelectDropdown title={'Message'} items={items} setOptions={setOptions} icon={<IoIosArrowDown />} />
+                                {/* <Stack direction='horizontal' gap={3} > */}
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                    <p className={ options === 1 ? "chat-style chat-style-active" : "chat-style"}  style={{ margin: '0 5px' }}  onClick={()=>setOptions(1)}> people </p>
+                                    <p className= {options === 2 ? "chat-style chat-style-active" :"chat-style"} style={{ margin: '0 5px' }} onClick={()=>setOptions(2)}>projects </p>
+                                    </div>
+                                    {/* <SelectDropdown title={'Message'} items={items} setOptions={setOptions} icon={<IoIosArrowDown />} /> */}
                                     {/* <Badge bg="dark" pill>12</Badge> */}
-                                </Stack>
+                                {/* </Stack> */}
 
                                 <FaCirclePlus fontSize={'2rem'} className='text-primary' onClick={() => setModalShow(true)} />
 

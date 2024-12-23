@@ -6,7 +6,7 @@ import { CiSearch } from 'react-icons/ci'
 export const SearchPanel = ({className}) => {
     return (
         <>
-            <InputField startIcon={<CiSearch />} placeholder={'Search project, users...'} id={'search'}  className={className}/>
+            <InputField startIcon={<CiSearch />} placeholder={'Search projects ...'} id={'search'}  className={className}/>
         </>
     )
 }

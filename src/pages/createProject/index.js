@@ -8,12 +8,13 @@ import { HiOutlineArrowLeft } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
 import { InputField } from '../../components/InputField'
 import { Select } from '../../components/Select'
-import { option } from '../../components/Helper'
+import { option, skillsOption } from '../../components/Helper'
 import { createProject_API } from '../../APIServices/service'
 import { WaitingLoader } from '../../commonPages/WaitingLoader'
 import { errorAlert, successAlert } from '../../components/Alert'
 import { UploadImage } from '../../components/UploadImage'
 import { MyContext } from '../../App'
+import moment from 'moment-timezone'
 
 const Box = styled.div`
   width: 100%;
@@ -61,6 +62,7 @@ export const CreateProject = () => {
             formData.append('tag_by', tag_by);
             formData.append('description', description);
             formData.append('image', logo);
+            formData.append('createDate',moment().format('DD-MM-YYYY'));
 
             setWaiting(true);
             const resp = await createProject_API(formData);
@@ -120,21 +122,26 @@ export const CreateProject = () => {
                                             isInvalid={feedback.end_date} feedback={feedback.end_date}
                                             className={'mb-3'} type={'date'} label={'End Date'} placeholder={'Date'} />
                                     </Col>
-                                    <Col md={4}>
+                                    <Col md={6} className='mb-3'>
                                         <Select name={"category"} value={data.category} onChange={onChangeHandler}
                                             isInvalid={feedback.category} feedback={feedback.category}
                                             option={option} SelectLabel={'Category'} SelectOption={'select'} />
                                     </Col>
-                                    <Col md={4}>
+                                    <Col md={6} className='mb-3'>
+                                        <Select name={"skills"} value={data.skills} onChange={onChangeHandler}
+                                            isInvalid={feedback.skills} feedback={feedback.skills}
+                                            option={skillsOption} SelectLabel={'Skill'} SelectOption={'select'} />
+                                    </Col>
+                                    {/* <Col md={4}>
                                         <InputField name={"skills"} value={data.skills} onChange={onChangeHandler}
                                             isInvalid={feedback.skills} feedback={feedback.skills}
                                             className={'mb-3'} type={'text'} label={'Skill'} placeholder={'react js , node js'} />
-                                    </Col>
-                                    <Col md={4}>
+                                    </Col> */}
+                                    {/* <Col md={4}>
                                         <InputField name={"tag_by"} value={data.tag_by} onChange={onChangeHandler}
                                             isInvalid={feedback.tag_by} feedback={feedback.tag_by}
                                             className={'mb-3'} type={'text'} label={'Tags'} placeholder={'#react , #node'} />
-                                    </Col>
+                                    </Col> */}
                                     <Col md={12}>
                                         <InputField name={"description"} value={data.description} onChange={onChangeHandler}
                                             isInvalid={feedback.description} feedback={feedback.description}

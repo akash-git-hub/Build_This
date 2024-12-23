@@ -133,7 +133,8 @@ export const UserProfile = () => {
                                     </Row>
                                 </Stack>
                             </Box>
-                            <Stack direction='horizontal' gap={4} className='ps-2 pe-2' style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+
+                            {/* <Stack direction='horizontal' gap={4} className='ps-2 pe-2' style={{ justifyContent: 'space-between', alignItems: 'center' }}>
                                 <h6 className='mb-0 mx-2'>Academic Information</h6>
                                 <Icon style={{ background: "#fff", cursor: "pointer", color: '#000' }} >
                                     <CiEdit fontSize={'1.5rem'} className='me-0' onClick={() => navigate('/AcademicInfo')} />
@@ -162,7 +163,8 @@ export const UserProfile = () => {
                                         ))}
                                     </Row>
                                 </Stack>
-                            </Box>
+                            </Box> */}
+
                              <Stack direction='horizontal' gap={4} className='ps-2 pe-2' style={{ justifyContent: 'space-between', alignItems: 'center' }}>
                                 <h6 className='mb-0 mx-2'>Project Preferences</h6>
                                 <Icon style={{ background: "#fff", cursor: "pointer", color: '#000' }} >

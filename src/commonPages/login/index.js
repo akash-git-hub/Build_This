@@ -5,10 +5,11 @@ import { SharedButton } from '../../components/Button'
 import { CheckBox } from '../../components/CheckBox'
 import { Heading } from '../../components/Heading'
 import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom'
+import { json, Link, useNavigate } from 'react-router-dom'
 import { validateEmail } from '../../components/Helper'
-import { login_API } from '../../APIServices/service'
+import { login_API, updateCompleteAPI } from '../../APIServices/service'
 import { successAlert } from '../../components/Alert'
+import Swal from 'sweetalert2'
 
 const Box = styled.div`
   height: 100vh;
@@ -58,6 +59,10 @@ export const Login = () => {
             const resp = await login_API(data);
             if (resp && resp.success) {
                 successAlert(resp.message);
+                const data = resp.data;
+
+                localStorage.setItem('userInfo', JSON.stringify(resp.data));
+
                 if (keepMe) {
                     localStorage.setItem('email', email);
                     localStorage.setItem('password', password);
@@ -66,7 +71,33 @@ export const Login = () => {
                     localStorage.removeItem('email');
                     localStorage.removeItem('password');
                 }
-                navigate("/dashboard");
+                if ((data?.role).toString() === 'admin') {
+                    navigate("/admin_dashboard");
+                } else {
+                    if (data?.profile_Complete === 'pending') {
+
+                        Swal.fire({
+                            title: "Are you specialist ?",
+                            text: "",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            cancelButtonText: 'No',
+                            confirmButtonText: "Yes"
+                        }).then(async (result) => {
+                            if (result.isConfirmed) {
+                                const resp = await updateCompleteAPI({ id: data.id });
+                                navigate("/my_profile");
+                            } else {
+                                const resp = await updateCompleteAPI({ id: data.id });
+                                navigate("/dashboard");
+                            }
+                        });
+                    }
+                      navigate("/dashboard");
+                }
+              
 
 
             }

@@ -136,22 +136,22 @@ export const Profile = () => {
                                         <h6>Date Of Birth</h6>
                                         <p>{inData && inData.dob && moment(inData.dob).format('DD-MM-YYYY')}</p>
                                     </Col>
-                                    <Col md={4} className='mb-2' >
+                                    {/* <Col md={4} className='mb-2' >
                                         <h6>Phone No</h6>
                                         <p>{inData.phone}</p>
-                                    </Col>
-                                    <Col md={4} className='mb-2' >
+                                    </Col> */}
+                                    {/* <Col md={4} className='mb-2' >
                                         <h6>Address</h6>
                                         <p>{inData.address}</p>
-                                    </Col>
+                                    </Col> */}
                                     <Col md={4} className='mb-2' >
                                         <h6>City</h6>
                                         <p>{inData.city}</p>
                                     </Col>
-                                    <Col md={4} className='mb-2' >
+                                    {/* <Col md={4} className='mb-2' >
                                         <h6>Postal Code</h6>
                                         <p>{inData.postalCode}</p>
-                                    </Col>
+                                    </Col> */}
                                     <Col md={4} className='mb-2' >
                                         <h6>Languages</h6>
                                         <p>{inData.language}</p>
@@ -205,7 +205,7 @@ export const Profile = () => {
                                     </Row>
                                 </Stack>
                             </Box>
-                            <Stack direction='horizontal' gap={4} className='ps-2 pe-2' style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                            {/* <Stack direction='horizontal' gap={4} className='ps-2 pe-2' style={{ justifyContent: 'space-between', alignItems: 'center' }}>
                                 <h6 className='mb-0 mx-2'>Academic Information</h6>
                                 <Icon style={{ background: "#fff", cursor: "pointer", color: '#000' }} >
                                     <CiEdit fontSize={'1.5rem'} className='me-0' onClick={() => navigate('/AcademicInfo')} />
@@ -214,7 +214,7 @@ export const Profile = () => {
                             <Box>
                                 <Stack direction='vertical' gap={2}>
                                     <Row>
-                                        <Col md={4}><h6>College/University Name</h6></Col>
+                                        <Col md={4}><h6>Academic Name</h6></Col>
                                         <Col md={4}><h6>Degree</h6></Col>
                                         <Col md={4}><h6>Passing Year</h6></Col>
                                     </Row>
@@ -234,7 +234,9 @@ export const Profile = () => {
                                         ))}
                                     </Row>
                                 </Stack>
-                            </Box>
+                            </Box> */}
+
+
                             {/* <Stack direction='horizontal' gap={4} className='ps-2 pe-2' style={{ justifyContent: 'space-between', alignItems: 'center' }}>
                                 <h6 className='mb-0 mx-2'>Project Preferences</h6>
                                 <Icon style={{ background: "#fff", cursor: "pointer", color: '#000' }} >

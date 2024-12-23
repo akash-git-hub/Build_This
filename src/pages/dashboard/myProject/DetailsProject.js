@@ -12,11 +12,15 @@ import { CiEdit } from 'react-icons/ci'
 import { UploadImage } from '../../../components/UploadImage'
 import { InputField } from '../../../components/InputField'
 import { Select } from '../../../components/Select'
-import { option } from '../../../components/Helper'
+import { getDayDifference, option, skillsOption } from '../../../components/Helper'
 import { IoMdClose } from 'react-icons/io'
 import { errorAlert, successAlert } from '../../../components/Alert'
-import { updateProject_API } from '../../../APIServices/service'
+import { createInvitationAPI, requestInvitationAPI, updateProject_API } from '../../../APIServices/service'
 import { WaitingLoader } from '../../../commonPages/WaitingLoader'
+import { FiUserPlus } from 'react-icons/fi'
+import { FaUserPlus } from 'react-icons/fa6'
+import { PopupModal } from '../../../components/PopupModal'
+import { SelectNew } from '../../../components/SelectNew'
 
 const Box = styled.div`
   width: 100%;
@@ -35,6 +39,9 @@ border-radius: 30px;
 export const DetailsProject = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const [modalShow, setModalShow] = useState(false);
+
     const [pre, setPre] = useState({
         "id": "", "project_name": "",
         "start_date": "", "end_date": "",
@@ -45,7 +52,7 @@ export const DetailsProject = () => {
 
     const [isEdit, setIsEdit] = useState(false);
 
-    const [data, setData] = useState({ "project_name": "", "start_date": "", "end_date": '', "category": "", "skills": "", "tag_by": "", "description": '', 'logo': '', 'team': '' });
+    const [data, setData] = useState({ "id": "", "project_name": "", "start_date": "", "end_date": '', "category": "", "skills": "", "tag_by": "", "description": '', 'logo': '', 'team': '' });
     const [feedback, setFeedback] = useState({ "project_name": "", "start_date": "", "end_date": '', "category": "", "skills": "", "tag_by": "", "description": '' });
     const [waiting, setWaiting] = useState(false);
     const [type, setType] = useState();
@@ -65,17 +72,18 @@ export const DetailsProject = () => {
 
     useEffect(() => {
         if (location && location.state && location.state.data) {
-            console.log(location.state.data);
             if (location?.state?.type) {
                 setType(location.state?.type);
             }
-            const { id, project_name, start_date, end_date, category, skills_name, tag_by, description, logo, status, team } = location.state.data;
+            const { id, project_name, start_date, end_date, category, skills_name, tag_by, description, logo, status, team, createdId } = location.state.data;
             setPre({
                 "id": id, "project_name": project_name,
                 "start_date": start_date, "end_date": end_date,
                 "category": category, "skills_name": skills_name,
+                "skills": skills_name,
                 "tag_by": tag_by, "description": description,
-                "logo": logo, "status": status, "team": team
+                "logo": logo, "status": status, "team": team,
+                'createdId': createdId
             });
             if (location?.state?.data?.creator_name) {
                 setCreator_name(location.state.data.creator_name);
@@ -84,6 +92,7 @@ export const DetailsProject = () => {
                 "id": id, "project_name": project_name,
                 "start_date": start_date, "end_date": end_date,
                 "category": category, "skills_name": skills_name,
+                "skills": skills_name,
                 "tag_by": tag_by, "description": description,
                 "logo": logo, "status": status, "team": team
             });
@@ -123,6 +132,33 @@ export const DetailsProject = () => {
         setWaiting(false);
 
     }
+
+
+    const interestedHandler = async () => {
+        const { id, createdId } = pre;
+        if (!id) { errorAlert("Please select a project."); return false; }
+        setWaiting(true);
+        try {
+            const data = {
+                'projectCreatorId': createdId,
+                "projectId": id,
+                "invitedUserIds": userInfo?.id,
+                "invitedDate": moment().format("YYYY-MM-DD"),
+            }
+            const res = await requestInvitationAPI(data);
+            if (res && res.success) {
+                setWaiting(false);
+                setModalShow(true)
+            }
+        } catch (error) {
+            console.log("Error Message--", error);
+        } finally {
+            setWaiting(false);
+        }
+    };
+
+      
+
     return (
         <>
             <WaitingLoader show={waiting} />
@@ -186,7 +222,8 @@ export const DetailsProject = () => {
                                                     <ProjectDetailIcon Icon={'/assets/images/Icons/Timeline.svg'} IconLabel={'Timeline'} />
                                                 </Col>
                                                 <Col md={9}>
-                                                    <p className='mb-0'>{pre && pre.end_date && moment(pre.end_date).fromNow("DD-MM-YYYY")}</p>
+                                                <p className='mb-0'>{getDayDifference(pre.start_date,pre.end_date)} Days</p>
+                                                    {/* <p className='mb-0'>{pre && pre.end_date && moment(pre.end_date).fromNow("DD-MM-YYYY")}</p> */}
                                                 </Col>
                                             </Row>
                                             <Row>
@@ -197,14 +234,14 @@ export const DetailsProject = () => {
                                                     <p className='mb-0'>{pre && pre.skills_name}</p>
                                                 </Col>
                                             </Row>
-                                            <Row>
+                                            {/* <Row>
                                                 <Col md={3}>
                                                     <ProjectDetailIcon Icon={'/assets/images/Icons/Tag.svg'} IconLabel={'Tags'} />
                                                 </Col>
                                                 <Col md={9}>
                                                     <p className='mb-0'>{pre && pre.tag_by}</p>
                                                 </Col>
-                                            </Row>
+                                            </Row> */}
                                             <Row>
                                                 <Col md={3}>
                                                     <ProjectDetailIcon Icon={'/assets/images/Icons/Team.svg'} IconLabel={'Team'} />
@@ -231,6 +268,16 @@ export const DetailsProject = () => {
                                                     <p className='mb-0'>{pre && pre.description}</p>
                                                 </Col>
                                             </Row>
+                                            {userInfo.id != pre.createdId &&
+                                                <Row>
+                                                    <Col md={3}>
+                                                    </Col>
+                                                    <Col md={9}>
+                                                        <SharedButton label={'Interested'} size={'sm'} variant={'primary'} startIcon={<FiUserPlus />} className="p-2 w-25 mt-2" onClick={interestedHandler} />
+
+                                                    </Col>
+                                                </Row>
+                                            }
                                         </Stack>
                                     </Stack>
                                 </Box>
@@ -263,21 +310,26 @@ export const DetailsProject = () => {
                                                 isInvalid={feedback.end_date} feedback={feedback.end_date}
                                                 className={'mb-3'} type={'date'} label={'End Date'} placeholder={'Date'} />
                                         </Col>
-                                        <Col md={4}>
-                                            <Select name={"category"} value={data.category} onChange={onChangeHandler}
+                                        <Col md={6}>
+                                            <SelectNew name={"category"} value={data.category} onChange={onChangeHandler}
                                                 isInvalid={feedback.category} feedback={feedback.category}
                                                 option={option} SelectLabel={'Category'} SelectOption={'select'} />
                                         </Col>
-                                        <Col md={4}>
+                                        {/* <Col md={4}>
                                             <InputField name={"skills"} value={data.skills_name} onChange={onChangeHandler}
                                                 isInvalid={feedback.skills_name} feedback={feedback.skills_name}
                                                 className={'mb-3'} type={'text'} label={'Skill'} placeholder={'react js , node js'} />
+                                        </Col> */}
+                                        <Col md={6} className='mb-3'>
+                                            <SelectNew name={"skills"} value={data.skills} onChange={onChangeHandler}
+                                                isInvalid={feedback.skills} feedback={feedback.skills}
+                                                option={skillsOption} SelectLabel={'Skill'} SelectOption={'select'} />
                                         </Col>
-                                        <Col md={4}>
+                                        {/* <Col md={4}>
                                             <InputField name={"tag_by"} value={data.tag_by} onChange={onChangeHandler}
                                                 isInvalid={feedback.tag_by} feedback={feedback.tag_by}
                                                 className={'mb-3'} type={'text'} label={'Tags'} placeholder={'#react , #node'} />
-                                        </Col>
+                                        </Col> */}
                                         <Col md={12}>
                                             <InputField name={"description"} value={data.description} onChange={onChangeHandler}
                                                 isInvalid={feedback.description} feedback={feedback.description}
@@ -296,7 +348,16 @@ export const DetailsProject = () => {
                         </Stack>
                     </Col>
                 </Row>
-            </Container>
+            </Container >
+            <PopupModal
+                size={'sm'}
+                icon={<Icon><FaUserPlus fontSize={"1.5rem"} /></Icon>}
+                title={'Request Successfully'}
+                subtitle={'Your request has been processed successfully'}
+                dialogClassName={'text-center'}
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
         </>
     )
 }

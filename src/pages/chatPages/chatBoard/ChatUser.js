@@ -17,7 +17,6 @@ export const ChatUser = (user,key) => {
                     <p className="text-secondary text-ellipsis fw-bold mb-0" style={{ maxWidth: '160px' }}>{user?.user?.message}</p>
                 </Stack>
             </Stack>
-            {/* <p className="fw-bold text-secondary">{user?.user?.msgtime}</p> */}
         </Stack>
     )
 }

@@ -66,7 +66,7 @@ export const EditCertificate = () => {
                         <Stack direction='vertical' gap={3}>
                             <EditMyProfileHeading inHeading={'My Profile'} inSubHeading={'Edit My Profile'} />
                             <Stack direction='horizontal' gap={4} className='ps-4 pe-2' style={{ justifyContent: 'space-between', alignItems: 'center' }}>
-                                <h5 className='text-secondary'>Skills & Expertise</h5>
+                                <h5 className='text-secondary'>Certifications</h5>
                                 <SharedButton label={'Back'} size={'sm'} variant={'primary'} className={'mx-2'} startIcon={<HiOutlineArrowLeft />} onClick={handleClickBack} />
                             </Stack>
                             <Box>

@@ -3,6 +3,7 @@ import { Badge, Image, Stack } from 'react-bootstrap'
 import styled from 'styled-components'
 import moment from 'moment-timezone';
 import { useNavigate } from 'react-router-dom';
+import { getDayDifference } from './Helper';
 
 const Box = styled.div`
 padding:1rem;
@@ -34,7 +35,8 @@ export const PublishProjectCard = ({ data, type = 'my_project' }) => {
                     alignItems: 'center'
                 }}>
                     <Badge bg='success'>{data && data.status}</Badge>
-                    <Badge bg='warning'>{data && data.end_date && moment(data.end_date).fromNow("DD-MM-YYYY")}</Badge>
+                    <Badge bg='warning'>{data && data.end_date && data.start_date && getDayDifference(data.start_date,data.end_date)} days</Badge>
+                    {/* <Badge bg='warning'>{data && data.end_date && moment(data.end_date).fromNow("DD-MM-YYYY")}</Badge> */}
 
                 </Stack>
                 <Stack direction='horizontal' gap={1} style={{

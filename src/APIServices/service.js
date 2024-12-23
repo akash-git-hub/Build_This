@@ -65,7 +65,7 @@ export const userProfileAPI = async () => {
             //  errorAlert(resp.data.message);
         }
     } catch (error) {
-        if (error && error.response && error.response.data && error.response.data.message) {           
+        if (error && error.response && error.response.data && error.response.data.message) {
             console.log(error.response.data.message);
         } else {
             console.log(error.response);
@@ -97,7 +97,7 @@ export const getMySkills_API = async () => {
             return resp.data;
         }
     } catch (error) {
-        if (error && error.response && error.response.data && error.response.data.message) {          
+        if (error && error.response && error.response.data && error.response.data.message) {
             console.log(error.response.data.message);
         } else {
             console.log(error.response);
@@ -163,7 +163,7 @@ export const getMyCertificates_API = async () => {
             return resp.data;
         }
     } catch (error) {
-        if (error && error.response && error.response.data && error.response.data.message) {           
+        if (error && error.response && error.response.data && error.response.data.message) {
             console.log(error.response.data.message);
         } else {
             console.log(error.response);
@@ -229,7 +229,7 @@ export const getAcademic_API = async () => {
             return resp.data;
         }
     } catch (error) {
-        if (error && error.response && error.response.data && error.response.data.message) {         
+        if (error && error.response && error.response.data && error.response.data.message) {
             console.log(error.response.data.message);
         } else {
             console.log(error.response);
@@ -371,6 +371,57 @@ export const getProjectsUserListAPI = async (prId) => {
 }
 
 
+
+export const getUserProfileByIdAPI = async (ID) => {
+    try {
+        const resp = await http.get(`/getUserProfileById?crUserId=${ID}`);
+        if (resp && resp.data && resp.data.success) {
+            return resp.data;
+        }
+    } catch (error) {
+        if (error && error.response && error.response.data && error.response.data.message) {
+            console.log(error.response.data.message);
+        } else {
+            console.log(error.response);
+        }
+    }
+}
+
+export const requestInvitationAPI = async (data) => {
+    try {
+        const resp = await http.post("/requestInvitation", data);
+        if (resp && resp.data && resp.data.success) {
+            return resp.data;
+        } else {
+            errorAlert(resp?.data?.message);
+        }
+    } catch (error) {
+        if (error && error.response && error.response.data && error.response.data.message) {
+            console.log(error.response.data.message);
+        } else {
+            console.log(error.response);
+        }
+    }
+}
+
+export const updateCompleteAPI = async (data) => {
+    try {
+        const resp = await http.post("/updateComplete", data);
+        if (resp && resp.data && resp.data.success) {
+            return resp.data;
+        } else {
+            errorAlert(resp?.data?.message);
+        }
+    } catch (error) {
+        if (error && error.response && error.response.data && error.response.data.message) {
+            console.log(error.response.data.message);
+        } else {
+            console.log(error.response);
+        }
+    }
+}
+
+
 export const createInvitationAPI = async (data) => {
     try {
         const resp = await http.post("/createInvitation", data);
@@ -416,13 +467,51 @@ export const getUserListProjectWiseAPI = async () => {
             //  errorAlert(resp.data.message);
         }
     } catch (error) {
-        if (error && error.response && error.response.data && error.response.data.message) {          
+        if (error && error.response && error.response.data && error.response.data.message) {
             console.log(error.response.data.message);
         } else {
             console.log(error.response);
         }
     }
 }
+
+
+export const getAllProjectsAPI = async () => {
+    try {
+        const resp = await http.get("/getAllProjects");
+        if (resp && resp.data && resp.data.success) {
+            return resp.data;
+        } else {
+            //  errorAlert(resp.data.message);
+        }
+    } catch (error) {
+        if (error && error.response && error.response.data && error.response.data.message) {
+            console.log(error.response.data.message);
+        } else {
+            console.log(error.response);
+        }
+    }
+}
+
+
+
+export const adminGetAllProjectsAPI = async () => {
+    try {
+        const resp = await http.get("/adminGetAllProjects");
+        if (resp && resp.data && resp.data.success) {
+            return resp.data;
+        } else {
+            //  errorAlert(resp.data.message);
+        }
+    } catch (error) {
+        if (error && error.response && error.response.data && error.response.data.message) {
+            console.log(error.response.data.message);
+        } else {
+            console.log(error.response);
+        }
+    }
+}
+
 
 export const getUserProjectAssociateListAPI = async () => {
     try {
@@ -433,7 +522,7 @@ export const getUserProjectAssociateListAPI = async () => {
             //  errorAlert(resp.data.message);
         }
     } catch (error) {
-        if (error && error.response && error.response.data && error.response.data.message) {           
+        if (error && error.response && error.response.data && error.response.data.message) {
             console.log(error.response.data.message);
         } else {
             console.log(error.response);
@@ -460,9 +549,44 @@ export const changeInviteStatusAPI = async (data) => {
 }
 
 
+export const changeProjectStatusAPI = async (data) => {
+    try {
+        const resp = await http.post("/changeProjectStatus", data);
+        if (resp && resp.data && resp.data.success) {
+            return resp.data;
+        } else {
+            errorAlert(resp.data.message);
+        }
+    } catch (error) {
+        if (error && error.response && error.response.data && error.response.data.message) {
+            console.log(error.response.data.message);
+        } else {
+            console.log(error.response);
+        }
+    }
+}
+
+
 export const searchChatListAPI = async (key) => {
     try {
         const resp = await http.get(`/searchChatList?searchKey=${key}`);
+        if (resp && resp.data && resp.data.success) {
+            return resp.data;
+        }
+    } catch (error) {
+        if (error && error.response && error.response.data && error.response.data.message) {
+            // errorAlert(error.response.data.message);
+        } else {
+            errorAlert(error.response);
+        }
+    }
+}
+
+
+
+export const adminGetAllUsersAPI = async (key) => {
+    try {
+        const resp = await http.get(`/adminGetAllUsers`);
         if (resp && resp.data && resp.data.success) {
             return resp.data;
         }

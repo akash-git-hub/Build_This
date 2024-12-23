@@ -155,21 +155,21 @@ export const EditProfile = () => {
                                                 <InputField required name='dob' value={inData.dob} onChange={onChangeHandler} label={'Date Of Birth'} placeholder={'Date Of Birth'} type={'date'} isInvalid={feedback.dob} feedback={feedback.dob} />
                                             </Col>
 
-                                            <Col md={6} lg={4} className='mb-3'>
+                                            {/* <Col md={6} lg={4} className='mb-3'>
                                                 <InputField required name='phone' value={inData.phone} onChange={onChangeHandler} label={'Phone No'} placeholder={'Phone No'} type={'number'} isInvalid={feedback.phone} feedback={feedback.phone} />
                                             </Col>
 
                                             <Col md={6} lg={4} className='mb-3'>
                                                 <InputField required name='address' value={inData.address} onChange={onChangeHandler} label={'Address'} placeholder={'Address'} isInvalid={feedback.address} feedback={feedback.address} />
-                                            </Col>
+                                            </Col> */}
 
                                             <Col md={6} lg={4} className='mb-3'>
                                                 <InputField required name='city' value={inData.city} onChange={onChangeHandler} label={'City'} placeholder={'City'} isInvalid={feedback.city} feedback={feedback.city} />
                                             </Col>
 
-                                            <Col md={6} lg={4} className='mb-3'>
+                                            {/* <Col md={6} lg={4} className='mb-3'>
                                                 <InputField required name='postalCode' value={inData.postalCode} onChange={onChangeHandler} label={'Postal Code'} placeholder={'Postal Code'} isInvalid={feedback.postalCode} feedback={feedback.postalCode} />
-                                            </Col>
+                                            </Col> */}
                                             <Col md={6} lg={4} className='mb-3'>
                                                 <InputField required name='language' value={inData.language} onChange={onChangeHandler} label={'Languages'} placeholder={'Hindi,English'} isInvalid={feedback.language} feedback={feedback.language} />
                                             </Col>

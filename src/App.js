@@ -22,6 +22,7 @@ import Auth from './Auth.js';
 import { InviteUser } from './pages/inviteUserPage/index.js';
 import { Chat } from './pages/chatPages/index.js'
 import MyInvitation from './pages/inviteUserPage/MyInvitation.js';
+import { AdminDashboard } from './pages/admin/dashboard/AdminDashboard.js';
 
 const MyContext = createContext();
 
@@ -81,6 +82,7 @@ function App() {
               <Route path="/forgot_password" element={<ForgotPassword />} />
               <Route path="/verification" element={<Verification />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/admin_dashboard" element={<AdminDashboard />} />
               <Route path="/create_project" element={<CreateProject />} />
               <Route path="/my_project" element={<MyProject />} />
               <Route path="/my_project_detail" element={<MyProjectDetail />} />
@@ -95,6 +97,7 @@ function App() {
               <Route path='/inviteUser' element={<InviteUser />} />
               <Route path='/my-invitation' element={<MyInvitation />} />
               <Route path='/chats' element={<Chat />} />
+            
             </Route>
 
           </Routes>
