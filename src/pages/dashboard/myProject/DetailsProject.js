@@ -210,27 +210,27 @@ export const DetailsProject = () => {
                                         </Stack>
                                         <Stack direction='vertical' gap={3}>
                                             <Row>
-                                                <Col md={3}>
+                                                <Col md={3} xs={5}>
                                                     <ProjectDetailIcon Icon={'/assets/images/Icons/Status.svg'} IconLabel={'Status'} />
                                                 </Col>
-                                                <Col md={9}>
+                                                <Col md={9} xs={7}>
                                                     <p className='mb-0' style={{ textTransform: "capitalize" }}>{pre && pre.status}</p>
                                                 </Col>
                                             </Row>
                                             <Row>
-                                                <Col md={3}>
+                                                <Col md={3} xs={5}>
                                                     <ProjectDetailIcon Icon={'/assets/images/Icons/Timeline.svg'} IconLabel={'Timeline'} />
                                                 </Col>
-                                                <Col md={9}>
+                                                <Col md={9} xs={7}>
                                                 <p className='mb-0'>{getDayDifference(pre.start_date,pre.end_date)} Days</p>
                                                     {/* <p className='mb-0'>{pre && pre.end_date && moment(pre.end_date).fromNow("DD-MM-YYYY")}</p> */}
                                                 </Col>
                                             </Row>
                                             <Row>
-                                                <Col md={3}>
+                                                <Col md={3} xs={5}>
                                                     <ProjectDetailIcon Icon={'/assets/images/Icons/Task.svg'} IconLabel={'Skills'} />
                                                 </Col>
-                                                <Col md={9}>
+                                                <Col md={9} xs={7}>
                                                     <p className='mb-0'>{pre && pre.skills_name}</p>
                                                 </Col>
                                             </Row>
@@ -243,38 +243,37 @@ export const DetailsProject = () => {
                                                 </Col>
                                             </Row> */}
                                             <Row>
-                                                <Col md={3}>
+                                                <Col md={3} xs={5}>
                                                     <ProjectDetailIcon Icon={'/assets/images/Icons/Team.svg'} IconLabel={'Team'} />
                                                 </Col>
-                                                <Col md={9}>
+                                                <Col md={9} xs={7}>
                                                     <p className='mb-0'>{pre?.team}</p>
                                                 </Col>
                                             </Row>
                                             {creator_name && type === 'active' &&
                                                 <Row>
-                                                    <Col md={3}>
+                                                    <Col md={3} xs={5}>
                                                         <ProjectDetailIcon Icon={'/assets/images/Icons/Team.svg'} IconLabel={'Owner Name'} />
                                                     </Col>
-                                                    <Col md={9}>
+                                                    <Col md={9}  xs={7}>
                                                         <p className='mb-0'>{creator_name}</p>
                                                     </Col>
                                                 </Row>
                                             }
                                             <Row>
-                                                <Col md={3}>
+                                                <Col md={3} xs={12}>
                                                     <ProjectDetailIcon Icon={'/assets/images/Icons/Description.svg'} IconLabel={'Description'} />
                                                 </Col>
-                                                <Col md={9}>
+                                                <Col md={9} xs={12}>
                                                     <p className='mb-0'>{pre && pre.description}</p>
                                                 </Col>
                                             </Row>
                                             {userInfo.id != pre.createdId &&
                                                 <Row>
-                                                    <Col md={3}>
+                                                    <Col md={3} xs={12}>
                                                     </Col>
-                                                    <Col md={9}>
-                                                        <SharedButton label={'Interested'} size={'sm'} variant={'primary'} startIcon={<FiUserPlus />} className="p-2 w-25 mt-2" onClick={interestedHandler} />
-
+                                                    <Col md={9} xs={12}>
+                                                        <SharedButton label={'Interested'} size={'sm'} variant={'primary'} startIcon={<FiUserPlus />} className="p-2 mt-2" onClick={interestedHandler} />
                                                     </Col>
                                                 </Row>
                                             }
