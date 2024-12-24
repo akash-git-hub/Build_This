@@ -13,10 +13,10 @@ export const Chat = () => {
             <WaitingLoader show={waiting} />
             <Container fluid>
                 <Row>
-                    <Col md={4} lg={3} className='p-0'>
+                    <Col md={12} lg={3} className='p-0'>
                         <Sidebar />
                     </Col>
-                    <Col md={8} lg={9} className='p-0'>
+                    <Col md={12} lg={9} className='p-0'>
                         <ChatBoard setWaiting={setWaiting}  />
                     </Col>
                 </Row>

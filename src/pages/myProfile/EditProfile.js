@@ -75,10 +75,10 @@ export const EditProfile = () => {
         if (!userName) { setFeedback((pre) => ({ ...pre, 'userName': "Please enter your user name." })); isValid = false; }
         if (!email) { setFeedback((pre) => ({ ...pre, 'email': "Please enter your valid email." })); isValid = false; }
         if (!dob) { setFeedback((pre) => ({ ...pre, 'dob': "Please enter Date Of Birth." })); isValid = false; }
-        if (!phone) { setFeedback((pre) => ({ ...pre, 'phone': "Please enter Phone No." })); isValid = false; }
-        if (!address) { setFeedback((pre) => ({ ...pre, 'address': "Please enter your address." })); isValid = false; }
+        // if (!phone) { setFeedback((pre) => ({ ...pre, 'phone': "Please enter Phone No." })); isValid = false; }
+        // if (!address) { setFeedback((pre) => ({ ...pre, 'address': "Please enter your address." })); isValid = false; }
         if (!city) { setFeedback((pre) => ({ ...pre, 'city': "Please enter your city." })); isValid = false; }
-        if (!postalCode) { setFeedback((pre) => ({ ...pre, 'postalCode': "Please enter your postal code." })); isValid = false; }
+        // if (!postalCode) { setFeedback((pre) => ({ ...pre, 'postalCode': "Please enter your postal code." })); isValid = false; }
         if (!language) { setFeedback((pre) => ({ ...pre, 'language': "Please enter your languages." })); isValid = false; }
         if (!bio) { setFeedback((pre) => ({ ...pre, 'bio': "Please enter your bio description." })); isValid = false; }
         if (phone) {
@@ -119,10 +119,10 @@ export const EditProfile = () => {
         <WaitingLoader show={waiting} />
             <Container fluid>
                 <Row>
-                    <Col lg={3} md={4} className='p-0'>
+                    <Col lg={3} md={12} className='p-0'>
                         <Sidebar />
                     </Col>
-                    <Col lg={9} md={8} className='p-0'>
+                    <Col lg={9} md={12} className='p-0'>
                         <Stack direction='vertical' gap={3}>
                             <EditMyProfileHeading inHeading={'My Profile'} inSubHeading={'Edit My Profile'} />
                             <Stack direction='horizontal' gap={4} className='ps-4 pe-2' style={{ justifyContent: 'space-between', alignItems: 'center' }}>
@@ -130,7 +130,7 @@ export const EditProfile = () => {
                                 <SharedButton label={'Back'} size={'sm'} variant={'primary'} className={'mx-2'} startIcon={<HiOutlineArrowLeft />} onClick={() => navigate('/my_profile')} />
                             </Stack>
                             <Box>
-                                <Form noValidate onSubmit={handleSubmit} className='mt-3'>
+                                <Form  onSubmit={handleSubmit} className='mt-3'>
                                     <Stack direction='vertical' gap={3}>
                                         <UploadImage
                                             FormLabel="Upload Profile"

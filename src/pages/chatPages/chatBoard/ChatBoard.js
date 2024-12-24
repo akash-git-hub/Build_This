@@ -101,7 +101,7 @@ export const ChatBoard = ({ setWaiting }) => {
             const q = query(collection(db, "groups"), where(documentId(), "in", prIDS));
             const unSub = onSnapshot(q, (querySnapshot) => {
                 const groupsData = [];
-                querySnapshot.forEach((doc) => {
+                querySnapshot?.forEach((doc) => {
                     if (doc.exists()) {
                         groupsData.push(doc.data());
                     }
@@ -129,6 +129,7 @@ export const ChatBoard = ({ setWaiting }) => {
 
     useEffect(() => {
         if (grChatHandler) {
+            setGroupMessages([]);
             const prId = grChatHandler?.projectId;
             const unSub = onSnapshot(doc(db, "GroupChats", prId), (doc) => {
                 doc.exists() && setGroupMessages(doc.data().messages);
@@ -142,6 +143,7 @@ export const ChatBoard = ({ setWaiting }) => {
 
     useEffect(() => {
         if (crChat) {
+            setMessages([]);
             const combinedId = currentUser?.id > crChat?.uid ? currentUser?.id + ',' + crChat?.uid : crChat?.uid + ',' + currentUser?.id;
             setCommonIDS(combinedId);
             const unSub = onSnapshot(doc(db, "chats", combinedId), (doc) => {
@@ -159,7 +161,7 @@ export const ChatBoard = ({ setWaiting }) => {
         const data = resp?.data;
         setProjectList(data);
         let pre = [];
-        data.forEach((e) => {
+        data?.forEach((e) => {
             pre.push({ "name": e.project_name, "value": e.id });
         });
         setPrOption(pre);

@@ -82,10 +82,10 @@ export const CreateProject = () => {
             <WaitingLoader show={waiting} />
             <Container fluid>
                 <Row>
-                    <Col className='p-1' md={3}>
+                    <Col className='p-1' md={12} lg={3}>
                         <Sidebar />
                     </Col>
-                    <Col className='p-1' md={9}>
+                    <Col className='p-1' md={12}lg={9} >
                         <Stack direction='vertical' gap={3}>
                             <Box>
                                 <Stack direction='horizontal' gap={2} className='d-flex justify-content-between'>

@@ -10,6 +10,13 @@ padding:1rem;
 background:#fff;
 border-radius:1rem;
 border: 1px solid #666666;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow :auto;
+scrollbar-width: none;
+ -webkit-scrollbar {
+  display: none;
+}
 `;
 export const PublishProjectCard = ({ data, type = 'my_project' }) => {
     const navigate = useNavigate();

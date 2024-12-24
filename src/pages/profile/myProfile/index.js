@@ -30,10 +30,10 @@ export const MyProfile = () => {
         <>
             <Container fluid>
                 <Row>
-                    <Col lg={3} md={4} className='p-0'>
+                    <Col lg={3} md={12} className='p-0'>
                         <Sidebar />
                     </Col>
-                    <Col lg={9} md={8} className='p-0'>
+                    <Col lg={9} md={12} className='p-0'>
                         <Stack direction='vertical' gap={3}>
 
                             <Box>

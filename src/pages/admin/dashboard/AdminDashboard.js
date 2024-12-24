@@ -158,10 +158,10 @@ export const AdminDashboard = () => {
             <WaitingLoader show={waiting} />
             <Container fluid>
                 <Row>
-                    <Col md={4} lg={3} className='p-0 fixed-sidebar'>
+                    <Col md={12} lg={3} className='p-0 '>
                         <AdminSidebar />
                     </Col>
-                    <Col md={8} lg={9} className='p-0 content-area'>
+                    <Col md={12} lg={9} className='p-0 content-lg-area'>
                         <Stack direction='vertical' gap={3}>
                             <Box>
                                 <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between' }}>
@@ -199,7 +199,7 @@ export const AdminDashboard = () => {
                                             <tr>
                                                 <td className='text-secondary p-2'>NAME</td>
                                                 <td className='text-secondary p-2'>EMAIL</td>
-                                                <td className='text-secondary p-2'>PHONE</td>
+                                                {/* <td className='text-secondary p-2'>PHONE</td> */}
                                                 <td className='text-secondary p-2'>ACTION</td>
                                             </tr>
                                         </thead>
@@ -208,7 +208,7 @@ export const AdminDashboard = () => {
                                                 <tr key={i}>
                                                     <td className='p-2'>{u?.full_name}</td>
                                                     <td className='p-2'>{u?.email}</td>
-                                                    <td className='p-2'>{u?.phone}</td>
+                                                    {/* <td className='p-2'>{u?.phone}</td> */}
                                                     <td className='p-2'> <SharedButton
                                                         label={'View'}
                                                         size={'sm'}

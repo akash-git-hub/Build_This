@@ -64,7 +64,7 @@ export const ChatBox = ({ chat, handleSend, messages, currentUser }) => {
                                                 borderRadius: '10px',
                                                 padding: '10px',
                                             }}>{msg.text} </span>
-                                            <small className='fw-normal  d-flex justify-content-end'>{msg?.date ? moment.unix(msg.date).format('HH:mm') : ''}</small>
+                                            <small className='fw-normal  d-flex justify-content-end' style={{fontSize:"10px"}}>{msg?.date ? moment.unix(msg.date).format('HH:mm') : ''}</small>
 
                                         </div>
                                         <Image src='/assets/images/user.svg' roundedCircle className="mb-4" style={{ maxWidth: '30px' }} />
@@ -81,7 +81,7 @@ export const ChatBox = ({ chat, handleSend, messages, currentUser }) => {
                                                 borderRadius: '10px',
                                                 padding: '10px',
                                             }}>{msg.text} </span>
-                                            <small className='fw-bold text-muted d-flex justify-content-end'>{msg.time}</small>
+                                            <small className='fw-bold text-muted d-flex justify-content-end' style={{fontSize:"10px"}}>{msg.time}</small>
                                         </div>
                                     </Stack>
                                 )

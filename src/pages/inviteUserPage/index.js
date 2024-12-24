@@ -91,7 +91,7 @@ export const InviteUser = () => {
             if (resp && resp.success) {
                 const data = resp.data;
                 const pre = [];
-                data.forEach((item) => {
+                data?.forEach((item) => {
                     pre.push({ id: item.id, skill_names: item.skill_names, label: item.full_name, profile: item?.pr_image ? item.pr_image : './assets/images/profileHolder.png' });
                 });
                 setUserList(pre);
@@ -140,7 +140,7 @@ export const InviteUser = () => {
             if (resp && resp.success) {
                 const data = resp.data;
                 const pre = [];
-                data.forEach((item) => {
+                data?.forEach((item) => {
                     pre.push({ value: item.id, name: item.project_name });
                 });
                 setProjectOptions(pre);
@@ -220,11 +220,11 @@ export const InviteUser = () => {
             <WaitingLoader show={waiting} />
             <Container fluid>
                 <Row>
-                    <Col md={4} lg={3} className='p-0'>
+                    <Col md={12} lg={3} className='p-0'>
                         <Sidebar />
                     </Col>
 
-                    <Col md={8} lg={9} className='p-0'>
+                    <Col md={12} lg={9} className='p-0'>
                         <Stack direction='vertical' gap={3}>
                             <Box>
                                 <Stack direction='vertical' gap={2} >
@@ -266,11 +266,11 @@ export const InviteUser = () => {
                                             </Col>
                                         </Row>
                                         <hr />
-                                        <Row className='mt-1' style={{ maxHeight: '300px', overflow: "auto" }}>
+                                        <Row className='g-3' style={{ maxHeight: '300px', overflow: "auto" }}>
                                             <Col md={12} className='mb-2'>Select Users</Col>
                                             {userOptions && userOptions?.length > 0 ?
                                                 userOptions.map((data, index) => (
-                                                    <Col md={2} className='mb-2' key={index}>
+                                                    <Col md={3} lg={2} xs={6} className='mb-2' key={index}>
                                                         <Card style={{ padding: ' 2px 0px 2px 0px' }}>
                                                             <div className='card-check-box'>
                                                                 <input type="checkbox" id="vehicle2" name="vehicle2" checked={checkIsSelect(data.id)} onClick={(e) => newCheckHandler(e, data)} />
@@ -312,9 +312,9 @@ export const InviteUser = () => {
 
                                         </Row>
                                     </Box>
-                                    <Box>
+                                    {/* <Box>
                                         <InviteUserList invitedList={invitedList} />
-                                    </Box>
+                                    </Box>  */}
                                 </>
                             }
                             {isJoin &&
@@ -370,22 +370,22 @@ export const InviteUser = () => {
                                     <h6>Date Of Birth</h6>
                                     <p>{inData && inData?.dob && moment(inData.dob).format('DD-MM-YYYY')}</p>
                                 </Col>
-                                <Col md={4} className='mb-2' >
+                                {/* <Col md={4} className='mb-2' >
                                     <h6>Phone No</h6>
                                     <p>{inData?.phone}</p>
-                                </Col>
-                                <Col md={4} className='mb-2' >
+                                </Col> */}
+                                {/* <Col md={4} className='mb-2' >
                                     <h6>Address</h6>
                                     <p>{inData?.address}</p>
-                                </Col>
+                                </Col> */}
                                 <Col md={4} className='mb-2' >
                                     <h6>City</h6>
                                     <p>{inData?.city}</p>
                                 </Col>
-                                <Col md={4} className='mb-2' >
+                                {/* <Col md={4} className='mb-2' >
                                     <h6>Postal Code</h6>
                                     <p>{inData?.postal_code}</p>
-                                </Col>
+                                </Col> */}
                                 <Col md={4} className='mb-2' >
                                     <h6>Languages</h6>
                                     <p>{inData?.language}</p>

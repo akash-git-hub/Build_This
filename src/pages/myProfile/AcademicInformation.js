@@ -91,10 +91,10 @@ export const AcademicInformation = () => {
         <>
             <Container fluid>
                 <Row>
-                    <Col lg={3} md={4} className='p-0'>
+                    <Col lg={12} md={4} className='p-0'>
                         <Sidebar />
                     </Col>
-                    <Col lg={9} md={8} className='p-0'>
+                    <Col lg={12} md={8} className='p-0'>
                         <Stack direction='vertical' gap={3}>
                             <EditMyProfileHeading inHeading={'My Profile'} inSubHeading={'Edit My Profile'} />
 

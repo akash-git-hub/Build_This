@@ -26,10 +26,10 @@ export const UserProfile = () => {
         <>
             <Container fluid>
                 <Row>
-                    <Col lg={3} md={4} className='p-0'>
+                    <Col lg={3} md={12} className='p-0'>
                         <Sidebar />
                     </Col>
-                    <Col lg={9} md={8} className='p-0'>
+                    <Col lg={9} md={12} className='p-0'>
                         <Stack direction='vertical' gap={3}>
 
                             <Box>
@@ -77,22 +77,22 @@ export const UserProfile = () => {
                                         <h6>Date Of Birth</h6>
                                         <p>{inData && inData.dob && moment(inData.dob).format('DD-MM-YYYY')}</p>
                                     </Col>
-                                    <Col md={4} className='mb-2' >
+                                    {/* <Col md={4} className='mb-2' >
                                         <h6>Phone No</h6>
                                         <p>{inData.phone}</p>
-                                    </Col>
-                                    <Col md={4} className='mb-2' >
+                                    </Col> */}
+                                    {/* <Col md={4} className='mb-2' >
                                         <h6>Address</h6>
                                         <p>{inData.address}</p>
-                                    </Col>
+                                    </Col> */}
                                     <Col md={4} className='mb-2' >
                                         <h6>City</h6>
                                         <p>{inData.city}</p>
                                     </Col>
-                                    <Col md={4} className='mb-2' >
+                                    {/* <Col md={4} className='mb-2' >
                                         <h6>Postal Code</h6>
                                         <p>{inData.postalCode}</p>
-                                    </Col>
+                                    </Col> */}
                                     <Col md={4} className='mb-2' >
                                         <h6>Languages</h6>
                                         <p>{inData.language}</p>

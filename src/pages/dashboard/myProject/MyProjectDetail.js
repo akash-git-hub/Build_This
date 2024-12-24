@@ -24,10 +24,10 @@ export const MyProjectDetail = () => {
         <>
             <Container fluid>
                 <Row>
-                    <Col className='p-0' lg={3} md={4}>
+                    <Col className='p-0' lg={3} md={12}>
                         <Sidebar />
                     </Col>
-                    <Col className='p-0' lg={9} md={8}>
+                    <Col className='p-0' lg={9} md={12}>
                         <Stack direction='vertical' gap={3}>
                             <Box>
                                 <Stack direction='horizontal' gap={2} justifyContent='space-between'>

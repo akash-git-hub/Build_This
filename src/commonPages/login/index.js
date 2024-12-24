@@ -5,7 +5,7 @@ import { SharedButton } from '../../components/Button'
 import { CheckBox } from '../../components/CheckBox'
 import { Heading } from '../../components/Heading'
 import styled from 'styled-components';
-import { json, Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { validateEmail } from '../../components/Helper'
 import { login_API, updateCompleteAPI } from '../../APIServices/service'
 import { successAlert } from '../../components/Alert'
@@ -95,9 +95,9 @@ export const Login = () => {
                             }
                         });
                     }
-                      navigate("/dashboard");
+                    navigate("/dashboard");
                 }
-              
+
 
 
             }
@@ -106,7 +106,12 @@ export const Login = () => {
     return (
         <>
             <Box>
-                <Form className='form w-25 rounded-2' style={{
+                {/* <Form className='form w-md-25 w-sm-75 rounded-2' style={{
+                    background: '#fff',
+                    padding: '2rem'
+                }}> */}
+
+                <Form className='form w-lg-25 w-md-50 w-sm-75 rounded-2' style={{
                     background: '#fff',
                     padding: '2rem'
                 }}>

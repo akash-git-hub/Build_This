@@ -43,10 +43,10 @@ export const MyAllProject = () => {
         <>
             <Container fluid>
                 <Row>
-                    <Col md={3} className='p-1'>
+                    <Col md={12} lg={3} className='p-1'>
                         <Sidebar />
                     </Col>
-                    <Col md={9} className='p-1'>
+                    <Col md={12} lg={9} className='p-1'>
                         <Stack direction='vertical' gap={3}>
                             <Box>
                                 <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between' }}>
