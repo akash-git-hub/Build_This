@@ -111,15 +111,22 @@ export const Sidebar = () => {
             <Nav.Link className={pathname === "/chats" ? 'active' : ""} style={{padding: '10px'}}>
               <LinkSidebar LinkIcon={<Image src='./assets/images/Icons/Chats.svg' />} LinkLabel={'Chats'} LinkPath={'/chats'} />
             </Nav.Link>
-            <Nav.Link className={pathname === "/messages" ? 'active' : ""} style={{padding: '10px'}}>
+            {/* <Nav.Link className={pathname === "/messages" ? 'active' : ""} style={{padding: '10px'}}>
             <LinkSidebar LinkIcon={<Image src='./assets/images/Icons/Notification.svg' />} LinkLabel={'Notification'} LinkPath={'/messages'} />
-          </Nav.Link>
+          </Nav.Link> */}
           <Nav.Link className={pathname === "/inviteUser" ? 'active' : ""} style={{ padding: '10px'}}>
           <LinkSidebar LinkIcon={<Image src='./assets/images/Icons/InviteUser.svg' />} LinkLabel={'Invite Users'} LinkPath={'/inviteUser'} />
         </Nav.Link>
-        <Button variant="light" onClick={() => logOutHandler()}>
+        <hr/>
+            <Nav.Link className={pathname === "/my_profile" ? 'active' : ""} style={{ padding: '0px 10px' }} onClick={() => navigate('/my_profile')} >
+                <Avatar UserName={info && info.full_name} UserEmail={info && info.email} Pr_Image={info && info.pr_image} />
+            </Nav.Link>
+            <Nav.Link>
+            <SharedButton label={'LogOut'} variant={'light'} onClick={logOutHandler} startIcon={<CgLogOut />} size={'sm'} className={"w-100"} />
+            </Nav.Link>
+        {/* <Button variant="light" onClick={() => logOutHandler()}>
           Log Out
-        </Button>
+        </Button> */}
       </Nav>
     </Offcanvas.Body >
       </Offcanvas >

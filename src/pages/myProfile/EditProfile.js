@@ -75,19 +75,20 @@ export const EditProfile = () => {
         if (!userName) { setFeedback((pre) => ({ ...pre, 'userName': "Please enter your user name." })); isValid = false; }
         if (!email) { setFeedback((pre) => ({ ...pre, 'email': "Please enter your valid email." })); isValid = false; }
         if (!dob) { setFeedback((pre) => ({ ...pre, 'dob': "Please enter Date Of Birth." })); isValid = false; }
-        // if (!phone) { setFeedback((pre) => ({ ...pre, 'phone': "Please enter Phone No." })); isValid = false; }
-        // if (!address) { setFeedback((pre) => ({ ...pre, 'address': "Please enter your address." })); isValid = false; }
         if (!city) { setFeedback((pre) => ({ ...pre, 'city': "Please enter your city." })); isValid = false; }
-        // if (!postalCode) { setFeedback((pre) => ({ ...pre, 'postalCode': "Please enter your postal code." })); isValid = false; }
         if (!language) { setFeedback((pre) => ({ ...pre, 'language': "Please enter your languages." })); isValid = false; }
         if (!bio) { setFeedback((pre) => ({ ...pre, 'bio': "Please enter your bio description." })); isValid = false; }
-        if (phone) {
-            const phoneNoStr = phone.toString();
-            if (phoneNoStr.length !== 10 || isNaN(Number(phoneNoStr))) {
-                setFeedback((pre) => ({ ...pre, "phone": "* Contact Number Must be Numeric and Contain 10 Digits" }));
-                isValid = false;
-            }
-        }
+        // if (phone) {
+        //     const phoneNoStr = phone.toString();
+        //     if (phoneNoStr.length !== 10 || isNaN(Number(phoneNoStr))) {
+        //         setFeedback((pre) => ({ ...pre, "phone": "* Contact Number Must be Numeric and Contain 10 Digits" }));
+        //         isValid = false;
+        //     }
+        // }        
+        // if (!phone) { setFeedback((pre) => ({ ...pre, 'phone': "Please enter Phone No." })); isValid = false; }
+        // if (!address) { setFeedback((pre) => ({ ...pre, 'address': "Please enter your address." })); isValid = false; }        
+        // if (!postalCode) { setFeedback((pre) => ({ ...pre, 'postalCode': "Please enter your postal code." })); isValid = false; }
+
         if (isValid) {
             setWaiting(true);
             const formData = new FormData();

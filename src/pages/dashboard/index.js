@@ -5,11 +5,9 @@ import { Heading } from '../../components/Heading'
 import styled from 'styled-components'
 import { SharedButton } from '../../components/Button'
 import { CiCirclePlus, CiFilter, CiSearch } from 'react-icons/ci'
-import { SearchPanel } from '../../components/Search'
-import { MyProjectCard } from '../../components/MyProjectCard'
 import { PublishProjectCard } from '../../components/PublishProjectCard'
 import { useNavigate } from 'react-router-dom'
-import { get_team_projectsAPI, getAllProjectsAPI, getMyProjects_API } from '../../APIServices/service'
+import {  getAllProjectsAPI, getMyProjects_API } from '../../APIServices/service'
 import { MyContext } from '../../App'
 import { InputField } from '../../components/InputField'
 
@@ -99,25 +97,20 @@ export const Dashboard = () => {
                                 </Stack>
                                 <Panel>
                                     <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between' }}>
-                                        <InputField startIcon={<CiSearch />} placeholder={'Search projects ...'} id={'search'} onChange={searchHandler} className={'w-50 bg-light'} />
-                                        {/* <SearchPanel id='search' className={'w-50 bg-light'} /> */}
-                                        <Icon>
+                                        <InputField startIcon={<CiSearch />} placeholder={'Search projects ...'} id={'search'} onChange={searchHandler} className={'w-50 bg-light'} />                                  
+                                        {/* <Icon>
                                             <CiFilter fontSize={'1.5rem'} className='me-0' />
-                                        </Icon>
+                                        </Icon> */}
                                     </Stack>
                                 </Panel>
                             </Box>
                             <Box>
                                 <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between', alignItems: 'center' }}>
                                     <h6 className='mb-4'>All Project</h6>
-                                    {/* {tmProjects.length > 0 &&
-                                        <SharedButton label={'See all'} size={'sm'} variant={'outlined'} onClick={() => navigate('/my_all_project', { state: { data: tmProjects } })} />
-                                        // <SharedButton label={'See all'} size={'sm'} variant={'outlined'} onClick={() => navigate('/my_project')} />
-                                    } */}
                                 </Stack>
 
                                 <div>
-                                    <Row >
+                                    <Row style={{maxHeight:"284px" , overflow:'auto'}} >
                                         {tmProjects.length > 0 ?
                                             tmProjects.map((project, index) => (
                                                 <Col className='mb-3' md={3} key={index} >
@@ -136,11 +129,8 @@ export const Dashboard = () => {
                             <Box>
                                 <Stack direction='horizontal' className='mb-3' gap={2} style={{ justifyContent: 'space-between', alignItems: 'center' }}>
                                     <h6>My Project</h6>
-                                    {/* {my_projects.length > 0 &&
-                                        <SharedButton label={'See all'} size={'sm'} variant={'outlined'} onClick={() => navigate('/my_all_project', { state: { data: my_projects } })} />
-                                    } */}
                                 </Stack>
-                                <Row>
+                                <Row style={{maxHeight:"284px" , overflow:'auto'}}>
                                     {my_projects.length > 0 ?
                                         my_projects.map((e, i) => (
                                             <Col className='mb-3' md={3} key={i}>
