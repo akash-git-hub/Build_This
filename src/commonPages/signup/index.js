@@ -77,7 +77,7 @@ export const SignUp = () => {
     return (
         <>
             <Box>
-                <Form className='form w-25 rounded-2' style={{
+                <Form className='form w-lg-25 w-md-50 w-sm-75 rounded-2' style={{
                     background: '#fff',
                     padding: '2rem'
                 }}>

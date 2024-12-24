@@ -110,7 +110,7 @@ export const Login = () => {
                     background: '#fff',
                     padding: '2rem'
                 }}> */}
-
+                    
                 <Form className='form w-lg-25 w-md-50 w-sm-75 rounded-2' style={{
                     background: '#fff',
                     padding: '2rem'

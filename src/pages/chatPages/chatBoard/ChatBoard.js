@@ -24,6 +24,7 @@ import NewSelect from "../../../components/NewSelect";
 import { errorAlert, successAlert } from "../../../components/Alert";
 import { GroupsList } from "./GroupsList";
 import { GroupChatBox } from "./GroupChatBox";
+import { IoChevronBack } from "react-icons/io5";
 
 const Box = styled.div`
   width: 100%;
@@ -387,7 +388,7 @@ export const ChatBoard = ({ setWaiting }) => {
 
             if (isValid) {
                 setWaiting(true);
-                console.log("prId---",prId);
+                console.log("prId---", prId);
                 const time = moment().unix(); // Get the current Unix timestamp
                 const groupData = {
                     groupName: grName,
@@ -458,21 +459,21 @@ export const ChatBoard = ({ setWaiting }) => {
                 <Heading Heading={'Chats'} SubHeading={'invite user as your team members'} />
             </Box>
 
-            <Box >
+            {/* <Box >
                 <Row>
                     <Col md={7} lg={5} xl={4} >
                         <Stack direction='vertical' gap={3}>
 
                             <Stack direction='horizontal' gap={0} style={{ justifyContent: "space-between" }}>
 
-                                {/* <Stack direction='horizontal' gap={3} > */}
+                                {/* <Stack direction='horizontal' gap={3} > 
                                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                     <p className={ options === 1 ? "chat-style chat-style-active" : "chat-style"}  style={{ margin: '0 5px' }}  onClick={()=>setOptions(1)}> people </p>
                                     <p className= {options === 2 ? "chat-style chat-style-active" :"chat-style"} style={{ margin: '0 5px' }} onClick={()=>setOptions(2)}>projects </p>
                                     </div>
                                     {/* <SelectDropdown title={'Message'} items={items} setOptions={setOptions} icon={<IoIosArrowDown />} /> */}
-                                    {/* <Badge bg="dark" pill>12</Badge> */}
-                                {/* </Stack> */}
+            {/* <Badge bg="dark" pill>12</Badge> 
+                                {/* </Stack> 
 
                                 <FaCirclePlus fontSize={'2rem'} className='text-primary' onClick={() => setModalShow(true)} />
 
@@ -484,7 +485,7 @@ export const ChatBoard = ({ setWaiting }) => {
                                 <>
                                     <Stack direction='vertical' gap={2}>
                                         <LiveChatSearch className={'bg-light'} value={searchValue} getSearch={getSearch} searchData={searchData} clickHandler={clickHandler} />
-                                        {/* <SearchPanel id='search' className={'bg-light'} />   */}
+                                        {/* <SearchPanel id='search' className={'bg-light'} />   
                                     </Stack>
 
                                     <ListBox style={{ minHeight: "70vh" }}>
@@ -528,7 +529,130 @@ export const ChatBoard = ({ setWaiting }) => {
                         </Col>
                     }
                 </Row>
-            </Box>
+            </Box> */}
+
+
+<Box>
+    <Row>
+        {/* Sidebar Column */}
+        {(options === 1 || window.innerWidth >= 768) && (
+            <Col xs={12} md={7} lg={5} xl={4} className="mb-3">
+                <Stack direction="vertical" gap={3}>
+                    {/* Header with options */}
+                    <Stack direction="horizontal" gap={0} style={{ justifyContent: "space-between" }}>
+                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <p
+                                className={options === 1 ? "chat-style chat-style-active" : "chat-style"}
+                                style={{ margin: "0 5px" }}
+                                onClick={() => setOptions(1)}
+                            >
+                                People
+                            </p>
+                            <p
+                                className={options === 2 ? "chat-style chat-style-active" : "chat-style"}
+                                style={{ margin: "0 5px" }}
+                                onClick={() => setOptions(2)}
+                            >
+                                Projects
+                            </p>
+                        </div>
+                        <FaCirclePlus
+                            fontSize="2rem"
+                            className="text-primary"
+                            onClick={() => setModalShow(true)}
+                        />
+                    </Stack>
+
+                    <hr className="mt-0" />
+
+                    {/* Conditional rendering for people/projects */}
+                    {options === 1 ? (
+                        <>
+                            <Stack direction="vertical" gap={2}>
+                                <LiveChatSearch
+                                    className="bg-light"
+                                    value={searchValue}
+                                    getSearch={getSearch}
+                                    searchData={searchData}
+                                    clickHandler={clickHandler}
+                                />
+                            </Stack>
+
+                            <ListBox style={{ minHeight: "70vh" }}>
+                                <ListGroup variant="flush">
+                                    {chatUserData.map((e, i) => (
+                                        <ListGroup.Item
+                                            onClick={() => {
+                                                setChatHandler(e); // Set the selected chat user
+                                                if (window.innerWidth < 768) setOptions(3); // Show chat on mobile
+                                            }}
+                                            key={i}
+                                        >
+                                            <ChatUser user={e} />
+                                        </ListGroup.Item>
+                                    ))}
+                                </ListGroup>
+                            </ListBox>
+                        </>
+                    ) : (
+                        <ListBox style={{ minHeight: "70vh" }}>
+                            <ListGroup variant="flush">
+                                {groupsName.map((e, i) => (
+                                    <ListGroup.Item
+                                        onClick={() => {
+                                            setGrChatHandler(e); // Set the selected group chat
+                                            if (window.innerWidth < 768) setOptions(3); // Show group chat on mobile
+                                        }}
+                                        key={i}
+                                    >
+                                        <GroupsList groups={e} />
+                                    </ListGroup.Item>
+                                ))}
+                            </ListGroup>
+                        </ListBox>
+                    )}
+                </Stack>
+            </Col>
+        )}
+
+        {/* Chat Column */}
+        {(options === 3 || window.innerWidth >= 768) && (
+            <Col xs={12} md={5} lg={7} xl={8} style={{ border: "1px solid #ddd", borderRadius: "10px", padding:"1rem"  }}>
+                {options === 1 || options === 3 ? (
+                    crChat && (
+                        <div>
+                            {window.innerWidth < 768 && (
+                                <IoChevronBack onClick={() => setOptions(1)}/>
+                            )}
+                            <ChatBox
+                                chat={crChat}
+                                handleSend={handleSend}
+                                messages={messages}
+                                currentUser={currentUser}
+                            />
+                        </div>
+                    )
+                ) : (
+                    grChatHandler && (
+                        <div>
+                            {window.innerWidth < 768 && (
+                                <IoChevronBack onClick={() => setOptions(1)}/>
+                            )}
+                            <GroupChatBox
+                                chat={grChatHandler}
+                                handleSend={GroupHandleSend}
+                                messages={groupMessages}
+                                currentUser={currentUser}
+                            />
+                        </div>
+                    )
+                )}
+            </Col>
+        )}
+    </Row>
+</Box>
+
+
 
         </Stack>
 
