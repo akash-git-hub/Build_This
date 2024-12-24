@@ -63,7 +63,7 @@ export const AdminSidebar = () => {
           <h6 style={{ color: '#64748B' }}>Profile</h6>
           <ul style={{ listStyle: 'none', padding: 0 }}>
             <Stack direction='vertical' gap={3} style={{ cursor: "pointer" }}>
-              <li className={pathname === "/my_profile" ? 'active' : ""} style={{ padding: '0px 10px' }} onClick={() => navigate('/my_profile')} >
+              <li className={pathname === "/my_profile" ? 'active' : ""} style={{ padding: '0px 10px' }} >
                 <Avatar UserName={info && info.full_name} UserEmail={info && info.email} Pr_Image={info && info.pr_image} />
               </li>
               <li>
@@ -85,7 +85,7 @@ export const AdminSidebar = () => {
               <LinkSidebar LinkIcon={<Image src='./assets/images/Icons/Dashboard.svg' />} LinkLabel={'Dashboard'} LinkPath={'/admin_dashboard'} />
             </Nav.Link>
             <hr />
-            <Nav.Link className={pathname === "/my_profile" ? 'active' : ""} style={{ padding: '0px 10px' }} onClick={() => navigate('/my_profile')} >
+            <Nav.Link className={pathname === "/my_profile" ? 'active' : ""} style={{ padding: '0px 10px' }}  >
               <Avatar UserName={info && info.full_name} UserEmail={info && info.email} Pr_Image={info && info.pr_image} />
             </Nav.Link>
             <Nav.Link>

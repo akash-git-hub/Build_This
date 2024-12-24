@@ -96,12 +96,12 @@ export const Dashboard = () => {
                                     />
                                 </Stack>
                                 <Panel>
-                                    <Stack direction='horizontal' gap={2} style={{ justifyContent: 'space-between' }}>
-                                        <InputField startIcon={<CiSearch />} placeholder={'Search projects ...'} id={'search'} onChange={searchHandler} className={'w-50 bg-light'} />                                  
+                                    {/* <Stack direction='horizontal'> */}
+                                        <InputField startIcon={<CiSearch />} placeholder={'Search projects ...'} id={'search'} onChange={searchHandler} className={'col-md-6 bg-light'} />                                  
                                         {/* <Icon>
                                             <CiFilter fontSize={'1.5rem'} className='me-0' />
                                         </Icon> */}
-                                    </Stack>
+                                    {/* </Stack> */}
                                 </Panel>
                             </Box>
                             <Box>
